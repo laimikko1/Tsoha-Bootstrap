@@ -19,5 +19,14 @@ class HelloWorldController extends BaseController {
     public static function kirjautuminen() {
         View::make('Suunnitelma/kirjautumissivu.html');
     }
+    
+    public static function ranking() {
+        View::make('Suunnitelma/rankinglistaus.html');
+    }
+    
+    public static function kilpailut() {
+        View::make('Suunnitelma/kilpailujen_tulokset.html');
+    }
+    
 
 }

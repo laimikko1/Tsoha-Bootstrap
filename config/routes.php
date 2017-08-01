@@ -15,3 +15,11 @@ $routes->get('/esittely', function() {
 $routes->get('/kirjautuminen', function() {
     HelloWorldController::kirjautuminen();
 });
+
+$routes->get('/kilpailut', function() {
+    HelloWorldController::kilpailut();
+});
+
+$routes->get('/ranking', function() {
+    HelloWorldController::ranking();
+});
