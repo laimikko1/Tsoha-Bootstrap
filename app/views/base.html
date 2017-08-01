@@ -7,7 +7,7 @@
 
     <title>
       {% block title %}
-        Tietokantasovellus
+        Kumpulan Judokat
       {% endblock %}
     </title>
 
@@ -33,13 +33,16 @@
             <span class="icon-bar"></span>
           </button>
           <!-- Sovelluksen nimi -->
-          <a class="navbar-brand" href="{{base_path}}">Tsoha Bootstrap</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
             <li><a href="{{base_path}}">Etusivu</a></li>
+            <li><a href='esittely'>Tietoa meistä</a></li>
+            <li><a href="{{base_path}}">Ranking</a></li>
+            <li><a href="{{base_path}}">Kilpailut</a></li>
+            <li><a href='kirjautuminen'>Kirjaudu</a></li>
           </ul>
         </div>
       </div>
