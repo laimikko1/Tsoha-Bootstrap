@@ -9,12 +9,10 @@ Yleisiä linkkejä:
 
 JOHDANTO
 
-Työn tavoitteena on luoda websovellus kuvitteelliselle Kumpulan Judokat (KuJudo) seuralle.
-Seura haluaa verkossa toimivan sovelluksen, jossa he voivat tiedottaa toiminnastaan ja tulevassa olevista tapahtumista, kuten kilpailuista ja leireistä.
+Työn tavoitteena on luoda websovellus kuvitteeliselle judoseuralle Kumpulan Judokoille.
+Websovelluksen pitäisi mahdollistaa sivusto, jonka kautta seura voi tiedottaa toiminnastaan ja tulossa olevista kilpailuista. Sivuston kautta tulisi myös hallinnoida kilpailuja ja käyttäjät voivat tarkastella käyttäjätietojaan, sekä ilmoittautua kilpailuihin. Sivuston kautta tulisi pystyä myös tarkastella kilpailujen tuloksia. Seura myös ylläpitää sivustollaan seuran kaikkien kilpailijoiden välistä rankingia.
 
-Sovelluksen kautta tulisi myös pystyä lisäämään, poistamaan ja muokkaamaan kilpailuita ja ylläpitää kilpailijoiden välisiä rankingeja.
-Kilpailijoiden tulisi sivuston kautta pystyä lisäämään henkilötietonsa, rekisteröityä kilpailuihin ja tarkastella omia kilpailutuloksiaan.
+Työ on tarkoitus toteuttaa PHP:llä ja PostgreSQL tietokannan hallintajärjestelmällä. Palvelimena toimii yliopiston users-palvelin. HTML puolella käytössä on Bootstrap sovelluskehitys, joka antaa valmiita työkaluja tyylittelyyn ja responsiivisten sivustojen luomiseen.
 
-Kilpailijan tulee myös pystyä poistamaan profiilinsa tarvittaessa.
 
 
