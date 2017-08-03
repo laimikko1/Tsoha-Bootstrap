@@ -5,6 +5,13 @@ Yleisiä linkkejä:
 * [Linkki sovellukseeni](http://laimikko.users.cs.helsinki.fi/KuJudo/)
 * [Linkki dokumentaatiooni](https://github.com/laimikko1/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
+[Linkki etusivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/)
+[Linkki Tietoa meistä sivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/esittely)
+[Linkki Ranking-sivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/ranking)
+[Linkki Kilpailut-sivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/kilpailut)
+[Linkki Kirjautuminen-sivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/kirjautuminen)
+[Linkki Rekisteröityminen-sivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/rekisteroityminen)
+
 ## Työn aihe
 
 JOHDANTO
