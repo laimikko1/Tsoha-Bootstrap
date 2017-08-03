@@ -23,3 +23,7 @@ $routes->get('/kilpailut', function() {
 $routes->get('/ranking', function() {
     HelloWorldController::ranking();
 });
+
+$routes->get('/rekisteroityminen', function() {
+    HelloWorldController::rekisteroityminen();
+});

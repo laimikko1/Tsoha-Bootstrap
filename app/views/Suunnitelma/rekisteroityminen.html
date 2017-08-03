@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<form>
+    <div class="form group">
+        <label>Nimi:</label>
+        <input type="text" class="form-control" placeholder="Kirjoita etu- ja sukunimesi">
+    </div>
+
+    <div class="form-group">
+        <label>Käyttäjätunnus</label>
+        <input type="text" class="form-control" placeholder="Kirjoita käyttäjätunnus">
+    </div>
+
+    <div class="form-group">
+        <label>Salasana</label>
+        <input type="text" class="form-control" placeholder="Kirjoita salasana">
+    </div>
+
+    <div class="form group">
+        <label>Valitse pääaine:</label>
+        <select class="form-control">
+            <option>Tietojenkäsittelytiede</option>
+            <option>Matematiikka</option>
+            <option>Tilastotiede</option>
+            <option>Kemia</option>
+            <option>Fysiikka</option>
+            <option>Maantiede</option>
+            <option>Alumni</option>
+            <option>Muun alan opiskelija</option>
+        </select>
+    </div>
+    <p></p>
+    <p></p>
+    <button type="submit" class="btn-success">Liity!</button>
+</form>
+
+{% endblock %}

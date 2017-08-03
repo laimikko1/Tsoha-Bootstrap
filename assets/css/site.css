@@ -24,3 +24,22 @@
     color:white;
 
 }
+
+.panel-body {
+    padding: 10px;
+    margin-left: 20px;
+
+}
+
+
+.jumbotron {
+    padding-left:440px;
+    margin-bottom: 0;
+}
+.jumbotron > i {
+    margin-left: 30px;
+}
+
+.panel-footer {
+    word-spacing: 20px;
+}
