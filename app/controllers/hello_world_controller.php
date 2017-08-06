@@ -1,5 +1,7 @@
 <?php
 
+require 'app/models/Kilpailija.php';
+
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -8,6 +10,11 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
+        $etsiYksi = Kilpailija::find(1);
+        $etsiKaikki = Kilpailija::all();
+
+        Kint::dump($etsiYksi);
+        Kint::dump($etsiKaikki);
         // Testaa koodiasi täällä
         View::make('helloworld.html');
     }
