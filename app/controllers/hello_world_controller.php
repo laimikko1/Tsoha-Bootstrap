@@ -1,6 +1,5 @@
 <?php
 
-require 'app/models/Kilpailija.php';
 
 class HelloWorldController extends BaseController {
 
@@ -36,7 +35,7 @@ class HelloWorldController extends BaseController {
     }
 
     public static function rekisteroityminen() {
-        View::make('Suunnitelma/rekisteroityminen.html');
+        View::make('Kilpailija/rekisteroityminen.html');
     }
 
 }

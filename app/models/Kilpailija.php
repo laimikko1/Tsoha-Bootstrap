@@ -14,10 +14,10 @@ class Kilpailija extends BaseModel {
         $query->execute();
 
         $rows = $query->fetchAll();
-        $kilpailijat = [];
+        $kilpailijat = array();
 
         foreach ($rows as $row) {
-            $kilpailijat = new Kilpailija(array(
+            $kilpailijat[] = new Kilpailija(array(
                 'ktunnus' => $row['ktunnus'],
                 'nimi' => $row['nimi'],
                 'kayttajanimi' => $row['kayttajanimi'],
@@ -45,5 +45,16 @@ class Kilpailija extends BaseModel {
             return $kilpailija;
         }
     }
+
+   
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO kilpailija(nimi, kayttajanimi, salasana, paaaine) VALUES(:nimi, :kayttajanimi, :salasana, :paaaine) RETURNING ktunnus');
+
+        $query > execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
+
+        $row = $query->fetch();
+        $this->ktunnus = $row['ktunnus'];
+        
+        }
 
 }
