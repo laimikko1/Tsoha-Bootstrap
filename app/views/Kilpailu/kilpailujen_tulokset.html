@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-offset-3">
+        <h2>Tulossa olevat kilpailut</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            {% for kilpailu in kilpailut %}
+            <div class="panel-heading">{{kilpailu.kilpailun_nimi}}</div>
+            <div class="row">
+                <div class="panel-body">{{kilpailu.kilpailun_kuvaus}}.</div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="panel-body"><{{kilpailu.kilpailun_ajankohta}}</div>
+                    <div class="col-md-offset-1">{{kilpailu.kilpailupaikka}}</div>
+                </div>
+            </div>
+            (% endfor %}
+        </div>
+        <div class="panel-footer"><a href="{{base_path}}/kilpailun_sivu/{{kilpailu.kilpailutunnus}}"></a>Ilmottaudu</div>
+
+    </div>
+</div>
+</div>
+{% endblock %}
+

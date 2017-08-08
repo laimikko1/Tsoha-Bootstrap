@@ -17,7 +17,7 @@ $routes->get('/kirjautuminen', function() {
 });
 
 $routes->get('/kilpailut', function() {
-    HelloWorldController::kilpailut();
+    Kilpailu_controller::index();
 });
 
 $routes->get('/ranking', function() {
@@ -32,13 +32,10 @@ $routes->get('/yllapitajan_sivu', function() {
     Kilpailija_controller::index();
 });
 
-//$routes->get('/kayttajan_sivu', function() {
-//    Kilpailija_controller::index();
-//});
-//
-//$routes->get('kayttajan_sivu/:id', function($id) {
-//    Kilpailija_controller::show($id);
-//});
+
+$routes->get('kayttajan_sivu/:id', function($id) {
+    Kilpailija_controller::show($id);
+});
 
 
 $routes->post('/rekisteroityminen', function() {
