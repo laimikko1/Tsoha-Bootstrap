@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div class="alert alert-success">
+    {{message}}
+</div>
+
 <form method="post" action="{{base_path}}/kayttajan_sivu">
 
     {% for kilpailija in kilpailija %}

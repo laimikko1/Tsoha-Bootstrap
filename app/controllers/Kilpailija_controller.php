@@ -36,7 +36,7 @@ class Kilpailija_controller extends BaseController {
 
         $kilpailija->save();
 
-        Redirect::to('/kayttajan_tunnus/' . $kilpailija->ktunnus, array('message' => 'Tunnus luotu!'));
+        Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tunnus luotu!'));
     }
 
 }
