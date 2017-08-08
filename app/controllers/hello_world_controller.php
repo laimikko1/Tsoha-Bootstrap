@@ -30,10 +30,6 @@ class HelloWorldController extends BaseController {
         View::make('Suunnitelma/rankinglistaus.html');
     }
 
-    public static function kilpailut() {
-        View::make('Suunnitelma/kilpailujen_tulokset.html');
-    }
-
     public static function rekisteroityminen() {
         View::make('Kilpailija/rekisteroityminen.html');
     }

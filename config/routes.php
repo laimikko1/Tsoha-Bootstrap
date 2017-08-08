@@ -33,7 +33,7 @@ $routes->get('/yllapitajan_sivu', function() {
 });
 
 
-$routes->get('kayttajan_sivu/:id', function($id) {
+$routes->get('/kayttajan_sivu/:id', function($id) {
     Kilpailija_controller::show($id);
 });
 

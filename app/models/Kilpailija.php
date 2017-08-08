@@ -50,9 +50,11 @@ class Kilpailija extends BaseModel {
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO kilpailija(nimi, kayttajanimi, salasana, paaaine) VALUES(:nimi, :kayttajanimi, :salasana, :paaaine) RETURNING ktunnus');
 
-        $query > execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
+        $query-> execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
 
         $row = $query->fetch();
+        Kint::trace();
+        Kint::dump($row);
         $this->ktunnus = $row['ktunnus'];
         
         }

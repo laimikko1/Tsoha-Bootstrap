@@ -1,1 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="post" action="{{base_path}}/kayttajan_sivu">
+
+    {% for kilpailija in kilpailija %}
+    {% endfor %}
+
+
+    <div class="form-group">
+        <label>Nimi:</label>
+        <input name="nimi" type="text" class="form-control" value="{{kilpailija.nimi}}">
+    </div>
+
+    <div class="form-group">
+        <label>Käyttäjätunnus</label>
+        <input name="kayttajatunnus" type="text" class="form-control" value="{{kilpailija.kayttajanimi}}">
+    </div>
+
+    <div class="form-group">
+        <label>Salasana</label>
+        <input name="salasana" type="text" class="form-control" value="{{kilpailija.salasana}}">
+    </div>
+
+    <div class="form-group">
+        <label>Pääaine</label>
+        <input name="paaaine" type="text" class="form-control" value="{{kilpailija.paaaine}}">
+    </div>
+
+
+    <div class="form-group">    
+        <button type="submit" class="btn btn-primary">Päivitä tiedot!</button>
+    </div>
+
+</form>
+
+
+{% endblock %}
 

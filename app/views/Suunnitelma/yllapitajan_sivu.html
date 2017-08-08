@@ -13,7 +13,7 @@
     <tbody>
         {% for kilpailija in kilpailijat %}
         <tr>
-            <td><a href="{{base_path}}/kayttajan_sivu/{{kilpailija.id}}">{{kilpailija.nimi}}</td>
+            <td><a href="{{base_path}}/kayttajan_sivu/{{kilpailija.ktunnus}}">{{kilpailija.nimi}}</td>
             <td>{{kilpailija.paaaine}}</td>
         </tr>
         {% endfor %} 
