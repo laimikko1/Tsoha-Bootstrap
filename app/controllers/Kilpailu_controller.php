@@ -7,7 +7,7 @@ class Kilpailu_controller extends BaseController {
 
         Kint::dump($kilpailut);
 
-        View::make('kilpailujen_tulokset.html', array('kilpailut' => $kilpailut));
+        View::make('Kilpailu/kilpailujen_tulokset.html', array('kilpailut' => $kilpailut));
     }
 
     public static function store() {

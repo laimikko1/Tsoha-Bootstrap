@@ -43,3 +43,7 @@
 .panel-footer {
     word-spacing: 20px;
 }
+
+#ajankohta > p{
+    margin-left: 2em;
+}

@@ -7,7 +7,7 @@ class Kilpailija_controller extends BaseController {
 
         Kint::dump($kilpailijat);
 
-        View::make('Kilpailija/yllapitajan_sivu.html', array('kilpailijat' => $kilpailijat));
+        View::make('Suunnitelma/yllapitajan_sivu.html', array('kilpailijat' => $kilpailijat));
     }
 
     public static function show($ktunnus) {
