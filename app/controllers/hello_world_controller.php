@@ -1,6 +1,5 @@
 <?php
 
-
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -9,13 +8,15 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $etsiYksi = Kilpailija::find(1);
-        $etsiKaikki = Kilpailija::all();
 
-        Kint::dump($etsiYksi);
-        Kint::dump($etsiKaikki);
-        // Testaa koodiasi täällä
-        View::make('helloworld.html');
+        $mikko = new Kilpailija(array(
+            'nimi' => 'm',
+            'kayttajanimi' => 'm',
+            'salasana' => 'm',
+            'paaaine' => 'Tietojenkäsittelytiede'
+        ));
+        $errors = $mikko->errors();
+        Kint::dump($errors);
     }
 
     public static function esittely() {

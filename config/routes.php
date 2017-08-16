@@ -33,15 +33,18 @@ $routes->get('/yllapitajan_sivu', function() {
 });
 
 
-$routes->get('/kayttajan_sivu/:id', function($id) {
-    Kilpailija_controller::show($id);
-});
-
-
 $routes->post('/rekisteroityminen', function() {
     Kilpailija_controller::store();
 });
 
 $routes->get('/rekisteroityminen', function() {
     Kilpailija_controller::create();
+});
+
+$routes->get('/kayttajan_sivu/:ktunnus', function($ktunnus) {
+    Kilpailija_controller::edit($ktunnus);
+});
+
+$routes->post('/kayttajan_sivu/:ktunnus', function($ktunnus) {
+    Kilpailija_controller::update($ktunnus);
 });

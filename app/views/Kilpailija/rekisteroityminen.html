@@ -1,34 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
 <form method="post" action="{{base_path}}/rekisteroityminen">
     <div class="form-group">
         <label>Nimi:</label>
-        <input name="nimi" type="text" class="form-control" placeholder="Kirjoita etu- ja sukunimesi">
+        <input name="nimi" type="text" class="form-control" value="{{attributes.nimi}}" placeholder="Kirjoita etu- ja sukunimesi">
     </div>
 
     <div class="form-group">
         <label>Käyttäjätunnus</label>
-        <input name="kayttajanimi" type="text" class="form-control" placeholder="Kirjoita käyttäjätunnus">
+        <input name="kayttajanimi" type="text" class="form-control" value="{{attributes.kayttajanimi}}" placeholder="Kirjoita käyttäjätunnus">
     </div>
 
     <div class="form-group">
         <label>Salasana</label>
-        <input name="salasana" type="text" class="form-control" placeholder="Kirjoita salasana">
+        <input name="salasana" type="text" class="form-control" value="{{attributes.salasana}}" placeholder="Kirjoita salasana">
     </div>
 
     <div class="form-group">
-        <label>Valitse pääaine:</label>
-        <select name="paaaine" class="form-control">
-            <option>Tietojenkäsittelytiede</option>
-            <option>Matematiikka</option>
-            <option>Tilastotiede</option>
-            <option>Kemia</option>
-            <option>Fysiikka</option>
-            <option>Maantiede</option>
-            <option>Alumni</option>
-            <option>Muun alan opiskelija</option>
-        </select>
+        <label>Pääaine</label>
+        <input name="paaaine" class="form-control" value="{{attributes.paaaine}}">
     </div>
 
     <div class="form-group">    

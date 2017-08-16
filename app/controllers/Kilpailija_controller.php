@@ -10,33 +10,73 @@ class Kilpailija_controller extends BaseController {
         View::make('Suunnitelma/yllapitajan_sivu.html', array('kilpailijat' => $kilpailijat));
     }
 
-    public static function show($ktunnus) {
-        
-        $kilpailija = Kilpailija::find($ktunnus);
-        Kint::dump($kilpailija);
-        
-        Kint::trace();
-
-        View::make('Kilpailija/kayttajan_sivu.html', array('kilpailija' => $kilpailija));
-    }
-    
+//    public static function show($ktunnus) {
+//
+//        $kilpailija = Kilpailija::find($ktunnus);
+//        Kint::dump($kilpailija);
+//
+//        Kint::trace();
+//
+//        View::make('Kilpailija/kayttajan_sivu.html', array('kilpailija' => $kilpailija));
+//    }
 
     public static function store() {
         $params = $_POST;
 
-        $kilpailija = new Kilpailija(array(
+        $attributes = array(
             'nimi' => $params['nimi'],
             'kayttajanimi' => $params['kayttajanimi'],
             'salasana' => $params['salasana'],
             'paaaine' => $params['paaaine']
-        ));
+        );
 
+        $kilpailija = new Kilpailija($attributes);
+        $errors = $kilpailija->errors();
+
+        if (count($errors) == 0) {
+            $kilpailija->save();
+            Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tunnus luotu!'));
+        } else {
+            View::make('Kilpailija/rekisteroityminen.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
         Kint::dump($params);
+    }
 
+    public static function edit($ktunnus) {
+        
+        $kilpailija = Kilpailija::find($ktunnus);
+        
+        Kint::dump($kilpailija);
 
-        $kilpailija->save();
+        Kint::trace();
 
-        Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tunnus luotu!'));
+        View::make('Kilpailija/kayttajan_sivu.html', array('attributes' => $kilpailija));
+    }
+
+    public static function update($ktunnus) {
+        $params = $_POST;
+
+        $attributes = array(
+            'ktunnus' => $ktunnus,
+            'nimi' => $params['nimi'],
+            'kayttajanimi' => $params['kayttajanimi'],
+            'salasana' => $params['salasana'],
+            'paaaine' => $params['paaaine']
+        );
+
+        $kilpailija = new Kilpailija($attributes);
+        $errors = $kilpailija->errors();
+        
+        Kint::dump($errors);
+        Kint::dump($kilpailija);
+
+        if (count($errors) > 0) {
+            View::make('Kilpailija/kayttajan_sivu.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $kilpailija->update();
+
+            Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tietoja päivitetty onnistuneesti!'));
+        }
     }
 
 }

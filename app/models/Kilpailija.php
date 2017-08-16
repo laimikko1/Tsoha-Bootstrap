@@ -6,6 +6,7 @@ class Kilpailija extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_kayttajatunnus', 'validate_salasana');
     }
 
     public static function all() {
@@ -46,17 +47,46 @@ class Kilpailija extends BaseModel {
         }
     }
 
-   
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO kilpailija(nimi, kayttajanimi, salasana, paaaine) VALUES(:nimi, :kayttajanimi, :salasana, :paaaine) RETURNING ktunnus');
 
-        $query-> execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
+        $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
 
         $row = $query->fetch();
         Kint::trace();
         Kint::dump($row);
         $this->ktunnus = $row['ktunnus'];
+    }
+
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Kilpailija SET nimi = :nimi, kayttajanimi = :kayttajanimi, salasana = :salasana, paaaine = :paaaine WHERE ktunnus = :ktunnus');
+
+        $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
+        $row = $query->fetch();
+        Kint::trace();
+        Kint::dump($row);
         
+    }
+
+    public function validate_name() {
+        if (parent::validate_string_length($this->nimi) == FALSE) {
+            return 'Nimi ei saa olla tyhjä tai alle 3 merkkiä!';
         }
+        return NULL;
+    }
+
+    public function validate_kayttajatunnus() {
+        if (parent::validate_string_length($this->kayttajanimi) == FALSE) {
+            return 'Käyttäjätunnus ei saa olla tyhjä tai alle 3 merkkiä!';
+        }
+        return null;
+    }
+
+    public function validate_salasana() {
+        if (parent::validate_string_length($this->salasana) == FALSE) {
+            return 'Salasana ei saa olla tyhjä tai alle 3 merkkiä!';
+        }
+        return null;
+    }
 
 }
