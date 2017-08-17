@@ -25,7 +25,8 @@ class Kilpailija_controller extends BaseController {
 
         if (count($errors) == 0) {
             $kilpailija->save();
-            Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tunnus luotu!'));
+            $_SESSION['kilpailija'] = $kilpailija->ktunnus;
+            Redirect::to('/', array('message' => 'Tunnus luotu!'));
         } else {
             View::make('Kilpailija/rekisteroityminen.html', array('errors' => $errors, 'attributes' => $attributes));
         }
