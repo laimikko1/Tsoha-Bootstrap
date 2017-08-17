@@ -35,7 +35,7 @@ class Kilpailija_controller extends BaseController {
     public static function edit($ktunnus) {
 
         $kilpailija = Kilpailija::find($ktunnus);
-        if ($kilpailija == NULL) {
+        if (empty($_SESSION['kilpailija'])) {
             Redirect::to('/');
         }
         if ($_SESSION['kilpailija'] == $kilpailija->ktunnus) {
