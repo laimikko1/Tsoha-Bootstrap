@@ -35,7 +35,14 @@ class Kilpailija_controller extends BaseController {
     public static function edit($ktunnus) {
 
         $kilpailija = Kilpailija::find($ktunnus);
-        View::make('Kilpailija/kayttajan_sivu.html', array('attributes' => $kilpailija));
+        if ($kilpailija == NULL) {
+            Redirect::to('/');
+        }
+        if ($_SESSION['kilpailija'] == $kilpailija->ktunnus) {
+            View::make('Kilpailija/kayttajan_sivu.html', array('attributes' => $kilpailija));
+        } else {
+            Redirect::to('/');
+        }
     }
 
     public static function update($ktunnus) {
@@ -51,7 +58,7 @@ class Kilpailija_controller extends BaseController {
 
         $kilpailija = new Kilpailija($attributes);
         $errors = $kilpailija->errors();
-        
+
 
 
 
@@ -62,7 +69,6 @@ class Kilpailija_controller extends BaseController {
 
             Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tietoja päivitetty onnistuneesti!'));
         }
-        
     }
 
     public static function destroy($ktunnus) {
