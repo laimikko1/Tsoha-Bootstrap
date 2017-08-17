@@ -2,15 +2,15 @@
 {% block content %}
 <h2>Kirjaudu sisään</h2>
 
-<form>
+<form method="post" action="{{base_path}}/kirjautumissivu">
     <div class="form-group">
         <label>Käyttäjätunnus</label>
-        <input class="form-control" type="text" placeholder="Käyttäjätunnus">
+        <input class="form-control" name="kayttajatunnus" value={{username}} type="text" placeholder="Käyttäjätunnus">
     </div>
 
     <div class="form-group">
         <label>Salasana</label>
-        <input class="form-control" type="text" placeholder="Salasana">
+        <input class="form-control" type="text" name="password" placeholder="Salasana">
     </div>
 
     <button type="submit" class="btn btn-info">Kirjaudu sisään</button>

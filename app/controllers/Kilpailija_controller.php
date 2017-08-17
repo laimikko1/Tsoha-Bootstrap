@@ -10,15 +10,6 @@ class Kilpailija_controller extends BaseController {
         View::make('Suunnitelma/yllapitajan_sivu.html', array('kilpailijat' => $kilpailijat));
     }
 
-//    public static function show($ktunnus) {
-//
-//        $kilpailija = Kilpailija::find($ktunnus);
-//        Kint::dump($kilpailija);
-//
-//        Kint::trace();
-//
-//        View::make('Kilpailija/kayttajan_sivu.html', array('kilpailija' => $kilpailija));
-//    }
 
     public static function store() {
         $params = $_POST;
@@ -43,9 +34,9 @@ class Kilpailija_controller extends BaseController {
     }
 
     public static function edit($ktunnus) {
-        
+
         $kilpailija = Kilpailija::find($ktunnus);
-        
+
         Kint::dump($kilpailija);
 
         Kint::trace();
@@ -66,7 +57,7 @@ class Kilpailija_controller extends BaseController {
 
         $kilpailija = new Kilpailija($attributes);
         $errors = $kilpailija->errors();
-        
+
         Kint::dump($errors);
         Kint::dump($kilpailija);
 
@@ -77,6 +68,13 @@ class Kilpailija_controller extends BaseController {
 
             Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tietoja päivitetty onnistuneesti!'));
         }
+    }
+
+    public static function destroy($ktunnus) {
+        $kilpailija = new Kilpailija(array('ktunnus' => $ktunnus));
+        $kilpailija->destroy();
+
+        Redirect::to('/rekisteroityminen', array('message' => 'Tunnus poistettu onnistuneesti!'));
     }
 
 }

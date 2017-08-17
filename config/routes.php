@@ -48,3 +48,15 @@ $routes->get('/kayttajan_sivu/:ktunnus', function($ktunnus) {
 $routes->post('/kayttajan_sivu/:ktunnus', function($ktunnus) {
     Kilpailija_controller::update($ktunnus);
 });
+
+$routes->post('/kayttajan_sivu/:ktunnus/destroy', function($ktunnus) {
+    Kilpailija_controller::destroy($ktunnus);
+});
+
+$routes->get('/kirjautumissivu', function() {
+    LoginController::login();
+});
+
+$routes->get('/kirjautumissivu', function() {
+    LoginController::handle_login();
+});

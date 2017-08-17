@@ -61,11 +61,18 @@ class Kilpailija extends BaseModel {
     public function update() {
         $query = DB::connection()->prepare('UPDATE Kilpailija SET nimi = :nimi, kayttajanimi = :kayttajanimi, salasana = :salasana, paaaine = :paaaine WHERE ktunnus = :ktunnus');
 
-        $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
+        $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine, 'ktunnus' => $this->ktunnus));
         $row = $query->fetch();
         Kint::trace();
         Kint::dump($row);
-        
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Kilpailija WHERE ktunnus = :ktunnus');
+        $query->execute(array('ktunnus' => $this->ktunnus));
+        $row = $query->fetch();
+        Kint::trace();
+        Kint::dump($row);
     }
 
     public function validate_name() {
@@ -87,6 +94,18 @@ class Kilpailija extends BaseModel {
             return 'Salasana ei saa olla tyhjä tai alle 3 merkkiä!';
         }
         return null;
+    }
+
+    public static function authenticate($kayttajanimi, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Kilpailija WHERE kayttajanimi = :kayttajanimi AND salasana = :salasana LIMIT 1');
+        $query->execute(array('kayttajanimi' => $kayttajanimi, 'salasana' => $salasana));
+        $row = $query->fetch();
+
+        if ($row) {
+            return $row;
+        } else {
+            return NULL;
+        }
     }
 
 }
