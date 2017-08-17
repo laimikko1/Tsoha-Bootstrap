@@ -15,7 +15,7 @@ Yleisiä linkkejä:
 * [Linkki Kirjautuminen-sivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/kirjautuminen)
 * [Linkki Rekisteröityminen-sivulle](http://laimikko.users.cs.helsinki.fi/KuJudo/rekisteroityminen)
 * [Linkki Ylläpitäjän sivulle, jossa kaikki kilpailijat listataan](http://laimikko.users.cs.helsinki.fi/KuJudo/yllapitajan_sivu)
-* ~~[Linkki yksittäisen kilpailijan sivulle]~~ <- Vaatii kirjautumisen sovellukseen
+* ~~[Linkki yksittäisen kilpailijan sivulle]~~ ** <- Vaatii kirjautumisen sovellukseen **
 
 ## Testitunnukset sovellukseen:
 tunnus: testi  
