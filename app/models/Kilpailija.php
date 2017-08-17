@@ -53,8 +53,6 @@ class Kilpailija extends BaseModel {
         $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
 
         $row = $query->fetch();
-        Kint::trace();
-        Kint::dump($row);
         $this->ktunnus = $row['ktunnus'];
     }
 
@@ -63,16 +61,12 @@ class Kilpailija extends BaseModel {
 
         $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine, 'ktunnus' => $this->ktunnus));
         $row = $query->fetch();
-        Kint::trace();
-        Kint::dump($row);
     }
 
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Kilpailija WHERE ktunnus = :ktunnus');
         $query->execute(array('ktunnus' => $this->ktunnus));
         $row = $query->fetch();
-        Kint::trace();
-        Kint::dump($row);
     }
 
     public function validate_name() {
@@ -102,7 +96,14 @@ class Kilpailija extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            return $row;
+            $kilpailija = new Kilpailija(array(
+                'ktunnus' => $row['ktunnus'],
+                'nimi' => $row['nimi'],
+                'kayttajanimi' => $row['kayttajanimi'],
+                'salasana' => $row['salasana'],
+                'paaaine' => $row['paaaine']
+            ));
+            return $kilpailija;
         } else {
             return NULL;
         }

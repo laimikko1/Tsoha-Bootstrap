@@ -2,15 +2,21 @@
 {% block content %}
 <h2>Kirjaudu sisään</h2>
 
-<form method="post" action="{{base_path}}/kirjautumissivu">
+{% if error %}
+<div class="alert alert-danger">
+    {{error}}
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/kirjautuminen">
     <div class="form-group">
         <label>Käyttäjätunnus</label>
-        <input class="form-control" name="kayttajatunnus" value={{username}} type="text" placeholder="Käyttäjätunnus">
+        <input class="form-control" name="kayttajanimi" value="{{kayttajanimi}}" type="text" placeholder="Käyttäjätunnus">
     </div>
 
     <div class="form-group">
         <label>Salasana</label>
-        <input class="form-control" type="text" name="password" placeholder="Salasana">
+        <input class="form-control" type="text" name="salasana" placeholder="Salasana">
     </div>
 
     <button type="submit" class="btn btn-info">Kirjaudu sisään</button>
@@ -20,7 +26,7 @@
     <p></p>
     <p></p>
 </form>
-    
+
 <form action="http://laimikko.users.cs.helsinki.fi/KuJudo/rekisteroityminen">
     <button type="submit" class="btn-success">Liity tästä!</button>
 

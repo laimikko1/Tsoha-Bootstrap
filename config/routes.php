@@ -12,10 +12,6 @@ $routes->get('/esittely', function() {
     HelloWorldController::esittely();
 });
 
-$routes->get('/kirjautuminen', function() {
-    HelloWorldController::kirjautuminen();
-});
-
 $routes->get('/kilpailut', function() {
     Kilpailu_controller::index();
 });
@@ -36,10 +32,10 @@ $routes->get('/yllapitajan_sivu', function() {
 $routes->post('/rekisteroityminen', function() {
     Kilpailija_controller::store();
 });
-
-$routes->get('/rekisteroityminen', function() {
-    Kilpailija_controller::create();
-});
+//
+//$routes->get('/rekisteroityminen', function() {
+//    Kilpailija_controller::create();
+//});
 
 $routes->get('/kayttajan_sivu/:ktunnus', function($ktunnus) {
     Kilpailija_controller::edit($ktunnus);
@@ -53,10 +49,14 @@ $routes->post('/kayttajan_sivu/:ktunnus/destroy', function($ktunnus) {
     Kilpailija_controller::destroy($ktunnus);
 });
 
-$routes->get('/kirjautumissivu', function() {
+$routes->get('/kirjautuminen', function() {
     LoginController::login();
 });
 
-$routes->get('/kirjautumissivu', function() {
+$routes->post('/kirjautuminen', function() {
     LoginController::handle_login();
+});
+
+$routes->post('/kirjaudu_ulos', function() {
+    LoginController::logOut();
 });

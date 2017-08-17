@@ -43,16 +43,43 @@
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
                         <li><a href="{{base_path}}">Etusivu</a></li>
-                        <li><a href='esittely'>Tietoa meistä</a></li>
-                        <li><a href='ranking'>Ranking</a></li>
-                        <li><a href='kilpailut'>Kilpailut</a></li>
-                        <li><a href='kirjautuminen'>Kirjaudu</a></li>
+                        <li><a href='{{base_path}}/esittely'>Tietoa meistä</a></li>
+                        <li><a href='{{base_path}}/ranking'>Ranking</a></li>
+                        <li><a href='{{base_path}}/kilpailut'>Kilpailut</a></li>
+                        {% if not user_logged_in %}
+                        <li><a href='{{base_path}}/kirjautuminen'>Kirjaudu</a></li>
+                        {% else %}
+                        <li><a href='{{base_path}}/kayttajan_sivu/{{user_logged_in.ktunnus}}'>Omat tiedot</a></li>
+                        {% endif %}
+
                     </ul>
+
                 </div>
             </div>
         </nav>
 
         <div id="main-container">
+            {% if message %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            {% endif %}
+
+            {% if errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for error in errors %}
+                    <li>{{error}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if user_logged_in %}
+            <form method="post" action="{{base_path}}/kirjaudu_ulos" id="uloskirjautuminen">
+                <button type="submit" class="alert alert-danger" style="inline-block">Kirjaudu ulos!</button>
+            </form>
+            {% endif %}
             <!-- Dynaaminen sisältö tulee tähän -->
             {% block content %}{% endblock %}
         </div>
