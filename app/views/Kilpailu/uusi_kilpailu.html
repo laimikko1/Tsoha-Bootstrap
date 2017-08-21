@@ -1,4 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
+<form method="post" action="{{base_path}}/uusi_kilpailu">
+    <div class="form-group">
+        <label>Kilpailun nimi</label>
+        <input name="kilpailun_nimi" type="text" class="form-control" value="{{attributes.kilpailun_nimi}}">
+    </div>
+
+    <div class="form-group">
+        <label>Kilpailupaikka</label>
+        <input name="kilpailupaikka" type="text" class="form-control" value="{{attributes.kilpailupaikka}}">
+    </div>
+
+    <div class="form-group">
+        <label>Kilpailun kuvaus</label>
+        <textarea id="kilpailun_kuvaus" class="text" cols="75" rows="10" name="kilpailun_kuvaus">{{attributes.kilpailun_kuvaus}}</textarea>
+
+    </div>
+
+    <div class="form-group">
+        <label>Kilpailun ajankohta (Kirjoita muodossa Vuosi-kuukausi-päivä)</label>
+        <input name="kilpailun_paiva" type="date" class="form-control" style="width:100px">
+    </div>
+
+    <div class="form-group">
+        <label>Kilpailun alkamisaika (Kirjoita muodossa tt:mm)</label>
+        <input name="kilpailun_kellonaika" type="text" class="form-control" style="width:100px">
+    </div>
+
+    <div class="form-group">
+        <label>Keltainen/Oranssi painoluokat</label><br>
+        <input type="checkbox" name="painoluokat_alemmat[]" value="alle70">Alle -70kg<br>
+        <input type="checkbox" name="painoluokat_alemmat[]" value="alle80">Alle -80kg<br>
+        <input type="checkbox" name="painoluokat_alemmat[]" value="alle90">Alle -90kg<br>
+        <input type="checkbox" name="painoluokat_alemmat[]" value="alle100">Alle -100kg<br>
+        <input type="checkbox" name="painoluokat_alemmat[]" value="yli100">Yli -100kg<br>
+    </div>
+
+    <div class="form-group">
+        <label>Vihreä/Ruskea/Musta painoluokat</label><br>
+        <input type="checkbox" name="painoluokat_ylemmat[]" value="alle70">Alle -70kg<br>
+        <input type="checkbox" name="painoluokat_ylemmat[]" value="alle80">Alle -80kg<br>
+        <input type="checkbox" name="painoluokat_ylemmat[]" value="alle90">Alle -90kg<br>
+        <input type="checkbox" name="painoluokat_ylemmat[]" value="alle100">Alle -100kg<br>
+        <input type="checkbox" name="painoluokat_ylemmat[]" value="yli100">Yli -100kg<br>
+    </div>
+
+    <div class="form-group">    
+        <button type="submit" class="btn btn-primary">Lisää kilpailu!</button>
+    </div>
+</form>
+
 
 {% endblock %}

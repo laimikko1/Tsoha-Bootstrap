@@ -3,6 +3,8 @@
 class Kilpailija_controller extends BaseController {
 
     public static function index() {
+        self::check_logged_in();
+
         $kilpailijat = Kilpailija::all();
 
         Kint::dump($kilpailijat);
@@ -11,6 +13,8 @@ class Kilpailija_controller extends BaseController {
     }
 
     public static function store() {
+        self::check_logged_in();
+
         $params = $_POST;
 
         $attributes = array(
@@ -33,6 +37,8 @@ class Kilpailija_controller extends BaseController {
     }
 
     public static function edit($ktunnus) {
+        self::check_logged_in();
+
 
         $kilpailija = Kilpailija::find($ktunnus);
         if (empty($_SESSION['kilpailija'])) {
@@ -46,7 +52,9 @@ class Kilpailija_controller extends BaseController {
     }
 
     public static function update($ktunnus) {
-        $params = $_POST;
+        self::check_logged_in();
+ 
+       $params = $_POST;
 
         $attributes = array(
             'ktunnus' => $ktunnus,

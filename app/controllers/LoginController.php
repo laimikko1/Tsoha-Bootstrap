@@ -22,12 +22,8 @@ class LoginController extends BaseController {
         Kint::dump($kilpailija);
     }
 
-    public static function logOut() {
-        unset($_SESSION['kayttajanimi']);
-        unset($_SESSION['salasana']);
-
-        session_destroy();
-        session_Start();
+    public static function logout() {
+        $_SESSION['kilpailija'] = null;
         Redirect::to('/', array('message' => 'Olet kirjautunut ulos!'));
     }
 

@@ -8,6 +8,8 @@ class Kilpailu extends BaseModel {
         parent::__construct($attributes);
     }
 
+ 
+
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM kilpailu');
 
@@ -45,6 +47,18 @@ class Kilpailu extends BaseModel {
 
             return $kilpailu;
         }
+    }
+
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO kilpailu(kilpailun_nimi, kilpailupaikka, ajankohta, kilpailun_kuvaus) VALUES(:kilpailun_nimi, :kilpailupaikka, :ajankohta, :kilpailun_kuvaus) RETURNING kilpailutunnus');
+
+        $query->execute(array('kilpailun_nimi' => $this->kilpailun_nimi, 'kilpailupaikka' => $this->kilpailupaikka, 'ajankohta' => $this->ajankohta, 'kilpailun_kuvaus' => $this->kilpailun_kuvaus));
+
+        $row = $query->fetch();
+        $this->ktunnus = $row['kilpailutunnus'];
+        
+        return $this->ktunnus;
+        
     }
 
 }

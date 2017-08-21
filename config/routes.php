@@ -32,10 +32,6 @@ $routes->get('/yllapitajan_sivu', function() {
 $routes->post('/rekisteroityminen', function() {
     Kilpailija_controller::store();
 });
-//
-//$routes->get('/rekisteroityminen', function() {
-//    Kilpailija_controller::create();
-//});
 
 $routes->get('/kayttajan_sivu/:ktunnus', function($ktunnus) {
     Kilpailija_controller::edit($ktunnus);
@@ -58,5 +54,17 @@ $routes->post('/kirjautuminen', function() {
 });
 
 $routes->post('/kirjaudu_ulos', function() {
-    LoginController::logOut();
+    LoginController::logout();
+});
+
+$routes->post('/kilpailut', function() {
+    Kilpailu_controller::store();
+});
+
+$routes->get('/uusi_kilpailu', function() {
+    Kilpailu_controller::uusi();
+});
+
+$routes->post('/uusi_kilpailu', function() {
+    Kilpailu_controller::store();
 });
