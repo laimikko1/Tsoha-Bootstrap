@@ -28,9 +28,13 @@ class Kilpailu_controller extends BaseController {
 
         Kint::dump($params);
 
-        $id = $kilpailu->save();
-       
-        Kint::dump($id);
+//        $id = $kilpailu->save();
+
+//        Kilpailun_sarja_controller::store($id, $alemmat_painoluokat, $ylemmat_painoluokat);
+
+//        Kint::dump($id);
+        Kint::dump($alemmat_painoluokat);
+        Kint::dump($ylemmat_painoluokat);
 //
 //        Redirect::to('/kilpailun_sivu/' . $kilpailu->ktunnus, array('message' => 'Kilpailu ja sen painoluokat luotu!'));
     }
