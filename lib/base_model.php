@@ -26,6 +26,16 @@ class BaseModel {
         return TRUE;
     }
 
+    public function validate_date($string) {
+        $year = substr($string, 0, -12);
+        $month = substr($string, -5, 2);
+        $day = substr($string, -8, 2);
+        if (checkdate($month, $day, $year)) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
     public function errors() {
 //         Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
         $errors = $this->validators;
