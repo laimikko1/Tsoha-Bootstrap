@@ -20,19 +20,25 @@ class Kilpailu_controller extends BaseController {
             'kilpailun_kuvaus' => $params['kilpailun_kuvaus']
         ));
 
+        Kint::dump($kilpailu);
 
-        $alemmat_painoluokat = array();
-        $ylemmat_painoluokat = array();
+        $errors = $kilpailu->errors();
 
-        $alemmat_painoluokat = $params['painoluokat_alemmat'];
-        $ylemmat_painoluokat = $params['painoluokat_ylemmat'];
+        if (empty($params['painoluokat_alemmat']) && empty($params['painoluokat_ylemmat'])) {
+            $errors[] = 'Valitse ainakin yksi painoluokka kilpailuun!';
+        } else {
+            $alemmat_painoluokat = $params['painoluokat_alemmat'];
+            $ylemmat_painoluokat = $params['painoluokat_ylemmat'];
+        }
 
-        $id = $kilpailu->save();
-        $kilpailun_sarjat = Kilpailun_sarja_controller::store($id, $alemmat_painoluokat, $ylemmat_painoluokat);
-        Kint::dump($id);
-        Kint::dump($kilpailun_sarjat);
-//
-//        Redirect::to('/' . $kilpailu->ktunnus, array('message' => 'Kilpailu ja sen painoluokat luotu!'));
+        if (count($errors) == 0) {
+            $id = $kilpailu->save();
+            Kilpailun_sarja_controller::store($id, $alemmat_painoluokat, $ylemmat_painoluokat);
+
+            Redirect::to('/' . $kilpailu->ktunnus, array('message' => 'Kilpailu ja sen painoluokat luotu!'));
+        } else {
+            View::make('Kilpailu/uusi_kilpailu.html', array('errors' => $errors, 'attributes' => $kilpailu));
+        }
     }
 
     public static function uusi() {

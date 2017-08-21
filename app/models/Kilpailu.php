@@ -6,9 +6,8 @@ class Kilpailu extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_kilpailun_kuvaus', 'validate_kilpailupaikka', 'validate_ajankohta');
     }
-
- 
 
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM kilpailu');
@@ -56,9 +55,38 @@ class Kilpailu extends BaseModel {
 
         $row = $query->fetch();
         $this->ktunnus = $row['kilpailutunnus'];
-        
+
         return $this->ktunnus;
-        
+    }
+
+    public function validate_name() {
+        if (parent::validate_string_length($this->kilpailun_nimi) == FALSE) {
+            return "Kilpailun nimi ei saa olla alle 3 merkkiä!";
+        }
+        return NULL;
+    }
+
+    public function validate_kilpailun_kuvaus() {
+        if (parent::validate_string_length($this->kilpailun_kuvaus) == FALSE) {
+            return "Kilpailun kuvaus ei saa olla alle 3 merkkiä!";
+        }
+        return NULL;
+    }
+
+    public function validate_kilpailupaikka() {
+        if (parent::validate_string_length($this->kilpailupaikka) == FALSE) {
+            return "Kilpailupaikka ei saa olla alle 3 merkkiä!";
+        }
+        return NULL;
+    }
+
+    public function validate_ajankohta() {
+        $string = $this->ajankohta;
+        $dateObj = DateTime::createFromFormat('Y-m-d H:i:s', $string);
+        if ($dateObj) {
+            return null;
+        }
+        return 'Ajankohta tulee olla muodossa VVVV-KK-PP JA TT:MM';
     }
 
 }
