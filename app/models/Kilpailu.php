@@ -83,10 +83,14 @@ class Kilpailu extends BaseModel {
     public function validate_ajankohta() {
         $string = $this->ajankohta;
         $dateObj = DateTime::createFromFormat('Y-m-d H:i:s', $string);
-        if ($dateObj) {
-            return null;
+        $nyt = date("Y-m-d H:i:s");
+        if ($nyt > $dateObj) {
+            return 'Ajankohta ei voi olla menneisyydessä! Jos omistat toimivan aikakoneen, ota yhteys ylläpitoon.';
         }
-        return 'Ajankohta tulee olla muodossa VVVV-KK-PP JA TT:MM';
+        if (!$dateObj) {
+            return 'Ajankohta tulee olla muodossa VVVV-KK-PP JA TT:MM';
+        }
+        return null;
     }
 
 }
