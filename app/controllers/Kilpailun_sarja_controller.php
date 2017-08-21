@@ -6,7 +6,7 @@ class Kilpailun_sarja_controller extends BaseController {
         $alemmatVyot_sarja = array();
         $ylemmatVyot_sarja = array();
         $kilpailun_sarjat = array();
-        
+
 
         foreach ($alemmat_painoluokat as $painoluokka) {
             $kilpailun_sarja = new Kilpailun_sarja(array(
@@ -14,7 +14,7 @@ class Kilpailun_sarja_controller extends BaseController {
                 'vyoarvo' => 'Keltainen/Oranssi',
                 'painoluokka' => $painoluokka
             ));
-           $kilpailun_sarjat[] = $kilpailun_sarja;
+            $kilpailun_sarjat[] = $kilpailun_sarja;
         }
 
         foreach ($ylemmat_painoluokat as $painoluokka) {
@@ -24,13 +24,16 @@ class Kilpailun_sarja_controller extends BaseController {
                 'painoluokka' => $painoluokka
             ));
 
-            $kilpailun_sarjat[]  = $kilpailun_sarja;
+            $kilpailun_sarjat[] = $kilpailun_sarja;
         }
-//        foreach ($kilpailun_sarja as $kilpailun_sarja) {
-//            $kilpailun_sarja->save();
-//        }
 
-        Kint::dump($kilpailun_sarjat);
+
+
+        foreach ($kilpailun_sarjat as $ksarja) {
+            $ksarja->save();
+        }
+        
+        return $kilpailun_sarjat;
     }
 
 }
