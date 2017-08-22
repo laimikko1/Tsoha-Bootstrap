@@ -10,7 +10,7 @@ class Kilpailu_controller extends BaseController {
         View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
     }
 
-    public static function show($kilpailutunnus) {
+    public static function showKilpailunSivu($kilpailutunnus) {
         $kilpailu = Kilpailu::find($kilpailutunnus);
         $kilpailun_painoluokat = Kilpailun_sarja::findAll($kilpailutunnus);
 
@@ -20,7 +20,9 @@ class Kilpailu_controller extends BaseController {
         View::make('Kilpailu/kilpailun_sivu.html', array('kilpailu' => $kilpailu, 'kilpailunp' => $kilpailun_painoluokat));
     }
 
-    public static function ilmoittaudu($kilpailutunnus) {
+    public static function showIlmoittautuminen($kilpailutunnus) {
+        self::check_logged_in();
+        
         $kilpailu = Kilpailu::find($kilpailutunnus);
         $kilpailun_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
 
@@ -39,8 +41,6 @@ class Kilpailu_controller extends BaseController {
             'ajankohta' => $params['kilpailun_paiva'] . ' ' . $params['kilpailun_kellonaika'] . ':00',
             'kilpailun_kuvaus' => $params['kilpailun_kuvaus']
         ));
-
-        Kint::dump($kilpailu);
 
         $errors = $kilpailu->errors();
 

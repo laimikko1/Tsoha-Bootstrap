@@ -69,10 +69,14 @@ $routes->post('/uusi_kilpailu', function() {
     Kilpailu_controller::store();
 });
 
-$routes->get('/kilpailun_sivu/:kilpailutunnus/', function($kilpailutunnus) {
-    Kilpailu_controller::show($kilpailutunnus);
+$routes->get('/kilpailun_sivu/:kilpailutunnus', function($kilpailutunnus) {
+    Kilpailu_controller::showKilpailunSivu($kilpailutunnus);
 });
 
 $routes->get('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen', function($kilpailutunnus) {
-    Kilpailu_controller::ilmoittaudu($kilpailutunnus);
+    Kilpailu_controller::showIlmoittautuminen($kilpailutunnus);
+});
+
+$routes->post('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen/', function($kilpailutunnus) {
+    Kilpailun_sarja_controller::ilmoittaudu($kilpailutunnus);
 });

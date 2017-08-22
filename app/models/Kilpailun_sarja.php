@@ -25,11 +25,12 @@ class Kilpailun_sarja extends BaseModel {
                     'painoluokka' => $row['painoluokka'],
                     'vyoarvo' => $row['vyoarvo']
                 ));
+                
+                
             }
         }
 
         foreach ($kilpailun_sarjat as $sarja) {
-//            $sarjan_osallistujat = array();
             $sarjan_osallistujat = self::haeSarjanKilpailijat($sarja->sarjatunnus);
             $sarja->sarjan_osallistujat = $sarjan_osallistujat;
         }

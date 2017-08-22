@@ -1,4 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-<h2> Ilmoittaudu kilpailuun {{kilpailu.nimi}}</h2>
+
+<h2>Ilmoittaudu kilpailuun alla</h2>
+<form method="post" action="{{base_path}}/kilpailun_sivu/{{kilpailu.kilpailutunnus}}/ilmoittautuminen">
+    {% for kilpailu in kilpailu %}
+    {% endfor %}
+    <div class="form-group">
+        <fieldset disabled>
+            <label>Kilpailun nimi</label>
+            <input name="nimi" type="text" class="form-control" value="{{kilpailu.kilpailun_nimi}}" >
+        </fieldset>
+    </div>
+    <div class="form-group">
+        <label>Kilpailun sarja, johon haluat ilmoittautua</label>
+        <select class="form-control" name="sarjatunnus">
+            {% for p in kilpailun_sarjat %}
+            <option value="{{p.sarjatunnus}}">{{p.painoluokka}}, {{p.vyoarvo}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">    
+        <button type="submit" class="btn btn-primary">Ilmoittaudu!</button>
+    </div>
+</form>
+
+
 {% endblock %}
+
+

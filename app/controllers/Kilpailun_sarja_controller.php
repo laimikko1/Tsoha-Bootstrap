@@ -36,4 +36,27 @@ class Kilpailun_sarja_controller extends BaseController {
         return $kilpailun_sarjat;
     }
 
+    public static function ilmoittaudu($kilpailutunnus) {
+        self::check_logged_in();
+        $id = $_SESSION['kilpailija'];
+
+        $params = $_POST;
+
+        $attributes = (array(
+            'ktunnus' => $id,
+            'sarjatunnus' => $params['sarjatunnus']
+        ));
+
+        $sarjan_osallistuja = new Sarjan_osallistuja($attributes);
+//        $sarjan_osallistuja->save();
+
+        $errors = $sarjan_osallistuja->errors();
+
+        if (count($errors) == 0) {
+        Redirect::to('/', array('message' => 'Ilmoittautuminen kilpailuun lisätty!'));
+        } else {
+            Redirect::to('/kilpailun_sivu/' . $kilpailutunnus . '/ilmoittautuminen', array('errors' => $errors));
+        }
+    }
+
 }
