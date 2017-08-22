@@ -2,7 +2,7 @@
 
 class Kilpailun_sarja extends BaseModel {
 
-    public $sarjatunnus, $kilpailutunnus, $painoluokka, $vyoarvo;
+    public $sarjatunnus, $kilpailutunnus, $painoluokka, $vyoarvo, $sarjan_osallistujat;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -27,6 +27,12 @@ class Kilpailun_sarja extends BaseModel {
                 ));
             }
         }
+
+        foreach ($kilpailun_sarjat as $sarja) {
+//            $sarjan_osallistujat = array();
+            $sarjan_osallistujat = self::haeSarjanKilpailijat($sarja->sarjatunnus);
+            $sarja->sarjan_osallistujat = $sarjan_osallistujat;
+        }
         return $kilpailun_sarjat;
     }
 
@@ -38,6 +44,30 @@ class Kilpailun_sarja extends BaseModel {
 
         $row = $query->fetch();
         $this->sarjatunnus = $row['sarjatunnus'];
+    }
+
+    public static function haeSarjanKilpailijat($sarjatunnus) {
+        $query = DB::connection()->prepare('SELECT sarjan_osallistuja.ktunnus, kilpailija.nimi, kilpailija.paaaine
+                 FROM sarjan_osallistuja
+                 LEFT JOIN Kilpailija
+                 ON sarjan_osallistuja.ktunnus = kilpailija.ktunnus
+                 WHERE sarjan_osallistuja.sarjatunnus = :sarjatunnus');
+        $query->execute(array('sarjatunnus' => $sarjatunnus));
+
+        $rows = $query->fetchAll();
+
+        $sarjan_osallistujat = array();
+
+        if ($rows) {
+            foreach ($rows as $row) {
+                $sarjan_osallistujat[] = new Kilpailija(array(
+                    'ktunnus' => $row['ktunnus'],
+                    'nimi' => $row['nimi'],
+                    'paaaine' => $row['paaaine']
+                ));
+            }
+        }
+        return $sarjan_osallistujat;
     }
 
 }

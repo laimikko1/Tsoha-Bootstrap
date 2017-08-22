@@ -1,8 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
+
 {% for kilpailu in kilpailu %} 
 {% endfor %}
-<h2>{{kilpailun.nimi}}</h2>
+
+<h2 style="margin-left:120px">{{kilpailu.kilpailun_nimi}}</h2>
+
+<div class="panel panel-default">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel-body">{{kilpailu.kilpailun_kuvaus}}</div>
+        </div>
+    </div>
+</div>
+
+<h2>Ilmoittautuneet kilpailijat</h2>
+
 {% endblock %}
 
 
