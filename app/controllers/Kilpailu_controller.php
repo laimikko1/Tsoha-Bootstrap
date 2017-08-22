@@ -9,12 +9,16 @@ class Kilpailu_controller extends BaseController {
 
         View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
     }
-    
-//    public static function ilmoittaudu($kilpailutunnus) {
-//        $kilpailu = Kilpailu::find($kilpailutunnus);
-//        
-//        if()
-//    }
+
+    public static function ilmoittaudu($kilpailutunnus) {
+        $kilpailu = Kilpailu::find($kilpailutunnus);
+        $kilpailun_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
+
+        Kint::dump($kilpailu);
+        Kint::dump($kilpailun_sarjat);
+
+        View::make('Kilpailu/kilpailun_ilmoittautumislomake.html', array('kilpailu' => $kilpailu, 'kilpailun_sarjat' => $kilpailun_sarjat));
+    }
 
     public static function store() {
         $params = $_POST;

@@ -31,8 +31,8 @@ class Kilpailu extends BaseModel {
     }
 
     public static function find($kilpailutunnus) {
-        $query = DB::connection()->prepare('SELECT * FROM kilpailu WHERE ktunnus = :kilpailutunnus LIMIT 1');
-        $query->execute(array('ktunnus' => $ktunnus));
+        $query = DB::connection()->prepare('SELECT * FROM kilpailu WHERE kilpailutunnus = :kilpailutunnus LIMIT 1');
+        $query->execute(array('kilpailutunnus' => $kilpailutunnus));
         $row = $query->fetch();
 
         if ($row) {

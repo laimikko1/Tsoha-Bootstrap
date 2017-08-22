@@ -32,7 +32,7 @@ class Kilpailun_sarja_controller extends BaseController {
         foreach ($kilpailun_sarjat as $ksarja) {
             $ksarja->save();
         }
-        
+
         return $kilpailun_sarjat;
     }
 

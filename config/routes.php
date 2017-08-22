@@ -68,3 +68,7 @@ $routes->get('/uusi_kilpailu', function() {
 $routes->post('/uusi_kilpailu', function() {
     Kilpailu_controller::store();
 });
+
+$routes->get('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen', function($kilpailutunnus) {
+    Kilpailu_controller::ilmoittaudu($kilpailutunnus);
+});
