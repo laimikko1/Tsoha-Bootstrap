@@ -48,12 +48,12 @@ class Kilpailun_sarja_controller extends BaseController {
         ));
 
         $sarjan_osallistuja = new Sarjan_osallistuja($attributes);
-//        $sarjan_osallistuja->save();
 
         $errors = $sarjan_osallistuja->errors();
 
         if (count($errors) == 0) {
-        Redirect::to('/', array('message' => 'Ilmoittautuminen kilpailuun lisätty!'));
+            $sarjan_osallistuja->save();
+            Redirect::to('/', array('message' => 'Ilmoittautuminen kilpailuun lisätty!'));
         } else {
             Redirect::to('/kilpailun_sivu/' . $kilpailutunnus . '/ilmoittautuminen', array('errors' => $errors));
         }

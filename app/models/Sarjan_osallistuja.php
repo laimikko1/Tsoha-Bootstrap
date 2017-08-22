@@ -18,11 +18,11 @@ class Sarjan_osallistuja extends BaseModel {
     public function validate_ilmoittautuminen() {
         $query = DB::connection()->prepare('SELECT * FROM sarjan_osallistuja WHERE ktunnus = :ktunnus AND sarjatunnus = :sarjatunnus');
 
-       $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus));
-       
-       $rows = $query->fetchAll();
-       
-        if($rows) {
+        $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus));
+
+        $rows = $query->fetchAll();
+
+        if ($rows) {
             return "Et voi ilmoittautua samaan sarjaan useasti!";
         }
         return null;

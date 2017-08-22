@@ -13,7 +13,6 @@ class Kilpailija_controller extends BaseController {
     }
 
     public static function store() {
-        self::check_logged_in();
 
         $params = $_POST;
 
