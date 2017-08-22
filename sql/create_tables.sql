@@ -9,7 +9,7 @@ paaaine varchar(50) NOT NULL
 );
 
 CREATE TABLE Ranking_pisteet(
-ktunnus INTEGER REFERENCES Kilpailija(ktunnus),
+ktunnus INTEGER REFERENCES Kilpailija(ktunnus) ON DELETE CASCADE,
 pisteet INTEGER
 );
 
@@ -23,13 +23,13 @@ kilpailun_kuvaus varchar(500)
 
 CREATE TABLE Kilpailun_sarja(
 sarjatunnus SERIAL PRIMARY KEY,
-kilpailutunnus INTEGER REFERENCES Kilpailu(kilpailutunnus),
+kilpailutunnus INTEGER REFERENCES Kilpailu(kilpailutunnus) ON DELETE CASCADE,
 painoluokka INTEGER,
 vyoarvo varchar(50)
 );
 
 CREATE TABLE Sarjan_osallistuja(
-ktunnus INTEGER REFERENCES Kilpailija(ktunnus),
-sarjatunnus INTEGER REFERENCES Kilpailun_sarja(sarjatunnus),
+ktunnus INTEGER REFERENCES Kilpailija(ktunnus) ON DELETE CASCADE,
+sarjatunnus INTEGER REFERENCES Kilpailun_sarja(sarjatunnus) ON DELETE CASCADE,
 sijoitus INTEGER
 );

@@ -9,6 +9,18 @@ class Kilpailu_controller extends BaseController {
 
         View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
     }
+    
+     public static function show($kilpailutunnus) {
+        $kilpailu = Kilpailu::find($kilpailutunnus);
+        $kilpailun_painoluokat = Kilpailun_sarja::findAll($kilpailutunnus);
+
+        Kint::dump($kilpailun_painoluokat);
+        Kint::dump($kilpailu);
+
+        View::make('Kilpailu/kilpailun_sivu.html', array('kilpailu' => $kilpailu));
+    } 
+    
+    
 
     public static function ilmoittaudu($kilpailutunnus) {
         $kilpailu = Kilpailu::find($kilpailutunnus);
@@ -45,7 +57,7 @@ class Kilpailu_controller extends BaseController {
             $id = $kilpailu->save();
             Kilpailun_sarja_controller::store($id, $alemmat_painoluokat, $ylemmat_painoluokat);
 
-            Redirect::to('/' . $kilpailu->ktunnus, array('message' => 'Kilpailu ja sen painoluokat luotu!'));
+            Redirect::to('Kilpailu/kilpailun_sivu.html' . $kilpailu->ktunnus, array('message' => 'Kilpailu ja sen painoluokat luotu!'));
         } else {
             View::make('Kilpailu/uusi_kilpailu.html', array('errors' => $errors, 'attributes' => $kilpailu));
         }
