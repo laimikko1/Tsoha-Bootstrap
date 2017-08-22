@@ -21,5 +21,14 @@ class BaseController {
             Redirect::to('/kirjautuminen', array('message' => 'Sivu sallittu vain kirjautuneille jäsenille!'));
         }
     }
+    
+    public static function check_if_users_page($tarkistettava) {
+        // Tarkistaa ettei yksi käyttäjä pääse esimerkiksi kaikkien muidenkin käyttäjien
+        // henk koht sivuille, kuten käyttäjätietojen muokkaukseen
+        $id = ($_SESSION['kilpailija']);
+        if ($id != $tarkistettava) {
+            Redirect::to('/kayttajan_sivu/' . $id);
+        }
+    }
 
 }

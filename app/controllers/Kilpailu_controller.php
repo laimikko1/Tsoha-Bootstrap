@@ -9,6 +9,12 @@ class Kilpailu_controller extends BaseController {
 
         View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
     }
+    
+//    public static function ilmoittaudu($kilpailutunnus) {
+//        $kilpailu = Kilpailu::find($kilpailutunnus);
+//        
+//        if()
+//    }
 
     public static function store() {
         $params = $_POST;

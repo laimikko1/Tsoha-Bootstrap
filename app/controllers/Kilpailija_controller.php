@@ -37,24 +37,21 @@ class Kilpailija_controller extends BaseController {
     }
 
     public static function edit($ktunnus) {
-        self::check_logged_in();
 
+        self::check_logged_in();
+        self::check_if_users_page($ktunnus);
 
         $kilpailija = Kilpailija::find($ktunnus);
-        if (empty($_SESSION['kilpailija'])) {
-            Redirect::to('/');
-        }
-        if ($_SESSION['kilpailija'] == $kilpailija->ktunnus) {
-            View::make('Kilpailija/kayttajan_sivu.html', array('attributes' => $kilpailija));
-        } else {
-            Redirect::to('/');
-        }
+        View::make('Kilpailija/kayttajan_sivu.html', array('attributes' => $kilpailija));
+
+        Kint::dump($k);
+        Redirect::to('/');
     }
 
     public static function update($ktunnus) {
         self::check_logged_in();
- 
-       $params = $_POST;
+
+        $params = $_POST;
 
         $attributes = array(
             'ktunnus' => $ktunnus,

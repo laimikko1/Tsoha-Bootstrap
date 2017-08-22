@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 class Kilpailija extends BaseModel {
 
@@ -103,7 +103,9 @@ class Kilpailija extends BaseModel {
                 'salasana' => $row['salasana'],
                 'paaaine' => $row['paaaine']
             ));
+
             return $kilpailija;
+            
         } else {
             return NULL;
         }
