@@ -55,7 +55,7 @@ class Kilpailu_controller extends BaseController {
             $id = $kilpailu->save();
             Kilpailun_sarja_controller::store($id, $alemmat_painoluokat, $ylemmat_painoluokat);
 
-            Redirect::to('Kilpailu/kilpailun_sivu.html' . $kilpailu->ktunnus, array('message' => 'Kilpailu ja sen painoluokat luotu!'));
+            Redirect::to('/kilpailun_sivu/' . $kilpailu->ktunnus, array('message' => 'Kilpailu ja sen painoluokat luotu!'));
         } else {
             View::make('Kilpailu/uusi_kilpailu.html', array('errors' => $errors, 'attributes' => $kilpailu));
         }
