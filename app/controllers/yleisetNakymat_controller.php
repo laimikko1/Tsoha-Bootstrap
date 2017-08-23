@@ -13,7 +13,9 @@ class yleisetNakymat_controller extends BaseController {
         // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
         View::make('Suunnitelma/index.html');
     }
-
+/**
+ * esittely-metodi renderöi app/views kansiossa olevan esittelysivun
+ */
     public static function esittely() {
         View::make('Suunnitelma/esittely.html');
     }
