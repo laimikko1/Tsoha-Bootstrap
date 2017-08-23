@@ -26,6 +26,8 @@ class BaseModel {
         return TRUE;
     }
 
+    
+
     public function errors() {
 //         Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
         $errors = $this->validators;

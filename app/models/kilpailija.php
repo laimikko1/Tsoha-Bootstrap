@@ -6,7 +6,7 @@ class Kilpailija extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_kayttajatunnus', 'validate_salasana');
+        $this->validators = array('validate_nimi', 'validate_kayttajanimi', 'validate_salasana', 'validate_duplicate_kayttajanimi');
     }
 
     public static function all() {
@@ -69,16 +69,27 @@ class Kilpailija extends BaseModel {
         $row = $query->fetch();
     }
 
-    public function validate_name() {
+    public function validate_nimi() {
         if (parent::validate_string_length($this->nimi) == FALSE) {
             return 'Nimi ei saa olla tyhjä tai alle 3 merkkiä!';
         }
         return NULL;
     }
 
-    public function validate_kayttajatunnus() {
+    public function validate_kayttajanimi() {
         if (parent::validate_string_length($this->kayttajanimi) == FALSE) {
             return 'Käyttäjätunnus ei saa olla tyhjä tai alle 3 merkkiä!';
+        }
+        return null;
+    }
+
+    public function validate_duplicate_kayttajanimi() {
+        $query = DB::connection()->prepare('SELECT FROM Kilpailija WHERE kayttajanimi = :kayttajanimi');
+        $query->execute(array('kayttajanimi' => $this->kayttajanimi));
+        $row = $query->fetchAll();
+
+        if ($row) {
+            return "Käyttäjänimi on jo käytössä!";
         }
         return null;
     }
@@ -105,7 +116,6 @@ class Kilpailija extends BaseModel {
             ));
 
             return $kilpailija;
-            
         } else {
             return NULL;
         }

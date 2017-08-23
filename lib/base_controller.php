@@ -21,7 +21,7 @@ class BaseController {
             Redirect::to('/kirjautuminen', array('message' => 'Sivu sallittu vain kirjautuneille jäsenille!'));
         }
     }
-    
+
     public static function check_if_users_page($tarkistettava) {
         // Tarkistaa ettei yksi käyttäjä pääse esimerkiksi kaikkien muidenkin käyttäjien
         // henk koht sivuille, kuten käyttäjätietojen muokkaukseen
@@ -31,4 +31,13 @@ class BaseController {
         }
     }
 
-}
+    public static function check_if_administrator() {
+        self::check_logged_in();
+        $tarkistettava = ($_SESSION['kilpailija']);
+        $kilpailija = Kilpailija::find($tarkistettava);
+        $nimi = $kilpailija->kayttajanimi;
+        if ($nimi != 'admin') {
+             Redirect::to('/', array('message' => 'Sivu sallittu vain ylläpidolle!'));
+        }
+    }
+}    

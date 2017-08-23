@@ -3,7 +3,7 @@
 class Kilpailija_controller extends BaseController {
 
     public static function index() {
-        self::check_logged_in();
+        self::check_if_administrator();
 
         $kilpailijat = Kilpailija::all();
 

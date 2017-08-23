@@ -2,14 +2,6 @@
 
 class Kilpailu_controller extends BaseController {
 
-    public static function index() {
-        $kilpailut = Kilpailu::all();
-
-        Kint::dump($kilpailut);
-
-        View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
-    }
-
     public static function showKilpailunSivu($kilpailutunnus) {
         $kilpailu = Kilpailu::find($kilpailutunnus);
         $kilpailun_painoluokat = Kilpailun_sarja::findAll($kilpailutunnus);
@@ -22,7 +14,7 @@ class Kilpailu_controller extends BaseController {
 
     public static function showIlmoittautuminen($kilpailutunnus) {
         self::check_logged_in();
-        
+
         $kilpailu = Kilpailu::find($kilpailutunnus);
         $kilpailun_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
 

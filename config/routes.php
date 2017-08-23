@@ -1,27 +1,27 @@
 <?php
 
 $routes->get('/', function() {
-    HelloWorldController::index();
-});
-
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+    yleisetNakymat_controller::index();
 });
 
 $routes->get('/esittely', function() {
-    HelloWorldController::esittely();
+    yleisetNakymat_controller::esittely();
 });
 
 $routes->get('/kilpailut', function() {
-    Kilpailu_controller::index();
+    yleisetNakymat_controller::kilpailut();
 });
 
 $routes->get('/ranking', function() {
-    HelloWorldController::ranking();
+    yleisetNakymat_controller::ranking();
 });
 
 $routes->get('/rekisteroityminen', function() {
-    HelloWorldController::rekisteroityminen();
+    yleisetNakymat_controller::rekisteroityminen();
+});
+
+$routes->get('/kirjautuminen', function() {
+    yleisetNakymat_controller::login();
 });
 
 $routes->get('/yllapitajan_sivu', function() {
@@ -45,9 +45,6 @@ $routes->post('/kayttajan_sivu/:ktunnus/destroy', function($ktunnus) {
     Kilpailija_controller::destroy($ktunnus);
 });
 
-$routes->get('/kirjautuminen', function() {
-    LoginController::login();
-});
 
 $routes->post('/kirjautuminen', function() {
     LoginController::handle_login();

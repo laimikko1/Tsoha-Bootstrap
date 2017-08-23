@@ -52,6 +52,12 @@
                         <li><a href='{{base_path}}/kayttajan_sivu/{{user_logged_in.ktunnus}}'>Omat tiedot</a></li>
                         {% endif %}
 
+                        {% if user_logged_in.kayttajanimi == "admin" %}
+                        <li><a href='{{base_path}}/yllapitajan_sivu'>Ylläpitäjän sivu</a></li>
+                        {% endif %}
+
+
+
                     </ul>
 
                 </div>
