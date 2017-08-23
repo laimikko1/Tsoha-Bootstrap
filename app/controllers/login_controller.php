@@ -1,8 +1,10 @@
 <?php
 
-class LoginController extends BaseController {
+class login_controller extends BaseController {
 
-
+    public static function login() {
+        View::make('Suunnitelma/kirjautumissivu.html');
+    }
 
     public static function handle_login() {
         $params = $_POST;

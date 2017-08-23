@@ -47,7 +47,7 @@ class Kilpailun_sarja extends BaseModel {
         $this->sarjatunnus = $row['sarjatunnus'];
     }
 
-    public static function haeSarjanKilpailijat($sarjatunnus) {
+    public static function getAllClassCompetitors($sarjatunnus) {
         $query = DB::connection()->prepare('SELECT sarjan_osallistuja.ktunnus, kilpailija.nimi, kilpailija.paaaine
                  FROM sarjan_osallistuja
                  LEFT JOIN Kilpailija

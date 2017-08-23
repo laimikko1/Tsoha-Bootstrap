@@ -9,10 +9,17 @@ class Kilpailu extends BaseModel {
         $this->validators = array('validate_name', 'validate_kilpailun_kuvaus', 'validate_kilpailupaikka', 'validate_ajankohta');
     }
 
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM kilpailu');
+    public static function all($newOrOld) {
+// todella pleb ratkaisu, SORI!!
 
+        if ($newOrOld === 0) {
+            $query = DB::connection()->prepare('SELECT * FROM kilpailu WHERE ajankohta > LOCALTIMESTAMP ORDER BY ajankohta ASC');
+        } else {
+            $query = DB::connection()->prepare('SELECT * FROM kilpailu WHERE ajankohta < LOCALTIMESTAMP ORDER BY ajankohta DESC');
+        }
         $query->execute();
+
+
 
         $rows = $query->fetchAll();
         $kilpailut = array();

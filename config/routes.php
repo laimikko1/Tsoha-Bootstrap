@@ -11,6 +11,10 @@ $routes->get('/esittely', function() {
 $routes->get('/kilpailut', function() {
     yleisetNakymat_controller::kilpailut();
 });
+//
+$routes->get('/kilpailut/menneet_kilpailut', function() {
+    yleisetNakymat_controller::menneet_Kilpailut();
+});
 
 $routes->get('/ranking', function() {
     yleisetNakymat_controller::ranking();
@@ -21,7 +25,7 @@ $routes->get('/rekisteroityminen', function() {
 });
 
 $routes->get('/kirjautuminen', function() {
-    yleisetNakymat_controller::login();
+    login_controller::login();
 });
 
 $routes->get('/yllapitajan_sivu', function() {
@@ -47,11 +51,11 @@ $routes->post('/kayttajan_sivu/:ktunnus/destroy', function($ktunnus) {
 
 
 $routes->post('/kirjautuminen', function() {
-    LoginController::handle_login();
+    login_controller::handle_login();
 });
 
 $routes->post('/kirjaudu_ulos', function() {
-    LoginController::logout();
+    login_controller::logout();
 });
 
 $routes->post('/kilpailut', function() {

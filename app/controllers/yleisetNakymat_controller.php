@@ -3,19 +3,23 @@
 /**
  * yleisetNakymat_controller on vastuussa yleisten näkymien esittämisestä, jotka ovat kaikkien käytössä,
  * eivätkä vaadi kirjautumista
+ * 
+ *  
  */
 class yleisetNakymat_controller extends BaseController {
 
-   /**
-    * index-metodi renderöi app/views kansiossa olevan etusivun
-    */
+    /**
+     * index-metodi renderöi app/views kansiossa olevan etusivun
+     * 
+     */
     public static function index() {
         // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
         View::make('Suunnitelma/index.html');
     }
-/**
- * esittely-metodi renderöi app/views kansiossa olevan esittelysivun
- */
+
+    /**
+     * esittely-metodi renderöi app/views kansiossa olevan esittelysivun
+     */
     public static function esittely() {
         View::make('Suunnitelma/esittely.html');
     }
@@ -28,15 +32,15 @@ class yleisetNakymat_controller extends BaseController {
         View::make('Kilpailija/rekisteroityminen.html');
     }
 
-    public static function login() {
-        View::make('Suunnitelma/kirjautumissivu.html');
+    public static function kilpailut() {
+        $kilpailut = Kilpailu::all(0);
+        View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
     }
 
-    public static function kilpailut() {
-        $kilpailut = Kilpailu::all();
-
-
-        View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
+    public static function menneet_Kilpailut() {
+        $kilpailut = Kilpailu::all(1);
+        View::make('Kilpailu/menneet_kilpailut.html', array('kilpailut' => $kilpailut));
+        
     }
 
 }
