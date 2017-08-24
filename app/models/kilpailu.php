@@ -1,6 +1,6 @@
 <?php
 
-class Kilpailu extends BaseModel {
+class kilpailu extends BaseModel {
 
     public $kilpailutunnus, $kilpailun_nimi, $kilpailupaikka, $ajankohta, $kilpailun_kuvaus;
 
@@ -25,7 +25,7 @@ class Kilpailu extends BaseModel {
         $kilpailut = array();
 
         foreach ($rows as $row) {
-            $kilpailut[] = new Kilpailu(array(
+            $kilpailut[] = new kilpailu(array(
                 'kilpailutunnus' => $row['kilpailutunnus'],
                 'kilpailun_nimi' => $row['kilpailun_nimi'],
                 'kilpailupaikka' => $row['kilpailupaikka'],
@@ -43,7 +43,7 @@ class Kilpailu extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $kilpailu = new Kilpailu(array(
+            $kilpailu = new kilpailu(array(
                 'kilpailutunnus' => $row['kilpailutunnus'],
                 'kilpailun_nimi' => $row['kilpailun_nimi'],
                 'kilpailupaikka' => $row['kilpailupaikka'],
@@ -98,6 +98,11 @@ class Kilpailu extends BaseModel {
             return 'Ajankohta tulee olla muodossa VVVV-KK-PP JA TT:MM';
         }
         return null;
+    }
+
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE kilpailu SET kilpailun_nimi = :kilpailun_nimi, kilpailupaikka = :kilpailupaikka, ajankohta = :ajankohta, kilpailun_kuvaus = :kilpailun_kuvaus WHERE kilpailutunnus = :kilpailutunnus');
+        $query->execute(array('kilpailun_nimi' => $this->kilpailun_nimi, 'kilpailupaikka' => $this->kilpailupaikka, 'ajankohta' => $this->ajankohta, 'kilpailun_kuvaus' => $this->kilpailun_kuvaus, 'kilpailutunnus' => $this->kilpailutunnus));
     }
 
 }

@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-
-<table class="table table-bordered">
-
+<h4 id="yllapitoOtsikko">Hallinnoi kilpailijoita</h4>
+<table class="table table-bordered" id="yllapitoTaulukko">
     <thead>
         <tr>        
             <th>Nimi</th>
@@ -20,4 +19,47 @@
     </tbody>
 </table>
 
-{% endblock %}
+<h4 id="yllapitoOtsikko">Muokkaa tulossa olevia kilpailuja</h4>
+    <table class="table table-bordered" id="yllapitoTaulukko">
+    <thead>
+        <tr>        
+            <th>Nimi</th>
+            <th>Ajankohta</th>
+            <th>Kilpailupaikka</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for tulossa in tulossaOlevat %}
+        <tr>
+            <td><a href="{{base_path}}/kilpailun_sivu/{{tulossa.kilpailutunnus}}/muokkaa">{{tulossa.kilpailun_nimi}}</td>
+            <td>{{tulossa.ajankohta}}</td>
+            <td>{{tulossa.kilpailupaikka}}</td>
+        </tr>
+        {% endfor %} 
+    </tbody>
+</table>
+
+<h4 id="yllapitoOtsikko">Muokkaa menneiden kilpailujen tuloksia</h4>
+    <table class="table table-bordered" id="yllapitoTaulukko">
+    <thead>
+        <tr>        
+            <th>Nimi</th>
+            <th>Ajankohta</th>
+            <th>Kilpailupaikka</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for mennyt in menneet %}
+        <tr>
+            <td><a href="{{base_path}}/Yllapitaja/muokkaa_kilpailun_tuloksia/{{mennyt.kilpailutunnus}}">{{mennyt.kilpailun_nimi}}</td>
+            <td>{{mennyt.ajankohta}}</td>
+            <td>{{mennyt.kilpailupaikka}}</td>
+        </tr>
+        {% endfor %} 
+    </tbody>
+    </table>
+
+    {% endblock %}

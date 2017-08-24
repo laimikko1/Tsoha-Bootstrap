@@ -1,6 +1,6 @@
 <?php
 
-class Kilpailun_sarja extends BaseModel {
+class kilpailun_sarja extends BaseModel {
 
     public $sarjatunnus, $kilpailutunnus, $painoluokka, $vyoarvo, $sarjan_osallistujat;
 
@@ -19,19 +19,17 @@ class Kilpailun_sarja extends BaseModel {
 
         if ($rows) {
             foreach ($rows as $row) {
-                $kilpailun_sarjat[] = new Kilpailun_sarja(array(
+                $kilpailun_sarjat[] = new kilpailun_sarja(array(
                     'sarjatunnus' => $row['sarjatunnus'],
                     'kilpailutunnus' => $row['kilpailutunnus'],
                     'painoluokka' => $row['painoluokka'],
                     'vyoarvo' => $row['vyoarvo']
                 ));
-                
-                
             }
         }
 
         foreach ($kilpailun_sarjat as $sarja) {
-            $sarjan_osallistujat = self::haeSarjanKilpailijat($sarja->sarjatunnus);
+            $sarjan_osallistujat = self::getAllClassCompetitors($sarja->sarjatunnus);
             $sarja->sarjan_osallistujat = $sarjan_osallistujat;
         }
         return $kilpailun_sarjat;
@@ -61,7 +59,7 @@ class Kilpailun_sarja extends BaseModel {
 
         if ($rows) {
             foreach ($rows as $row) {
-                $sarjan_osallistujat[] = new Kilpailija(array(
+                $sarjan_osallistujat[] = new kilpailija(array(
                     'ktunnus' => $row['ktunnus'],
                     'nimi' => $row['nimi'],
                     'paaaine' => $row['paaaine']
@@ -69,6 +67,11 @@ class Kilpailun_sarja extends BaseModel {
             }
         }
         return $sarjan_osallistujat;
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM kilpailun_sarja WHERE sarjatunnus = :sarjatunnus');
+        $query->execute(array('sarjatunnus' => $this->sarjatunnus));
     }
 
 }

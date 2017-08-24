@@ -29,26 +29,25 @@ $routes->get('/kirjautuminen', function() {
 });
 
 $routes->get('/yllapitajan_sivu', function() {
-    Kilpailija_controller::index();
+    yllapitajan_controller::index();
 });
 
 
 $routes->post('/rekisteroityminen', function() {
-    Kilpailija_controller::store();
+    kilpailija_controller::store();
 });
 
 $routes->get('/kayttajan_sivu/:ktunnus', function($ktunnus) {
-    Kilpailija_controller::edit($ktunnus);
+    kilpailija_controller::edit($ktunnus);
 });
 
 $routes->post('/kayttajan_sivu/:ktunnus', function($ktunnus) {
-    Kilpailija_controller::update($ktunnus);
+    kilpailija_controller::update($ktunnus);
 });
 
 $routes->post('/kayttajan_sivu/:ktunnus/destroy', function($ktunnus) {
-    Kilpailija_controller::destroy($ktunnus);
+    kilpailija_controller::destroy($ktunnus);
 });
-
 
 $routes->post('/kirjautuminen', function() {
     login_controller::handle_login();
@@ -58,26 +57,34 @@ $routes->post('/kirjaudu_ulos', function() {
     login_controller::logout();
 });
 
-$routes->post('/kilpailut', function() {
-    Kilpailu_controller::store();
-});
-
 $routes->get('/uusi_kilpailu', function() {
-    Kilpailu_controller::uusi();
+    yllapitajan_controller::uusi();
 });
 
 $routes->post('/uusi_kilpailu', function() {
-    Kilpailu_controller::store();
+    yllapitajan_controller::store();
 });
 
 $routes->get('/kilpailun_sivu/:kilpailutunnus', function($kilpailutunnus) {
-    Kilpailu_controller::showKilpailunSivu($kilpailutunnus);
+    kilpailu_controller::showKilpailunSivu($kilpailutunnus);
 });
 
 $routes->get('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen', function($kilpailutunnus) {
-    Kilpailu_controller::showIlmoittautuminen($kilpailutunnus);
+    kilpailu_controller::showIlmoittautuminen($kilpailutunnus);
 });
 
 $routes->post('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen/', function($kilpailutunnus) {
-    Kilpailun_sarja_controller::ilmoittaudu($kilpailutunnus);
+    kilpailun_sarja_controller::ilmoittaudu($kilpailutunnus);
+});
+
+$routes->get('/kilpailun_sivu/:kilpailutunnus/muokkaa', function($kilpailutunnus) {
+    yllapitajan_controller::viewMuokattava($kilpailutunnus);
+});
+
+$routes->post('/kilpailun_sivu/:kilpailutunnus/muokkaa', function($kilpailutunnus) {
+    yllapitajan_controller::update($kilpailutunnus);
+});
+
+$routes->post('/kilpailun_sarja/destroy', function() {
+    kilpailun_sarja_controller::destroy();
 });

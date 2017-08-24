@@ -7,7 +7,7 @@ class BaseController {
         if (isset($_SESSION['kilpailija'])) {
             $kilpailija_ktunnus = $_SESSION['kilpailija'];
 
-            $kilpailija = Kilpailija::find($kilpailija_ktunnus);
+            $kilpailija = kilpailija::find($kilpailija_ktunnus);
 
             return $kilpailija;
         }
@@ -34,7 +34,7 @@ class BaseController {
     public static function check_if_administrator() {
         self::check_logged_in();
         $tarkistettava = ($_SESSION['kilpailija']);
-        $kilpailija = Kilpailija::find($tarkistettava);
+        $kilpailija = kilpailija::find($tarkistettava);
         $nimi = $kilpailija->kayttajanimi;
         if ($nimi != 'admin') {
              Redirect::to('/', array('message' => 'Sivu sallittu vain ylläpidolle!'));

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post" action="{{base_path}}/kilpailun_sivu/{{attributes.kilpailutunnus}}/muokkaa">
+    <div class="form-group">
+        <label>Kilpailun nimi</label>
+        <input name="kilpailun_nimi" type="text" class="form-control" value="{{attributes.kilpailun_nimi}}">
+    </div>
+
+    <div class="form-group">
+        <label>Kilpailupaikka</label>
+        <input name="kilpailupaikka" type="text" class="form-control" value="{{attributes.kilpailupaikka}}">
+    </div>
+
+    <div class="form-group">
+        <label>Kilpailun kuvaus</label>
+        <textarea id="kilpailun_kuvaus" class="text" cols="75" rows="10" name="kilpailun_kuvaus">{{attributes.kilpailun_kuvaus}}</textarea>
+
+    </div>
+
+    <div class="form-group">
+        <label>Kilpailun ajankohta (Kirjoita muodossa Vuosi-kuukausi-päivä)</label>
+        <input name="ajankohta" class="form-control" value="{{attributes.ajankohta}}" style="width:180px">
+    </div>
+
+    <div class="form-group">    
+        <button type="submit" class="btn btn-primary">Tallenna muutokset</button>
+    </div>
+</form>
+
+<div class="row">
+
+    <form method="post" action="{{base_path}}/kilpailun_sivu/{{attributes.kilpailutunnus}}/muokkaa">
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Lisää sarja kilpailuun</label>
+                <label>Painoluokka</label>
+                <input name="paino" type="text" class="form-control">
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Valitse/lisää sarjan vyöarvo ja painoluokka</label>
+                <label>Vyöarvo</label>
+                <select class="form-control" name="vyo">
+                    <option value="Keltainen/Oranssi">Keltainen/Oranssi</option>
+                    <option value="Vihrea/Sininen/Ruskea/Musta">Vihrea/Sininen/Ruskea/Musta</option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <div class="form-group">    
+                <button type="submit" class="btn btn-primary">Tallenna muutokset</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<div class="row">
+
+    <form method="post" action="{{base_path}}/kilpailun_sarja/destroy">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Poista kilpailun sarja</label>
+                <select class="form-control" name="sarjatunnus">
+                    {% for muokattava in muokattavat  %}
+                    <option value="{{muokattava.sarjatunnus}}">{{muokattava.vyoarvo}}, {{muokattava.painoluokka}}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="hidden" value="{{attributes.kilpailutunnus}}" name="kilpailutunnus">
+                <button type="submit" class="btn btn-danger">Poista</button>
+            </div>
+        </div>
+
+
+    </form>
+</div>
+
+
+{% endblock %}

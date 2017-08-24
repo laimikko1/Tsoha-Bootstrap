@@ -1,6 +1,6 @@
 <?php
 
-class Sarjan_osallistuja extends BaseModel {
+class sarjan_osallistuja extends BaseModel {
 
     public $ktunnus, $sarjatunnus, $sijoitus;
 

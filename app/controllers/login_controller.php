@@ -9,7 +9,7 @@ class login_controller extends BaseController {
     public static function handle_login() {
         $params = $_POST;
 
-        $kilpailija = Kilpailija::authenticate($params['kayttajanimi'], $params['salasana']);
+        $kilpailija = kilpailija::authenticate($params['kayttajanimi'], $params['salasana']);
 
         if (!$kilpailija) {
             View::make('/Suunnitelma/kirjautumissivu.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'kayttajanimi' => $params['kayttajanimi']));

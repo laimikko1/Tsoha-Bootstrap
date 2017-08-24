@@ -1,6 +1,6 @@
 <?php
 
-class Kilpailija extends BaseModel {
+class kilpailija extends BaseModel {
 
     public $ktunnus, $nimi, $kayttajanimi, $salasana, $paaaine;
 
@@ -35,7 +35,7 @@ class Kilpailija extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $kilpailija = new Kilpailija(array(
+            $kilpailija = new kilpailija(array(
                 'ktunnus' => $row['ktunnus'],
                 'nimi' => $row['nimi'],
                 'kayttajanimi' => $row['kayttajanimi'],
@@ -58,9 +58,7 @@ class Kilpailija extends BaseModel {
 
     public function update() {
         $query = DB::connection()->prepare('UPDATE Kilpailija SET nimi = :nimi, kayttajanimi = :kayttajanimi, salasana = :salasana, paaaine = :paaaine WHERE ktunnus = :ktunnus');
-
         $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine, 'ktunnus' => $this->ktunnus));
-        $row = $query->fetch();
     }
 
     public function destroy() {

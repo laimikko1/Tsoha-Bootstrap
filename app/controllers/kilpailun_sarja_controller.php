@@ -1,6 +1,6 @@
 <?php
 
-class Kilpailun_sarja_controller extends BaseController {
+class kilpailun_sarja_controller extends BaseController {
 
     public static function store($kilpailutunnus, $alemmat_painoluokat, $ylemmat_painoluokat) {
 
@@ -8,15 +8,6 @@ class Kilpailun_sarja_controller extends BaseController {
         $kilpailun_sarjat[] = self::luoSarjat($alemmat_painoluokat, $kilpailutunnus, 'Keltainen/oranssi');
         $kilpailun_sarjat[] = self::luoSarjat($ylemmat_painoluokat, $kilpailutunnus, 'Vihrea/Sininen/Ruskea/Musta');
 
-//        foreach ($ylemmat_painoluokat as $painoluokka) {
-//            $kilpailun_sarja = new Kilpailun_sarja(array(
-//                'kilpailutunnus' => $kilpailutunnus,
-//                'vyoarvo' => 'Vihrea/Sininen/Ruskea/Musta',
-//                'painoluokka' => $painoluokka
-//            ));
-//
-//            $kilpailun_sarjat[] = $kilpailun_sarja;
-//        }
 
         foreach ($kilpailun_sarjat as $ksarja) {
             $ksarja->save();
@@ -36,7 +27,7 @@ class Kilpailun_sarja_controller extends BaseController {
             'sarjatunnus' => $params['sarjatunnus']
         ));
 
-        $sarjan_osallistuja = new Sarjan_osallistuja($attributes);
+        $sarjan_osallistuja = new sarjan_osallistuja($attributes);
 
         $errors = $sarjan_osallistuja->errors();
 
@@ -50,7 +41,7 @@ class Kilpailun_sarja_controller extends BaseController {
 
     private static function luoSarjat($painoluokka, $kilpailutunnus, $vyoarvo) {
         foreach ($painoluokka as $painoluokka) {
-            $kilpailun_sarja = new Kilpailun_sarja(array(
+            $kilpailun_sarja = new kilpailun_sarja(array(
                 'kilpailutunnus' => $kilpailutunnus,
                 'vyoarvo' => 'Keltainen/Oranssi',
                 'painoluokka' => $painoluokka
@@ -58,6 +49,19 @@ class Kilpailun_sarja_controller extends BaseController {
             $kilpailun_sarjat[] = $kilpailun_sarja;
         }
         return $kilpailun_sarjat;
+    }
+
+    public static function destroy() {
+        $params = $_POST;
+        $sarjatunnus = $params['sarjatunnus'];
+        $kilpailutunnus = $params['kilpailutunnus'];
+        $poistettava_sarja = new kilpailun_sarja(array('sarjatunnus' => $sarjatunnus));
+//        Kint::dump($poistettava_sarja);
+//        View::make('/');
+        $poistettava_sarja->destroy();
+
+
+        Redirect::to('/kilpailun_sivu/' . $kilpailutunnus . '/muokkaa', array('message' => 'Painoluokka poistettu kilpailusta!'));
     }
 
 }
