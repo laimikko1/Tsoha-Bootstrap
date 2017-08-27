@@ -27,9 +27,14 @@ class Sarjan_osallistuja extends BaseModel {
         }
         return null;
     }
-    
+
     function validate_sijoitus() {
         //basemodel-validaattorit tähän :)
+    }
+
+    public function editSijoitus() {
+        $query = DB::connection()->prepare('UPDATE sarjan_osallistuja SET sijotus = :sijoitus WHERE ktunnus = :ktunnus AND sarjatunnus = :sarjatunnus');
+        $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus, 'sijoitus' => $this->sijoitus));
     }
 
 }
