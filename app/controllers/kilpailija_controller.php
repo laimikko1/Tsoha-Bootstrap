@@ -30,7 +30,7 @@ class kilpailija_controller extends BaseController {
         self::check_logged_in();
         self::check_if_users_page($ktunnus);
 
-        $kilpailija = kilpailija::find($ktunnus);
+        $kilpailija = Kilpailija::find($ktunnus);
         View::make('Kilpailija/kayttajan_sivu.html', array('attributes' => $kilpailija));
 
     }
@@ -64,7 +64,7 @@ class kilpailija_controller extends BaseController {
     }
 
     public static function destroy($ktunnus) {
-        $kilpailija = new kilpailija(array('ktunnus' => $ktunnus));
+        $kilpailija = new Kilpailija(array('ktunnus' => $ktunnus));
         $kilpailija->destroy();
 
         Redirect::to('/rekisteroityminen', array('message' => 'Tunnus poistettu onnistuneesti!'));

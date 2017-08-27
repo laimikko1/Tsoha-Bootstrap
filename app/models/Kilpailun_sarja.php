@@ -1,6 +1,6 @@
 <?php
 
-class kilpailun_sarja extends BaseModel {
+class Kilpailun_sarja extends BaseModel {
 
     public $sarjatunnus, $kilpailutunnus, $painoluokka, $vyoarvo, $sarjan_osallistujat;
 
@@ -19,7 +19,7 @@ class kilpailun_sarja extends BaseModel {
 
         if ($rows) {
             foreach ($rows as $row) {
-                $kilpailun_sarjat[] = new kilpailun_sarja(array(
+                $kilpailun_sarjat[] = new Kilpailun_sarja(array(
                     'sarjatunnus' => $row['sarjatunnus'],
                     'kilpailutunnus' => $row['kilpailutunnus'],
                     'painoluokka' => $row['painoluokka'],
@@ -27,12 +27,38 @@ class kilpailun_sarja extends BaseModel {
                 ));
             }
         }
-
         foreach ($kilpailun_sarjat as $sarja) {
             $sarjan_osallistujat = self::getAllClassCompetitors($sarja->sarjatunnus);
             $sarja->sarjan_osallistujat = $sarjan_osallistujat;
         }
+
+
         return $kilpailun_sarjat;
+    }
+
+    public static function getAllClassCompetitors($sarjatunnus) {
+        $query = DB::connection()->prepare('SELECT kilpailija.nimi, kilpailija.paaaine, sarjan_osallistuja.sarjatunnus, '
+                . 'sarjan_osallistuja.sijoitus, sarjan_osallistuja.ktunnus FROM sarjan_osallistuja '
+                . 'LEFT JOIN kilpailija '
+                . 'ON sarjan_osallistuja.ktunnus = kilpailija.ktunnus '
+                . 'WHERE sarjan_osallistuja.sarjatunnus = :sarjatunnus');
+        $query->execute(array('sarjatunnus' => $sarjatunnus));
+
+        $rows = $query->fetchAll();
+
+        $sarjan_osallistujat = array();
+
+        if ($rows) {
+            foreach ($rows as $row) {
+                $sarjan_osallistujat[] = new Kilpailija(array(
+                    'ktunnus' => $row['ktunnus'],
+                    'nimi' => $row['nimi'],
+                    'paaaine' => $row['paaaine'],
+                    'sijoitus' => $row['sijoitus']
+                ));
+            }
+        }
+        return $sarjan_osallistujat;
     }
 
     public function save() {
@@ -43,30 +69,6 @@ class kilpailun_sarja extends BaseModel {
 
         $row = $query->fetch();
         $this->sarjatunnus = $row['sarjatunnus'];
-    }
-
-    public static function getAllClassCompetitors($sarjatunnus) {
-        $query = DB::connection()->prepare('SELECT sarjan_osallistuja.ktunnus, kilpailija.nimi, kilpailija.paaaine
-                 FROM sarjan_osallistuja
-                 LEFT JOIN Kilpailija
-                 ON sarjan_osallistuja.ktunnus = kilpailija.ktunnus
-                 WHERE sarjan_osallistuja.sarjatunnus = :sarjatunnus');
-        $query->execute(array('sarjatunnus' => $sarjatunnus));
-
-        $rows = $query->fetchAll();
-
-        $sarjan_osallistujat = array();
-
-        if ($rows) {
-            foreach ($rows as $row) {
-                $sarjan_osallistujat[] = new kilpailija(array(
-                    'ktunnus' => $row['ktunnus'],
-                    'nimi' => $row['nimi'],
-                    'paaaine' => $row['paaaine']
-                ));
-            }
-        }
-        return $sarjan_osallistujat;
     }
 
     public function destroy() {

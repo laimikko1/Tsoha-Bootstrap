@@ -16,11 +16,11 @@
 
 <h2>Ilmoittautuneet kilpailijat</h2>
 
-{% for kilpailunp in kilpailunp %}
+{% for kilpailunpa in kilpailunp %}
 <ul>
-    <li>{{kilpailunp.painoluokka}} {{kilpailunp.vyoarvo}}
+    <li>{{kilpailunpa.painoluokka}} {{kilpailunpa.vyoarvo}}
         <ul>
-            {% for osallistuja in kilpailunp.sarjan_osallistujat %}
+            {% for osallistuja in kilpailunpa.sarjan_osallistujat %}
             <li>{{osallistuja.nimi}}, {{osallistuja.paaaine}}</li>
             {% endfor %}
         </ul>

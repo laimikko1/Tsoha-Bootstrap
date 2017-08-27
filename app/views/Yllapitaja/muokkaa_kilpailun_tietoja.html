@@ -28,23 +28,22 @@
 </form>
 
 <div class="row">
+        <label style="margin-left: 15px;">Lisää sarja kilpailuun</label>
 
-    <form method="post" action="{{base_path}}/kilpailun_sivu/{{attributes.kilpailutunnus}}/muokkaa">
+    <form method="post" action="{{base_path}}/kilpailun_sarja/{{attributes.kilpailutunnus}}/add">
 
         <div class="col-md-4">
             <div class="form-group">
-                <label>Lisää sarja kilpailuun</label>
                 <label>Painoluokka</label>
-                <input name="paino" type="text" class="form-control">
+                <input name="painoluokka" type="text" class="form-control">
 
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="form-group">
-                <label>Valitse/lisää sarjan vyöarvo ja painoluokka</label>
                 <label>Vyöarvo</label>
-                <select class="form-control" name="vyo">
+                <select class="form-control" name="vyoarvo">
                     <option value="Keltainen/Oranssi">Keltainen/Oranssi</option>
                     <option value="Vihrea/Sininen/Ruskea/Musta">Vihrea/Sininen/Ruskea/Musta</option>
                 </select>
@@ -54,7 +53,7 @@
 
         <div class="col-md-6">
             <div class="form-group">    
-                <button type="submit" class="btn btn-primary">Tallenna muutokset</button>
+                <button type="submit" class="btn btn-primary">Lisää sarja</button>
             </div>
         </div>
     </form>
@@ -75,7 +74,7 @@
                 </select>
                 <br>
                 <input type="hidden" value="{{attributes.kilpailutunnus}}" name="kilpailutunnus">
-                <button type="submit" class="btn btn-danger">Poista</button>
+                <button type="submit" class="btn btn-danger">Poista sarja</button>
             </div>
         </div>
 

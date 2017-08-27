@@ -1,6 +1,6 @@
 <?php
 
-class kilpailu extends BaseModel {
+class Kilpailu extends BaseModel {
 
     public $kilpailutunnus, $kilpailun_nimi, $kilpailupaikka, $ajankohta, $kilpailun_kuvaus;
 
@@ -25,7 +25,7 @@ class kilpailu extends BaseModel {
         $kilpailut = array();
 
         foreach ($rows as $row) {
-            $kilpailut[] = new kilpailu(array(
+            $kilpailut[] = new Kilpailu(array(
                 'kilpailutunnus' => $row['kilpailutunnus'],
                 'kilpailun_nimi' => $row['kilpailun_nimi'],
                 'kilpailupaikka' => $row['kilpailupaikka'],
@@ -43,7 +43,7 @@ class kilpailu extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $kilpailu = new kilpailu(array(
+            $kilpailu = new Kilpailu(array(
                 'kilpailutunnus' => $row['kilpailutunnus'],
                 'kilpailun_nimi' => $row['kilpailun_nimi'],
                 'kilpailupaikka' => $row['kilpailupaikka'],
@@ -75,9 +75,8 @@ class kilpailu extends BaseModel {
 
     public function validate_kilpailun_kuvaus() {
         if (parent::validate_string_length($this->kilpailun_kuvaus) == FALSE) {
-            return "Kilpailun kuvaus ei saa olla alle 3 merkkiä!";
-        }
-        return NULL;
+            return 'Nope!';
+        } return NULL;
     }
 
     public function validate_kilpailupaikka() {

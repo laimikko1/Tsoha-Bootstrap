@@ -1,6 +1,6 @@
 <?php
 
-class sarjan_osallistuja extends BaseModel {
+class Sarjan_osallistuja extends BaseModel {
 
     public $ktunnus, $sarjatunnus, $sijoitus;
 
@@ -9,13 +9,13 @@ class sarjan_osallistuja extends BaseModel {
         $this->validators = array('validate_ilmoittautuminen');
     }
 
-    public function save() {
+    function save() {
         $query = DB::connection()->prepare('INSERT INTO Sarjan_osallistuja(ktunnus, sarjatunnus) VALUES(:ktunnus, :sarjatunnus)');
 
         $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus));
     }
 
-    public function validate_ilmoittautuminen() {
+    function validate_ilmoittautuminen() {
         $query = DB::connection()->prepare('SELECT * FROM sarjan_osallistuja WHERE ktunnus = :ktunnus AND sarjatunnus = :sarjatunnus');
 
         $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus));

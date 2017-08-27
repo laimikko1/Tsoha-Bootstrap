@@ -85,6 +85,20 @@ $routes->post('/kilpailun_sivu/:kilpailutunnus/muokkaa', function($kilpailutunnu
     yllapitajan_controller::update($kilpailutunnus);
 });
 
+$routes->get('/kilpailun_sivu/:kilpailutunnus/muokkaa_tuloksia', function($kilpailutunnus) {
+    yllapitajan_controller::viewMuokattavaTulokset($kilpailutunnus);
+});
+
+$routes->post('/kilpailun_sivu/:kilpailutunnus/muokkaa_tuloksia', function($kilpailutunnus) {
+    yllapitajan_controller::updateSijoitukset($kilpailutunnus);
+});
+
+
 $routes->post('/kilpailun_sarja/destroy', function() {
     kilpailun_sarja_controller::destroy();
 });
+
+$routes->post('/kilpailun_sarja/:kilpailutunnus/add', function($kilpailutunnus) {
+    kilpailun_sarja_controller::add($kilpailutunnus);
+});
+

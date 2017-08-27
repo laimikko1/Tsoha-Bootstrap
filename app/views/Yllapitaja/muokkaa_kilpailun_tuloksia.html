@@ -1,5 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
+{% for kilpailu in muokattava %}
+{% endfor %}
+<h2>Muokkaa kilpailun {{kilpailu.kilpailun_nimi}} tuloksia</h2>
+
+<form method="post" action="">
+    <input name="kilpailutunnus" type="hidden" value="{{kilpailu.kilpailutunnus}}"> 
+
+    {% for sarja in sarjat %}
+    <h4>{{sarja.vyoarvo}}, {{sarja.painoluokka}}</h4>
+    <h4 style="word-spacing: 160px">Sijoitus Nimi</h4>
+
+    {% for osallistuja in sarja.sarjan_osallistujat %}
+    <input name="sarjatunnus[]" type="hidden" value="{{sarja.sarjatunnus}}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input name="sijoitus[]" type="text" class="form-control input-sm" value="{{osallistuja.sijoitus}}">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input name="kilp" type="text" class="form-control input-sm" readonly="readonly" value="{{osallistuja.nimi}}">
+            </div>
+        </div>
+        <input name="kilpailija[]" type="hidden" value="{{osallistuja.ktunnus}}">
+    </div>
+    {% endfor %}
+
+
+
+    {% endfor %}
+
+
+    <button class="btn btn-primary" type="submit">Muokkaa tulokset!</button>
+</form>
 
 {% endblock %}
-

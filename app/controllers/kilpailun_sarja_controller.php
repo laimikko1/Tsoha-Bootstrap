@@ -27,7 +27,7 @@ class kilpailun_sarja_controller extends BaseController {
             'sarjatunnus' => $params['sarjatunnus']
         ));
 
-        $sarjan_osallistuja = new sarjan_osallistuja($attributes);
+        $sarjan_osallistuja = new Sarjan_osallistuja($attributes);
 
         $errors = $sarjan_osallistuja->errors();
 
@@ -41,7 +41,7 @@ class kilpailun_sarja_controller extends BaseController {
 
     private static function luoSarjat($painoluokka, $kilpailutunnus, $vyoarvo) {
         foreach ($painoluokka as $painoluokka) {
-            $kilpailun_sarja = new kilpailun_sarja(array(
+            $kilpailun_sarja = new Kilpailun_sarja(array(
                 'kilpailutunnus' => $kilpailutunnus,
                 'vyoarvo' => 'Keltainen/Oranssi',
                 'painoluokka' => $painoluokka
@@ -55,13 +55,26 @@ class kilpailun_sarja_controller extends BaseController {
         $params = $_POST;
         $sarjatunnus = $params['sarjatunnus'];
         $kilpailutunnus = $params['kilpailutunnus'];
-        $poistettava_sarja = new kilpailun_sarja(array('sarjatunnus' => $sarjatunnus));
+        $poistettava_sarja = new Kilpailun_sarja(array('sarjatunnus' => $sarjatunnus));
 //        Kint::dump($poistettava_sarja);
 //        View::make('/');
         $poistettava_sarja->destroy();
 
 
         Redirect::to('/kilpailun_sivu/' . $kilpailutunnus . '/muokkaa', array('message' => 'Painoluokka poistettu kilpailusta!'));
+    }
+
+    public static function add($kilpailutunnus) {
+
+        $params = $_POST;
+        
+        Kint::dump($params);
+        View::make('/');
+//        $lisattava_sarja = new kilpailun_sarja(array(
+//            'kilpailutunnus' => $kilpailutunnus,
+//            'painoluokka' => $params['painoluokka'],
+//            'vyoarvo' => $params['vyoarvo']
+//        ));
     }
 
 }

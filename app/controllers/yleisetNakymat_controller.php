@@ -33,12 +33,12 @@ class yleisetNakymat_controller extends BaseController {
     }
 
     public static function kilpailut() {
-        $kilpailut = kilpailu::all(0);
+        $kilpailut = Kilpailu::all(0);
         View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
     }
 
     public static function menneet_Kilpailut() {
-        $kilpailut = kilpailu::all(1);
+        $kilpailut = Kilpailu::all(1);
         View::make('Kilpailu/menneet_kilpailut.html', array('kilpailut' => $kilpailut));
         
     }

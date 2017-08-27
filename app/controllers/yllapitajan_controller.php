@@ -6,18 +6,43 @@ class yllapitajan_controller extends BaseController {
         self::check_if_administrator();
 
         $kilpailijat = Kilpailija::all();
-        $tulossaOlevatK = kilpailu::all(0);
-        $menneetK = kilpailu::all(1);
+        $tulossaOlevatK = Kilpailu::all(0);
+        $menneetK = Kilpailu::all(1);
 
 
         View::make('Yllapitaja/yllapitajan_sivu.html', array('kilpailijat' => $kilpailijat, 'tulossaOlevat' => $tulossaOlevatK, 'menneet' => $menneetK));
     }
 
     public static function viewMuokattava($kilpailutunnus) {
-        $muokattava = kilpailu::find($kilpailutunnus);
-        $muokattava_sarjat = kilpailun_sarja::findAll($kilpailutunnus);
+        $muokattava = Kilpailu::find($kilpailutunnus);
+        $muokattava_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
 
         View::make('Yllapitaja/muokkaa_kilpailun_tietoja.html', array('attributes' => $muokattava, 'muokattavat' => $muokattava_sarjat));
+    }
+
+    public static function viewMuokattavaTulokset($kilpailutunnus) {
+        $muokattava = Kilpailu::find($kilpailutunnus);
+        $muokattava_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
+
+        View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html', array('kilpailu' => $muokattava, 'sarjat' => $muokattava_sarjat));
+    }
+
+    public static function updateSijoitukset($kilpailutunnus) {
+        $params = $_POST;
+        $sarj = $params['sarjatunnus'];
+        $sij = $params['sijoitus'];
+        $kilp = $params['kilpailija'];
+        $osallistujat = array();
+        $koko = count($sarj);
+        for ($index = 0; $index < $koko; $index++) {
+            $osallistujat[] = new Sarjan_osallistuja(array(
+                'ktunnus' => $kilp[$index],
+                'sarjatunnus' => $sarj[$index],
+                'sijoitus' => $sij[$index]
+            ));
+        }
+        Kint::dump($osallistujat);
+        View::make('/');
     }
 
     public static function update($kilpailutunnus) {
@@ -31,13 +56,13 @@ class yllapitajan_controller extends BaseController {
             'kilpailun_kuvaus' => $params['kilpailun_kuvaus']
         );
 
-        $kilpailu = new kilpailu($attributes);
+        $kilpailu = new Kilpailu($attributes);
         $errors = $kilpailu->errors();
 
 
 
         if (count($errors) > 0) {
-            View::make('/kilpailun_sivu/' . $kilpailutunnus . '/muokkaa', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('Yllapitaja/muokkaa_kilpailun_tietoja.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $kilpailu->update();
             Redirect::to('/yllapitajan_sivu', array('message' => 'Kilpailun tietoja päivitetty onnistuneesti!'));
@@ -51,7 +76,7 @@ class yllapitajan_controller extends BaseController {
     public static function store() {
         $params = $_POST;
 
-        $kilpailu = new kilpailu(array(
+        $kilpailu = new Kilpailu(array(
             'kilpailun_nimi' => $params['kilpailun_nimi'],
             'kilpailupaikka' => $params['kilpailupaikka'],
             'ajankohta' => $params['kilpailun_paiva'] . ' ' . $params['kilpailun_kellonaika'] . ':00',

@@ -1,8 +1,8 @@
 <?php
 
-class kilpailija extends BaseModel {
+class Kilpailija extends BaseModel {
 
-    public $ktunnus, $nimi, $kayttajanimi, $salasana, $paaaine;
+    public $ktunnus, $nimi, $kayttajanimi, $salasana, $paaaine, $sijoitus;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -35,7 +35,7 @@ class kilpailija extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $kilpailija = new kilpailija(array(
+            $kilpailija = new Kilpailija(array(
                 'ktunnus' => $row['ktunnus'],
                 'nimi' => $row['nimi'],
                 'kayttajanimi' => $row['kayttajanimi'],
