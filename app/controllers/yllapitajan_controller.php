@@ -38,13 +38,16 @@ class yllapitajan_controller extends BaseController {
                 'sarjatunnus' => $params['sarjatunnus'][$index],
                 'sijoitus' => $params['sijoitus'][$index]
             ));
+            if ($osallistujat[$index]->sijoitus == "") {
+                $osallistujat[$index]->sijoitus = null;
+            }
             
             Kint::dump($errors);
         }
         if (count($errors) == 0) {
             foreach ($osallistujat as $osal) {
-                $osal->save();
-            }
+                $osal->updateSijoitus();
+                }
             Redirect::to('/yllapitajan_sivu', array('message' => 'Kilpailun tuloksia muokattua onnistuneesti!'));
         } else {
             View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html');
