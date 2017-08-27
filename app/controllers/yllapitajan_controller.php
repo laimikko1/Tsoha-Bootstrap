@@ -27,22 +27,28 @@ class yllapitajan_controller extends BaseController {
         View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html', array('kilpailu' => $muokattava, 'sarjat' => $muokattava_sarjat));
     }
 
-    public static function updateSijoitukset($kilpailutunnus) {
+    public static function updateSijoitukset() {
         $params = $_POST;
-        $sarj = $params['sarjatunnus'];
-        $sij = $params['sijoitus'];
-        $kilp = $params['kilpailija'];
         $osallistujat = array();
-        $koko = count($sarj);
-        for ($index = 0; $index < $koko; $index++) {
+        $errors = array();
+
+        for ($index = 0; $index < count($params['sarjatunnus']); $index++) {
             $osallistujat[] = new Sarjan_osallistuja(array(
-                'ktunnus' => $kilp[$index],
-                'sarjatunnus' => $sarj[$index],
-                'sijoitus' => $sij[$index]
+                'ktunnus' => $params['kilpailija'][$index],
+                'sarjatunnus' => $params['sarjatunnus'][$index],
+                'sijoitus' => $params['sijoitus'][$index]
             ));
+            
+            Kint::dump($errors);
         }
-        Kint::dump($osallistujat);
-        View::make('/');
+        if (count($errors) == 0) {
+            foreach ($osallistujat as $osal) {
+                $osal->save();
+            }
+            Redirect::to('/yllapitajan_sivu', array('message' => 'Kilpailun tuloksia muokattua onnistuneesti!'));
+        } else {
+            View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html');
+        }
     }
 
     public static function update($kilpailutunnus) {

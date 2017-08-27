@@ -6,7 +6,7 @@ class Sarjan_osallistuja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_ilmoittautuminen');
+//        $this->validators = array('validate_ilmoittautuminen');
     }
 
     function save() {
@@ -26,6 +26,10 @@ class Sarjan_osallistuja extends BaseModel {
             return "Et voi ilmoittautua samaan sarjaan useasti!";
         }
         return null;
+    }
+    
+    function validate_sijoitus() {
+        //basemodel-validaattorit tähän :)
     }
 
 }

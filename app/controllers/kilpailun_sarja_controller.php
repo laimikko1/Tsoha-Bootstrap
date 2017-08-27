@@ -29,7 +29,7 @@ class kilpailun_sarja_controller extends BaseController {
 
         $sarjan_osallistuja = new Sarjan_osallistuja($attributes);
 
-        $errors = $sarjan_osallistuja->errors();
+        $errors = $sarjan_osallistuja->validate_ilmoittautuminen();
 
         if (count($errors) == 0) {
             $sarjan_osallistuja->save();

@@ -4,8 +4,7 @@
 {% endfor %}
 <h2>Muokkaa kilpailun {{kilpailu.kilpailun_nimi}} tuloksia</h2>
 
-<form method="post" action="">
-    <input name="kilpailutunnus" type="hidden" value="{{kilpailu.kilpailutunnus}}"> 
+<form method="post" action="{{base_path}}/kilpailun_sivu/{{kilpailu.kilpailutunnus}}/muokkaa_tuloksia">
 
     {% for sarja in sarjat %}
     <h4>{{sarja.vyoarvo}}, {{sarja.painoluokka}}</h4>
