@@ -77,4 +77,49 @@ class Kilpailun_sarja extends BaseModel {
         $query->execute(array('sarjatunnus' => $this->sarjatunnus));
     }
 
+    public static function validateJarjestys($sijoitusjar) {
+        sort($sijoitusjar);
+        if (count($sijoitusjar) >= 8) {
+            Kint::dump(self::checkOverEightBracket($sijoitusjar));
+            View::make('/');
+        }
+//        if (count($sijoitusjar) < 6) {
+//            self::checkUnderSixBracket($sijoitusjar);
+//        } else {
+//            self::checkSixSevenBrackets($sijoitusjar);
+//        }
+    }
+
+    public static function checkOverEightBracket($sijoitusjar) {
+        //tarkistetaan uniikit sijat 1 & 2
+
+        if ($sijoitusjar[0] != 1 && $sijoitusjar[1] != 2) {
+            return false;
+        }
+        //sijat 3-7 ovat kaikki tuplia, eli sijoituksevat ovat: 3,3/ 5,5/ 7,7 eli 4,6 sijoja ei ole,
+        // eli tarkistetaan ensnin ettei indeksin arvo ole 4&6 ja sen jälkeen arvo saa olla joko
+        // indeksi tai indeksi +1
+        for ($index = 2; $index < count($sijoitusjar); $index++) {
+            if ($sijoitusjar[$index] == $index || $sijoitusjar[$index] == $index + 1) {
+                continue;
+            }
+            if ($sijoitusjar[$index] == 4 || [$sijoitusjar[$index]] == 6 || $sijoitusjar[$index] > 7) {
+                return false;
+            }
+            Kint::dump('tääne kosahti');
+            Kint::dump($index);
+
+            return false;
+        }
+        return true;
+    }
+
+    public static function checkUnderSixBracket($sijoitusjar) {
+        
+    }
+
+    public static function checkSixSevenBrackets($sijoitusjar) {
+        
+    }
+
 }
