@@ -41,18 +41,24 @@ class yllapitajan_controller extends BaseController {
             if ($osallistujat[$index]->sijoitus == "") {
                 $osallistujat[$index]->sijoitus = null;
             }
-            $sijoitusjar[] = $params['sijoitus'][$index];
-
+            // tarkista vaihtuuko kilpailun sarja (useita sarjoja samassa parametrijoukossa)
             if ($index != 0 && $osallistujat[$index]->sarjatunnus != $osallistujat[$index - 1]->sarjatunnus) {
                 $tarkistettuSarjat++;
-                $errors = Kilpailun_sarja::validateJarjestys($sijoitusjar);
+                $errors = Kilpailun_sarja::validateJarjestys($sijoitusjarj);
+                $sijoitusjarj = array();
             }
+            if ($osallistujat[$index]->sijoitus != NULL) {
+                $sijoitusjarj[] = $params['sijoitus'][$index];                
+            }
+
             $errors = $osallistujat[$index]->validate_sijoitus();
         }
+        //viimeinen sarja, joka mahd jäänyt kesken pitää vielä tarkastaa, mahdollisesti aina
+        //tarkastetaan siis tuplana yksi sarja...
+        Kilpailun_sarja::validateJarjestys($sijoitusjarj);
         
-        if($tarkistettuSarjat == 0) {
-            $errors = Kilpailun_sarja::validateJarjestys($sijoitusjar);
-        }
+        Kint::dump($sijoitusjarj);
+        View::make('/');
 
 //
 //        if (count($errors) > 0) {
