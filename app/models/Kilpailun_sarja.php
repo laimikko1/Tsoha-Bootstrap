@@ -41,7 +41,8 @@ class Kilpailun_sarja extends BaseModel {
                 . 'sarjan_osallistuja.sijoitus, sarjan_osallistuja.ktunnus FROM sarjan_osallistuja '
                 . 'LEFT JOIN kilpailija '
                 . 'ON sarjan_osallistuja.ktunnus = kilpailija.ktunnus '
-                . 'WHERE sarjan_osallistuja.sarjatunnus = :sarjatunnus');
+                . 'WHERE sarjan_osallistuja.sarjatunnus = :sarjatunnus '
+                . 'ORDER BY sarjan_osallistuja.sijoitus ASC');
         $query->execute(array('sarjatunnus' => $sarjatunnus));
 
         $rows = $query->fetchAll();

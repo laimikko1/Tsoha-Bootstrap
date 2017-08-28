@@ -69,6 +69,10 @@ $routes->get('/kilpailun_sivu/:kilpailutunnus', function($kilpailutunnus) {
     kilpailu_controller::showKilpailunSivu($kilpailutunnus);
 });
 
+$routes->get('/kilpailun_sivu/tulokset/:kilpailutunnus', function($kilpailutunnus) {
+    kilpailu_controller::showTulokset($kilpailutunnus);
+});
+
 $routes->get('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen', function($kilpailutunnus) {
     kilpailu_controller::showIlmoittautuminen($kilpailutunnus);
 });

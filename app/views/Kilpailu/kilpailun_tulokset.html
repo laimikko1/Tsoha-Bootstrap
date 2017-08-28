@@ -1,1 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+{% for kilpailu in kilpailu %} 
+{% endfor %}
+<h2> Kilpailun {{kilpailu.kilpailun_nimi}} tulokset</h2>
+
+{% for sarja in kilpailun_sarjat %}
+<h4>{{sarja.painoluokka}}, {{sarja.vyoarvo}}</h4>
+{% for osallistuja in sarja.sarjan_osallistujat %}
+<ul style="list-styletype:none">
+    <li>{{osallistuja.sijoitus}}. {{osallistuja.nimi}}, {{osallistuja.paaaine}}</li>
+</ul>
+{% endfor %}
+{% endfor %}
+{% endblock %}
 

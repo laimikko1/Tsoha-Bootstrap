@@ -29,8 +29,6 @@ class yllapitajan_controller extends BaseController {
 
     public static function updateSijoitukset() {
         $params = $_POST;
-        $osallistujat = array();
-        $errors = array();
 
         for ($index = 0; $index < count($params['sarjatunnus']); $index++) {
             $osallistujat[] = new Sarjan_osallistuja(array(
@@ -38,19 +36,22 @@ class yllapitajan_controller extends BaseController {
                 'sarjatunnus' => $params['sarjatunnus'][$index],
                 'sijoitus' => $params['sijoitus'][$index]
             ));
+
+            $errors = $osallistujat[$index]->validate_sijoitus();
+            
+            if (count($errors) > 0) {
+                View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html', array('errors' => $errors));
+            }
             if ($osallistujat[$index]->sijoitus == "") {
                 $osallistujat[$index]->sijoitus = null;
             }
-            
-            Kint::dump($errors);
+ 
         }
-        if (count($errors) == 0) {
-            foreach ($osallistujat as $osal) {
-                $osal->updateSijoitus();
-                }
+
+        foreach ($osallistujat as $osal) {
+            $osal->updateSijoitus();
+
             Redirect::to('/yllapitajan_sivu', array('message' => 'Kilpailun tuloksia muokattua onnistuneesti!'));
-        } else {
-            View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html');
         }
     }
 

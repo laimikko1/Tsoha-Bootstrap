@@ -21,7 +21,11 @@ class kilpailu_controller extends BaseController {
         View::make('Kilpailu/kilpailun_ilmoittautumislomake.html', array('kilpailu' => $kilpailu, 'kilpailun_sarjat' => $kilpailun_sarjat));
     }
 
-  
-
+    public static function showTulokset($kilpailutunnus) {
+        $kilpailu = Kilpailu::find($kilpailutunnus);
+        $kilpailun_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
+        
+        View::make('Kilpailu/kilpailun_tulokset.html', array('kilpailu' => $kilpailu, 'kilpailun_sarjat' => $kilpailun_sarjat));
+    }
 
 }
