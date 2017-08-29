@@ -2,6 +2,11 @@
 
 class yllapitajan_controller extends BaseController {
 
+    public static function aloitus() {
+        // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
+        View::make('Suunnitelma/esittely.html');
+    }
+
     public static function index() {
         self::check_if_administrator();
 
@@ -48,7 +53,7 @@ class yllapitajan_controller extends BaseController {
                 $sijoitusjarj = array();
             }
             if ($osallistujat[$index]->sijoitus != NULL) {
-                $sijoitusjarj[] = $params['sijoitus'][$index];                
+                $sijoitusjarj[] = $params['sijoitus'][$index];
             }
 
             $errors = $osallistujat[$index]->validate_sijoitus();
@@ -56,7 +61,7 @@ class yllapitajan_controller extends BaseController {
         //viimeinen sarja, joka mahd jäänyt kesken pitää vielä tarkastaa, mahdollisesti aina
         //tarkastetaan siis tuplana yksi sarja...
         Kilpailun_sarja::validateJarjestys($sijoitusjarj);
-        
+
         Kint::dump($sijoitusjarj);
         View::make('/');
 

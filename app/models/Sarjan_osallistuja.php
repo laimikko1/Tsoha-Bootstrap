@@ -44,4 +44,10 @@ class Sarjan_osallistuja extends BaseModel {
         return null;
     }
 
+    public function destroyIlmoittautuminen() {
+        $query = DB::connection()->prepare('DELETE FROM sarjan_osallistuja WHERE ktunnus = :ktunnus AND sarjatunnus = :sarjatunnus');
+        $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' =>$this->sarjatunnus));
+
+    }
+
 }

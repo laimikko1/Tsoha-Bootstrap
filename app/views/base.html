@@ -17,14 +17,16 @@
 
         <!-- Oma tyylitiedostomme -->
         <link href="{{base_path}}/assets/css/site.css" rel="stylesheet">
-        {% endblock %}
-    </head>
+    <div class="container">
 
+
+
+        {% endblock %}
+
+    </head>
     <body>
-        <div class="jumbotron">
-            <h1>Kumpulan Judokat</h1>
-            <i>Judoilevat luonnontietelijät</i> 
-        </div>
+
+
 
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
@@ -42,9 +44,7 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
-                        <li><a href="{{base_path}}">Etusivu</a></li>
-                        <li><a href='{{base_path}}/esittely'>Tietoa meistä</a></li>
-                        <li><a href='{{base_path}}/ranking'>Ranking</a></li>
+                        <li><a href='{{base_path}}'>Tietoa meistä</a></li>
                         <li><a href='{{base_path}}/kilpailut'>Kilpailut</a></li>
                         {% if not user_logged_in %}
                         <li><a href='{{base_path}}/kirjautuminen'>Kirjaudu</a></li>

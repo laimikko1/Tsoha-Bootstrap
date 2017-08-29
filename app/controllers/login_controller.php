@@ -26,4 +26,8 @@ class login_controller extends BaseController {
         Redirect::to('/', array('message' => 'Olet kirjautunut ulos!'));
     }
 
+    public static function rekisteroityminen() {
+        View::make('Kilpailija/rekisteroityminen.html');
+    }
+
 }

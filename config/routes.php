@@ -1,27 +1,19 @@
 <?php
 
 $routes->get('/', function() {
-    yleisetNakymat_controller::index();
-});
-
-$routes->get('/esittely', function() {
-    yleisetNakymat_controller::esittely();
+    yllapitajan_controller::aloitus();
 });
 
 $routes->get('/kilpailut', function() {
-    yleisetNakymat_controller::kilpailut();
+    kilpailu_controller::kilpailut();
 });
 //
 $routes->get('/kilpailut/menneet_kilpailut', function() {
-    yleisetNakymat_controller::menneet_Kilpailut();
-});
-
-$routes->get('/ranking', function() {
-    yleisetNakymat_controller::ranking();
+    kilpailu_controller::menneet_Kilpailut();
 });
 
 $routes->get('/rekisteroityminen', function() {
-    yleisetNakymat_controller::rekisteroityminen();
+    login_controller::rekisteroityminen();
 });
 
 $routes->get('/kirjautuminen', function() {
@@ -32,15 +24,17 @@ $routes->get('/yllapitajan_sivu', function() {
     yllapitajan_controller::index();
 });
 
-
 $routes->post('/rekisteroityminen', function() {
     kilpailija_controller::store();
 });
 
 $routes->get('/kayttajan_sivu/:ktunnus', function($ktunnus) {
-    kilpailija_controller::edit($ktunnus);
+    kilpailija_controller::view($ktunnus);
 });
 
+$routes->get('/kayttajan_sivu_muokkaa/:ktunnus', function($ktunnus) {
+    kilpailija_controller::edit($ktunnus);
+});
 $routes->post('/kayttajan_sivu/:ktunnus', function($ktunnus) {
     kilpailija_controller::update($ktunnus);
 });
@@ -79,6 +73,10 @@ $routes->get('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen', function($kilpa
 
 $routes->post('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen/', function($kilpailutunnus) {
     kilpailun_sarja_controller::ilmoittaudu($kilpailutunnus);
+});
+
+$routes->post('/kayttajan_sivu/:sarjatunnus/peru/', function($kilpailutunnus) {
+    kilpailun_sarja_controller::destroyIlmoittautuminen($kilpailutunnus);
 });
 
 $routes->get('/kilpailun_sivu/:kilpailutunnus/muokkaa', function($kilpailutunnus) {

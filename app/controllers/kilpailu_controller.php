@@ -2,6 +2,16 @@
 
 class kilpailu_controller extends BaseController {
 
+    public static function kilpailut() {
+        $kilpailut = Kilpailu::all(0);
+        View::make('Kilpailu/tulossa_olevat_kilpailut.html', array('kilpailut' => $kilpailut));
+    }
+
+    public static function menneet_Kilpailut() {
+        $kilpailut = Kilpailu::all(1);
+        View::make('Kilpailu/menneet_kilpailut.html', array('kilpailut' => $kilpailut));
+    }
+
     public static function showKilpailunSivu($kilpailutunnus) {
         $kilpailu = Kilpailu::find($kilpailutunnus);
         $kilpailun_painoluokat = Kilpailun_sarja::findAll($kilpailutunnus);
@@ -24,7 +34,7 @@ class kilpailu_controller extends BaseController {
     public static function showTulokset($kilpailutunnus) {
         $kilpailu = Kilpailu::find($kilpailutunnus);
         $kilpailun_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
-        
+
         View::make('Kilpailu/kilpailun_tulokset.html', array('kilpailu' => $kilpailu, 'kilpailun_sarjat' => $kilpailun_sarjat));
     }
 

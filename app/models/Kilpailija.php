@@ -6,7 +6,7 @@ class Kilpailija extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_nimi', 'validate_kayttajanimi', 'validate_salasana', 'validate_duplicate_kayttajanimi');
+        $this->validators = array('validate_nimi', 'validate_kayttajanimi', 'validate_salasana', 'validate_duplicate_kayttajanimi', 'validate_paaaine');
     }
 
     public static function all() {
@@ -67,38 +67,6 @@ class Kilpailija extends BaseModel {
         $row = $query->fetch();
     }
 
-    public function validate_nimi() {
-        if (parent::validate_string_length($this->nimi) == FALSE) {
-            return 'Nimi ei saa olla tyhjä tai alle 3 merkkiä!';
-        }
-        return NULL;
-    }
-
-    public function validate_kayttajanimi() {
-        if (parent::validate_string_length($this->kayttajanimi) == FALSE) {
-            return 'Käyttäjätunnus ei saa olla tyhjä tai alle 3 merkkiä!';
-        }
-        return null;
-    }
-
-    public function validate_duplicate_kayttajanimi() {
-        $query = DB::connection()->prepare('SELECT FROM Kilpailija WHERE kayttajanimi = :kayttajanimi');
-        $query->execute(array('kayttajanimi' => $this->kayttajanimi));
-        $row = $query->fetchAll();
-
-        if ($row) {
-            return "Käyttäjänimi on jo käytössä!";
-        }
-        return null;
-    }
-
-    public function validate_salasana() {
-        if (parent::validate_string_length($this->salasana) == FALSE) {
-            return 'Salasana ei saa olla tyhjä tai alle 3 merkkiä!';
-        }
-        return null;
-    }
-
     public static function authenticate($kayttajanimi, $salasana) {
         $query = DB::connection()->prepare('SELECT * FROM Kilpailija WHERE kayttajanimi = :kayttajanimi AND salasana = :salasana LIMIT 1');
         $query->execute(array('kayttajanimi' => $kayttajanimi, 'salasana' => $salasana));
@@ -117,6 +85,59 @@ class Kilpailija extends BaseModel {
         } else {
             return NULL;
         }
+    }
+
+    public static function findAllIlmoittautumiset($ktunnus) {
+        //Haetaan kaikki kilpailijan ilmoittautumiset kilpailuihin, joiden päivämäärä on suurempi kuin nykyhetki
+        //eli kilpailu on tulossa
+        $query = DB::connection()->prepare('SELECT kilpailu.kilpailun_nimi, kilpailun_sarja.painoluokka, kilpailun_sarja.vyoarvo, kilpailun_sarja.sarjatunnus 
+            FROM kilpailu, kilpailun_sarja, sarjan_osallistuja WHERE kilpailu.kilpailutunnus = kilpailun_sarja.kilpailutunnus 
+            AND kilpailun_sarja.sarjatunnus = sarjan_osallistuja.sarjatunnus AND sarjan_osallistuja.ktunnus = :ktunnus 
+            AND kilpailu.ajankohta > NOW()');
+        $query->execute(array('ktunnus' => $ktunnus));
+        $row = $query->fetchAll();
+        $ilmoittautumiset = array();
+
+        if ($row) {
+            foreach ($row as $r) {
+
+
+                $ilmoittautumiset[] = new Kilpailun_sarja(array(
+                    'kilpailutunnus' => $r['kilpailun_nimi'],
+                    'painoluokka' => $r['painoluokka'],
+                    'vyoarvo' => $r['vyoarvo'],
+                    'sarjatunnus' => $r['sarjatunnus']
+                ));
+            }
+        }
+        return $ilmoittautumiset;
+    }
+
+    public function validate_kayttajanimi() {
+        return parent::validate_string_length($this->kayttajanimi, 'Käyttäjänimi');
+    }
+
+    public function validate_salasana() {
+        return parent::validate_string_length($this->salasana, 'Salasana');
+    }
+
+    public function validate_nimi() {
+        return parent::validate_string_length($this->nimi, 'Nimi');
+    }
+
+    public function validate_paaaine() {
+        return parent::validate_string_length($this->paaaine, 'Pääaine');
+    }
+
+    public function validate_duplicate_kayttajanimi() {
+        $query = DB::connection()->prepare('SELECT FROM Kilpailija WHERE kayttajanimi = :kayttajanimi');
+        $query->execute(array('kayttajanimi' => $this->kayttajanimi));
+        $row = $query->fetchAll();
+
+        if ($row) {
+            return "Käyttäjänimi on jo käytössä!";
+        }
+        return null;
     }
 
 }

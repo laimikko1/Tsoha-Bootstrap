@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% import "macros/forms.html" as forms %}
+{% block content %}
+
+
+{% for attributes in attributes %}
+{% endfor %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label>Nimi:</label>
+            <input name="nimi" type="text" readonly="readonly" class="form-control" value="{{attributes.nimi}}">
+        </div>
+
+        <div class="form-group">
+            <label>Käyttäjätunnus</label>
+            <input name="kayttajanimi" type="text" readonly="readonly" class="form-control" value="{{attributes.kayttajanimi}}">
+        </div>
+
+
+        <div class="form-group">
+            <label>Salasana</label>
+            <input name="salasana" type="text" readonly="readonly" class="form-control" value="{{attributes.salasana}}">
+        </div>
+
+        <div class="form-group">
+            <label>Pääaine</label>
+            <input name="paaaine" type="text" readonly="readonly" class="form-control" value="{{attributes.paaaine}}">
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <h4>Ilmoittautumiset</h4>
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Kilpailun nimi</th>
+                    <th>Painoluokka</th>
+                    <th>Vyoarvo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for ilm in ilmoittautumiset %}
+            <form method="post" action="{{base_path}}/kayttajan_sivu/{{ilm.sarjatunnus}}/peru">
+
+
+                <tr>
+                    <td>{{ilm.kilpailutunnus}}</td>
+                    <td>{{ilm.painoluokka}}</td>
+                    <td> {{ilm.vyoarvo}}</td>
+                    <td> <input type="hidden" name="sarjatunnus" value="{{ilm.sarjatunnus}}"></td>
+                    <td><button type="submit" class="btn btn-danger">Peru ilmoittautuminen</button></td>
+                </tr>
+            </form>
+
+            </tbody>
+            {% endfor %}
+
+        </table>
+    </div>
+</div>
+<br>
+<a class="btn btn-default" href="{{base_path}}/kayttajan_sivu_muokkaa/{{attributes.ktunnus}}">Muokkaa tietoja</a>
+
+
+
+{% endblock %}
+
+

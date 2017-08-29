@@ -14,7 +14,9 @@ class kilpailija_controller extends BaseController {
         );
 
         $kilpailija = new Kilpailija($attributes);
+        
         $errors = $kilpailija->errors();
+
 
         if (count($errors) == 0) {
             $kilpailija->save();
@@ -25,14 +27,22 @@ class kilpailija_controller extends BaseController {
         }
     }
 
+    public static function view($ktunnus) {
+        self::check_logged_in();
+        self::check_if_users_page($ktunnus);
+
+        $ilmoittautumiset = Kilpailija::findAllIlmoittautumiset($ktunnus);
+        $kilpailija = Kilpailija::find($ktunnus);
+        View::make('Kilpailija/kayttajan_tiedot_ja_ilmoittautumiset.html', array('attributes' => $kilpailija, 'ilmoittautumiset' => $ilmoittautumiset));
+    }
+
     public static function edit($ktunnus) {
 
         self::check_logged_in();
         self::check_if_users_page($ktunnus);
 
         $kilpailija = Kilpailija::find($ktunnus);
-        View::make('Kilpailija/kayttajan_sivu.html', array('attributes' => $kilpailija));
-
+        View::make('Kilpailija/kayttajan_sivu_muokkaus.html', array('attributes' => $kilpailija));
     }
 
     public static function update($ktunnus) {

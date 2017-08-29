@@ -67,7 +67,7 @@ class kilpailun_sarja_controller extends BaseController {
     public static function add($kilpailutunnus) {
 
         $params = $_POST;
-        
+
         Kint::dump($params);
         View::make('/');
 //        $lisattava_sarja = new kilpailun_sarja(array(
@@ -75,6 +75,18 @@ class kilpailun_sarja_controller extends BaseController {
 //            'painoluokka' => $params['painoluokka'],
 //            'vyoarvo' => $params['vyoarvo']
 //        ));
+    }
+
+    public static function destroyIlmoittautuminen($sarjatunnus) {
+        $id = $_SESSION['kilpailija'];
+        $params = $_POST;
+        $osallistuja = new Sarjan_osallistuja(array(
+            'ktunnus' => $id,
+            'sarjatunnus' => $params['sarjatunnus']
+        ));
+
+        $osallistuja->destroyIlmoittautuminen();
+        Redirect::to('/kayttajan_sivu/' . $osallistuja->ktunnus, array('message' => 'Ilmoittautuminen peruttu!'));
     }
 
 }
