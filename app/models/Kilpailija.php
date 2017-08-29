@@ -114,19 +114,25 @@ class Kilpailija extends BaseModel {
     }
 
     public function validate_kayttajanimi() {
-        return parent::validate_string_length($this->kayttajanimi, 'Käyttäjänimi');
+        $length = parent::validate_string_length($this->kayttajanimi, 'Käyttäjänimi', 2, 50);
+        $req = parent::validate_required_fields($this->kayttajanimi, 'Käyttäjänimi');
+        return parent::merge_validations($length, $req);
     }
 
     public function validate_salasana() {
-        return parent::validate_string_length($this->salasana, 'Salasana');
+        $length = parent::validate_string_length($this->salasana, 'Salasana', 2, 50);
+        $req = parent::validate_required_fields($this->salasana, 'Salasana');
+        return parent::merge_validations($length, $req);
     }
 
     public function validate_nimi() {
-        return parent::validate_string_length($this->nimi, 'Nimi');
+        $length = parent::validate_string_length($this->nimi, 'Nimi', 2, 50);
+        $req = parent::validate_required_fields($this->nimi, 'Nimi');
+        return parent::merge_validations($length, $req);
     }
 
     public function validate_paaaine() {
-        return parent::validate_string_length($this->paaaine, 'Pääaine');
+        return parent::validate_string_length($this->paaaine, 'Pääaine', 0, 50);
     }
 
     public function validate_duplicate_kayttajanimi() {

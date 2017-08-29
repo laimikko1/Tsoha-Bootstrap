@@ -62,8 +62,6 @@ class yllapitajan_controller extends BaseController {
         //tarkastetaan siis tuplana yksi sarja...
         Kilpailun_sarja::validateJarjestys($sijoitusjarj);
 
-        Kint::dump($sijoitusjarj);
-        View::make('/');
 
 //
 //        if (count($errors) > 0) {
@@ -119,7 +117,6 @@ class yllapitajan_controller extends BaseController {
             'ajankohta' => $params['kilpailun_paiva'] . ' ' . $params['kilpailun_kellonaika'] . ':00',
             'kilpailun_kuvaus' => $params['kilpailun_kuvaus']
         ));
-
         $errors = $kilpailu->errors();
 
         if (empty($params['painoluokat_alemmat']) && empty($params['painoluokat_ylemmat'])) {

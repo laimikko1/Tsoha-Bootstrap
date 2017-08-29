@@ -67,23 +67,21 @@ class Kilpailu extends BaseModel {
     }
 
     public function validate_name() {
-        if (parent::validate_string_length($this->kilpailun_nimi) == FALSE) {
-            return "Kilpailun nimi ei saa olla alle 3 merkkiä!";
-        }
-        return NULL;
+        $length = parent::validate_string_length($this->kilpailun_nimi, 'Kilpailun nimi', 2, 50);
+        $req = parent::validate_required_fields($this->kilpailun_nimi, 'Kilpailun nimi');
+        return parent::merge_validations($length, $req);
     }
 
     public function validate_kilpailun_kuvaus() {
-        if (parent::validate_string_length($this->kilpailun_kuvaus) == FALSE) {
-            return 'Nope!';
-        } return NULL;
+        $length = parent::validate_string_length($this->kilpailun_kuvaus, 'Kilpailun kuvaus', 10, 500);
+        $req = parent::validate_required_fields($this->kilpailun_kuvaus, 'Kilpailun kuvaus');
+        return parent::merge_validations($length, $req);
     }
 
     public function validate_kilpailupaikka() {
-        if (parent::validate_string_length($this->kilpailupaikka) == FALSE) {
-            return "Kilpailupaikka ei saa olla alle 3 merkkiä!";
-        }
-        return NULL;
+        $length = parent::validate_string_length($this->kilpailupaikka, 'Kilpailupaikka', 2, 50);
+        $req = parent::validate_required_fields($this->kilpailupaikka, 'Kilpailupaikka');
+        return parent::merge_validations($length, $req);
     }
 
     public function validate_ajankohta() {
@@ -91,10 +89,10 @@ class Kilpailu extends BaseModel {
         $dateObj = DateTime::createFromFormat('Y-m-d H:i:s', $string);
         $nyt = date("Y-m-d H:i:s");
         if ($nyt > $dateObj) {
-            return 'Ajankohta ei voi olla menneisyydessä! Jos omistat toimivan aikakoneen, ota yhteys ylläpitoon.';
+            return array('ajankohta' => 'Ajankohta ei voi olla menneisyydessä! Jos omistat toimivan aikakoneen, ota yhteys ylläpitoon.');
         }
         if (!$dateObj) {
-            return 'Ajankohta tulee olla muodossa VVVV-KK-PP JA TT:MM';
+            return array('ajankohta' => 'Ajankohta tulee olla muodossa VVVV-KK-PP JA TT:MM');
         }
         return null;
     }

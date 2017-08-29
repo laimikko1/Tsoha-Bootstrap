@@ -81,13 +81,13 @@ class Kilpailun_sarja extends BaseModel {
         sort($sijoitusjar);
 
         if (count($sijoitusjar) >= 8) {
-            Kint::dump(self::checkEightOrMorePlacings($sijoitusjar));
+            self::checkEightOrMorePlacings($sijoitusjar);
         }
         if (count($sijoitusjar) == 4) {
             self::checkFourPlacings($sijoitusjar);
         }
         if (count($sijoitusjar) < 4) {
-            Kint::dump(self::checkUnderEightPlacings($sijoitusjar));
+            self::checkUnderEightPlacings($sijoitusjar);
         }
 
 

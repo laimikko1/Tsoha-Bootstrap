@@ -14,6 +14,7 @@ class kilpailija_controller extends BaseController {
         );
 
         $kilpailija = new Kilpailija($attributes);
+
         
         $errors = $kilpailija->errors();
 
