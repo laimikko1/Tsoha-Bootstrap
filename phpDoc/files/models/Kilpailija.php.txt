@@ -207,3 +207,4 @@ class Kilpailija extends BaseModel {
     }
 
 }
+
