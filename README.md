@@ -2,10 +2,10 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](http://laimikko.users.cs.helsinki.fi/KuJudo/)
-* [Linkki dokumentaatiooni](https://github.com/laimikko1/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)  
+* [Linkki sovellukseen](http://laimikko.users.cs.helsinki.fi/KuJudo/)
+* [Linkki dokumentaatioon](https://github.com/laimikko1/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)  
 * [phpDoc](https://htmlpreview.github.io/?https://github.com/laimikko1/Tsoha-Bootstrap/blob/master/phpDoc/index.html)
-    - Jostain syystä githubin htmlpreview ei arvosta phpDoccia ja antaa herjaa, mutta yleensä päivittely (F5) vähemmän tai enemmän raivokkaasti korjaa asian
+    - Jostain syystä githubin htmlpreview antaa herjaa, mutta yleensä päivittely (F5) vähemmän tai enemmän raivokkaasti korjaa asian
 
 <h2>Linkit sovellukseni websivulle</h2>  
     
