@@ -2,10 +2,12 @@
 {% block content %}
 {% for kilpailu in muokattava %}
 {% endfor %}
+
 <h2>Muokkaa kilpailun {{kilpailu.kilpailun_nimi}} tuloksia</h2>
 
 
 <form method="post" action="{{base_path}}/kilpailun_sivu/{{kilpailu.kilpailutunnus}}/muokkaa_tuloksia">
+    <input name="kilpailutunnus" type="hidden" value="{{kilpailu.kilpailutunnus}}">
 
     {% for sarja in sarjat %}
 
@@ -29,9 +31,10 @@
     </div>
     {% endfor %}
 
-
-
     {% endfor %}
+
+
+
 
 
     <button class="btn btn-primary" type="submit">Muokkaa tulokset!</button>

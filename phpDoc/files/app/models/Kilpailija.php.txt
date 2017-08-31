@@ -1,0 +1,226 @@
+<?php
+
+/**
+ * Kilpailija luokka vastaa tietokantataulu kilpailijan ilmentymää.
+ * Tietokannasta poiketen mallilla on myös sijoitus-ominaisuus, joka helpottaa merkittävästi
+ * tiettyjen toimintojen toteuttamista suoraan kilpailija-mallin kautta.
+ */
+class Kilpailija extends BaseModel {
+
+    public $ktunnus, $nimi, $kayttajanimi, $salasana, $paaaine, $sijoitus;
+
+    /**
+     * 
+     * @param type $attributes
+     * Konstruktori, joka luo uuden Kilpailija-olion attribuuttien perusteella.
+     */
+    public function __construct($attributes) {
+        parent::__construct($attributes);
+        $this->validators = array('validate_nimi', 'validate_kayttajanimi', 'validate_salasana', 'validate_duplicate_kayttajanimi', 'validate_paaaine');
+    }
+
+    /**
+     * 
+     * @return \Kilpailija
+     * Metodi joka hakee kaikki kilpailijat ja palauttaa ne taulukkona.
+     */
+    public static function all() {
+        $query = DB::connection()->prepare('SELECT * From kilpailija');
+
+        $query->execute();
+
+        $rows = $query->fetchAll();
+        $kilpailijat = array();
+
+        foreach ($rows as $row) {
+            $kilpailijat[] = new Kilpailija(array(
+                'ktunnus' => $row['ktunnus'],
+                'nimi' => $row['nimi'],
+                'kayttajanimi' => $row['kayttajanimi'],
+                'salasana' => $row['salasana'],
+                'paaaine' => $row['paaaine']
+            ));
+        }
+        return $kilpailijat;
+    }
+
+    /**
+     * 
+     * @param type $ktunnus
+     * @return \Kilpailija
+     * 
+     * Metodi saa parametrinaan ktunnuksen, jonka perusteella se etsii halutun kilpailijan ja palauttaa sen.
+
+     */
+    public static function find($ktunnus) {
+        $query = DB::connection()->prepare('SELECT * FROM kilpailija WHERE ktunnus = :ktunnus LIMIT 1');
+        $query->execute(array('ktunnus' => $ktunnus));
+        $row = $query->fetch();
+
+        if ($row) {
+            $kilpailija = new Kilpailija(array(
+                'ktunnus' => $row['ktunnus'],
+                'nimi' => $row['nimi'],
+                'kayttajanimi' => $row['kayttajanimi'],
+                'salasana' => $row['salasana'],
+                'paaaine' => $row['paaaine']
+            ));
+
+            return $kilpailija;
+        }
+    }
+
+    /**
+     * Tallentaa tietokantaan uuden kilpailija-olion ilmentymän.
+     */
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO kilpailija(nimi, kayttajanimi, salasana, paaaine) VALUES(:nimi, :kayttajanimi, :salasana, :paaaine) RETURNING ktunnus');
+
+        $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine));
+
+        $row = $query->fetch();
+        $this->ktunnus = $row['ktunnus'];
+    }
+
+    /**
+     * Päivittää kilpailijan tietoja.
+     */
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Kilpailija SET nimi = :nimi, kayttajanimi = :kayttajanimi, salasana = :salasana, paaaine = :paaaine WHERE ktunnus = :ktunnus');
+        $query->execute(array('nimi' => $this->nimi, 'kayttajanimi' => $this->kayttajanimi, 'salasana' => $this->salasana, 'paaaine' => $this->paaaine, 'ktunnus' => $this->ktunnus));
+    }
+
+    /**
+     * Poistaa kilpailijan tietokannasta, sekä luonnollisesti sovelluksesta.
+     */
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Kilpailija WHERE ktunnus = :ktunnus');
+        $query->execute(array('ktunnus' => $this->ktunnus));
+        $row = $query->fetch();
+    }
+
+    /**
+     * @param $kayttajanimi, salasana
+     * @return kilpailija
+     * @return null
+     * Metodi saa parametreina käyttäjän käyttäjänimen ja salasanan.
+     * Se tekee tietokantakyselyn, jolla todennetaan että vastine käyttäjänimi/salasana yhdistelmälle on olemassa
+     * ja palauttaa sen tai null-arvon, jos haluttua kilpailijaa ei löydy.
+     */
+    public static function authenticate($kayttajanimi, $salasana) {
+
+        $query = DB::connection()->prepare('SELECT * FROM Kilpailija WHERE kayttajanimi = :kayttajanimi AND salasana = :salasana LIMIT 1');
+        $query->execute(array('kayttajanimi' => $kayttajanimi, 'salasana' => $salasana));
+        $row = $query->fetch();
+
+        if ($row) {
+            $kilpailija = new Kilpailija(array(
+                'ktunnus' => $row['ktunnus'],
+                'nimi' => $row['nimi'],
+                'kayttajanimi' => $row['kayttajanimi'],
+                'salasana' => $row['salasana'],
+                'paaaine' => $row['paaaine']
+            ));
+
+            return $kilpailija;
+        } else {
+            return NULL;
+        }
+    }
+
+    /**
+     * 
+     * @param type $ktunnus
+     * @return \Kilpailun_sarja
+     * Metodi hakee kaikki kilpailun ilmoittautumiset kilpailuihin. Hieman erikoisesti luodaan
+     * Kilpailun_Sarja olio, jolle annetaan ominaisuudet.
+     * Tämän avulla kilpailijan omalle sivulle saadaan listattua kaikki hänen ilmoittautumisensa.
+     */
+    public static function findAllIlmoittautumiset($ktunnus) {
+        //Haetaan kaikki kilpailijan ilmoittautumiset kilpailuihin, joiden päivämäärä on suurempi kuin nykyhetki
+        //eli kilpailu on tulossa
+        $query = DB::connection()->prepare('SELECT kilpailu.kilpailun_nimi, kilpailun_sarja.painoluokka, kilpailun_sarja.vyoarvo, kilpailun_sarja.sarjatunnus 
+            FROM kilpailu, kilpailun_sarja, sarjan_osallistuja WHERE kilpailu.kilpailutunnus = kilpailun_sarja.kilpailutunnus 
+            AND kilpailun_sarja.sarjatunnus = sarjan_osallistuja.sarjatunnus AND sarjan_osallistuja.ktunnus = :ktunnus 
+            AND kilpailu.ajankohta > NOW()');
+        $query->execute(array('ktunnus' => $ktunnus));
+        $row = $query->fetchAll();
+        $ilmoittautumiset = array();
+
+        if ($row) {
+            foreach ($row as $r) {
+
+
+                $ilmoittautumiset[] = new Kilpailun_sarja(array(
+                    'kilpailutunnus' => $r['kilpailun_nimi'],
+                    'painoluokka' => $r['painoluokka'],
+                    'vyoarvo' => $r['vyoarvo'],
+                    'sarjatunnus' => $r['sarjatunnus']
+                ));
+            }
+        }
+        return $ilmoittautumiset;
+    }
+
+    /**
+     * 
+     * @return type
+     * Validoi käyttäjänimen, palauttaa joko arrayn, joka sisältää virheviestit tai nullin, 
+     * jolloin virheitä ei esiintynyt.
+     * 
+     */
+    public function validate_kayttajanimi() {
+        $length = parent::validate_string_length($this->kayttajanimi, 'Käyttäjänimi', 2, 50);
+        $req = parent::validate_required_fields($this->kayttajanimi, 'Käyttäjänimi');
+        return parent::merge_validations($length, $req);
+    }
+
+    /**
+     * 
+     * @return type
+     * Sama kuin yllä, mutta salasanalle.
+     */
+    public function validate_salasana() {
+        $length = parent::validate_string_length($this->salasana, 'Salasana', 2, 50);
+        $req = parent::validate_required_fields($this->salasana, 'Salasana');
+        return parent::merge_validations($length, $req);
+    }
+
+    /**
+     * 
+     * @return type
+     * Sama kuin yllä, mutta käyttäjän nimelle.
+     */
+    public function validate_nimi() {
+        $length = parent::validate_string_length($this->nimi, 'Nimi', 2, 50);
+        $req = parent::validate_required_fields($this->nimi, 'Nimi');
+        return parent::merge_validations($length, $req);
+    }
+
+    /**
+     * 
+     * @return type
+     * Validoi pääaineen, mutta nyt validoidaan vain mahdollisen syötteen pituus, koska pääaine ei ole pakollinen kenttä.
+     */
+    public function validate_paaaine() {
+        return parent::validate_string_length($this->paaaine, 'Pääaine', 0, 50);
+    }
+
+    /**
+     * 
+     * @return string
+     * Varmistaa ettei luoda kahta käyttäjää samalla käyttäjänimellä. Palauttaa joko virheilmoituksen
+     * tai nullin, jos käyttäjänimi on uniikki.
+     */
+    public function validate_duplicate_kayttajanimi() {
+        $query = DB::connection()->prepare('SELECT FROM Kilpailija WHERE kayttajanimi = :kayttajanimi');
+        $query->execute(array('kayttajanimi' => $this->kayttajanimi));
+        $row = $query->fetchAll();
+
+        if ($row) {
+            return array("Käyttäjänimi on jo käytössä!");
+        }
+    }
+
+}
+

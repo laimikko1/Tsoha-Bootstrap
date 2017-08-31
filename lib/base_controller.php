@@ -1,7 +1,13 @@
 <?php
-
+/**
+ * BaseController-luokan perivät kaikki sovelluksen kontrollerit.
+ */
 class BaseController {
-
+/**
+ * Tarkista onko session ID(joka vastaa ktunnusta) asetettu. Jos löytyy, palauta sitä vastaava kilpailija.
+ * tai null.
+ * @return type
+ */
     public static function get_user_logged_in() {
         // Toteuta kirjautuneen käyttäjän haku tähän
         if (isset($_SESSION['kilpailija'])) {
@@ -13,7 +19,10 @@ class BaseController {
         }
         return null;
     }
-
+/**
+ * Tarkista onko sivua avaava käyttäjä kirjautunut sovelluksen käyttäjäksi. 
+ * Jos ei ole, ohjataan kirjautumissivulle.
+ */
     public static function check_logged_in() {
         // Toteuta kirjautumisen tarkistus tähän.
         // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
@@ -21,7 +30,12 @@ class BaseController {
             Redirect::to('/kirjautuminen', array('message' => 'Sivu sallittu vain kirjautuneille jäsenille!'));
         }
     }
-
+/**
+ * Tarkista onko sivu, jolle käyttäjä yrittää mennä, hänelle määritelty.
+ * Poikkeuksen aiheuttaa adminin ktunnus, joka on 6. Hänellä on pääsy kaikkien käyttäjien sivuille.
+ * @param type $tarkistettava
+ * @return type
+ */
     public static function check_if_users_page($tarkistettava) {
         // Tarkistaa ettei yksi käyttäjä pääse esimerkiksi kaikkien muidenkin käyttäjien
         // henk koht sivuille, kuten käyttäjätietojen muokkaukseen
@@ -35,7 +49,9 @@ class BaseController {
             Redirect::to('/kayttajan_sivu/' . $id);
         }
     }
-
+/**
+ * Tarkistaa onko käyttäjä admin, jolla pääsy ylläpidolle rajatuille sivuille.
+ */
     public static function check_if_administrator() {
         self::check_logged_in();
         $tarkistettava = ($_SESSION['kilpailija']);

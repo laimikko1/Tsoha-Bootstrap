@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-665183212"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1186465901"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-665183212" class="accordion-body collapse in">
+            <div id="namespace-1186465901" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -171,8 +171,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>login_controller</h1>
-                    <p><em></em></p>
+                    <h1><small>\</small>BaseModel</h1>
+                    <p><em>Basemodel luokan perivät kaikki käytettävät mallit</em></p>
                     
                     
                                         
@@ -191,10 +191,11 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/login_controller.html#method_login" class="">login()</a><br />
-                                                                    <a href="../classes/login_controller.html#method_handle_login" class="">handle_login()</a><br />
-                                                                    <a href="../classes/login_controller.html#method_logout" class="">logout()</a><br />
-                                                                    <a href="../classes/login_controller.html#method_rekisteroityminen" class="">rekisteroityminen()</a><br />
+                                                                    <a href="../classes/BaseModel.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/BaseModel.html#method_validate_string_length" class="">validate_string_length()</a><br />
+                                                                    <a href="../classes/BaseModel.html#method_validate_required_fields" class="">validate_required_fields()</a><br />
+                                                                    <a href="../classes/BaseModel.html#method_errors" class="">errors()</a><br />
+                                                                    <a href="../classes/BaseModel.html#method_merge_validations" class="">merge_validations()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -208,7 +209,7 @@
                                                                     <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <em>No protected properties found</em>
+                                                                    <a href="../classes/BaseModel.html#property_validators" class="">$validators</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -232,14 +233,12 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/app.controllers.login_controller.html"><div class="path-wrapper">app/controllers/login_controller.php</div></a></dd>
+                            <dd><a href="../files/lib.base_model.html"><div class="path-wrapper">lib/base_model.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper">Default</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                
-                                        <div class="namespace-wrapper">\BaseController</div>
-                                                                                                    <div class="namespace-wrapper">\login_controller</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\BaseModel</div>
                             </dd>
 
                         
@@ -255,7 +254,39 @@
             </div>
 
                         
-                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_validators" name="property_validators" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$validators</h3>
+                <pre class="signature">$validators : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -264,14 +295,22 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_login" name="method_login" class="anchor"></a>
+            <a id="method___construct" name="method___construct" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">login()</h3>
+                <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">login() </pre>
-                <p><em>Luo kirjautumissivun näkymän.</em></p>
+                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$attributes = null</span>) </pre>
+                <p><em></em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$attributes </td>
+                                <td></td>
+                            </tr>
+                                            </table>
                 
                 
                 				
@@ -279,7 +318,6 @@
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -291,23 +329,47 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_handle_login" name="method_handle_login" class="anchor"></a>
+            <a id="method_validate_string_length" name="method_validate_string_length" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">handle_login()</h3>
+                <h3 class="public ">validate_string_length()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">handle_login() </pre>
-                <p><em>Kirjaa käyttäjän sisään. Validoidaan ensin käyttäjänimi ja salasana, etteivät ne ole liian pitkiä
-ja että molemmat kentät ovat täytetty. Tämän jälkeen tehdään authenticate, eli kirjautumistoiminnallisuus.</em></p>
+                <pre class="signature" style="margin-right: 54px;">validate_string_length(\type  <span class="argument">$string</span>, \type  <span class="argument">$message</span>, \type  <span class="argument">$min</span>, \type  <span class="argument">$max</span>) : \type</pre>
+                <p><em>Tarkistetaan syötteen pituus. Parametreina saadaan tarkistettava, sen nimi, joka liitetään virheilmoituksiin
+ja halutut pituudet</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$string </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$message </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$min </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$max </td>
+                                <td></td>
+                            </tr>
+                                            </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -319,22 +381,36 @@ ja että molemmat kentät ovat täytetty. Tämän jälkeen tehdään authenticat
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_logout" name="method_logout" class="anchor"></a>
+            <a id="method_validate_required_fields" name="method_validate_required_fields" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">logout()</h3>
+                <h3 class="public ">validate_required_fields()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">logout() </pre>
-                <p><em>Kirjaa käyttäjän ulos sovelluksesta.</em></p>
+                <pre class="signature" style="margin-right: 54px;">validate_required_fields(\type  <span class="argument">$string</span>, \type  <span class="argument">$message</span>) : \type</pre>
+                <p><em>Tarkistetaan onko kenttä täytetty, taas tarkistettava ja virheilmoituksiin liitettävä attribuutin nimi</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$string </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$message </td>
+                                <td></td>
+                            </tr>
+                                            </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -346,17 +422,60 @@ ja että molemmat kentät ovat täytetty. Tämän jälkeen tehdään authenticat
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_rekisteroityminen" name="method_rekisteroityminen" class="anchor"></a>
+            <a id="method_errors" name="method_errors" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">rekisteroityminen()</h3>
+                <h3 class="public ">errors()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">rekisteroityminen() </pre>
-                <p><em>Näyttää rekisteröitymissivun näkymän.</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">errors() : \type</pre>
+                <p><em>Errors-metodi käy läpi validaattorit, jotka alustetaan konstruktorin luonnin yhteydessä.</em></p>
+                <p>Jos virheitä esiintyy,palautellaan ne</p>
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_merge_validations" name="method_merge_validations" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">merge_validations()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">merge_validations(\type  <span class="argument">$req</span>, \type  <span class="argument">$length</span>) : \type</pre>
+                <p><em>Yhdistää kahden eri validaatiometodin tuottamat listat, jotta siirto ylläolevaan error metodiin onnistuu</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$req </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$length </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -377,10 +496,10 @@ ja että molemmat kentät ovat täytetty. Tämän jälkeen tehdään authenticat
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">login_controller.php</h3>
+            <h3 id="source-view-label">base_model.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/app/controllers/login_controller.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/lib/base_model.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
