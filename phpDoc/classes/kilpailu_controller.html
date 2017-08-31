@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">135</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">78</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-320788849"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-248228052"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-320788849" class="accordion-body collapse in">
+            <div id="namespace-248228052" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -171,7 +171,8 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>kilpailu_controller</h1>
-                    <p><em></em></p>
+                    <p><em>Kilpailu_controller vastaa kilpailija-mallin kanssa kilpailun tietokantailmentymän hallinnasta
+ja muokkauksesta-</em></p>
                     
                     
                                         
@@ -195,6 +196,7 @@
                                                                     <a href="../classes/kilpailu_controller.html#method_showKilpailunSivu" class="">showKilpailunSivu()</a><br />
                                                                     <a href="../classes/kilpailu_controller.html#method_showIlmoittautuminen" class="">showIlmoittautuminen()</a><br />
                                                                     <a href="../classes/kilpailu_controller.html#method_showTulokset" class="">showTulokset()</a><br />
+                                                                    <a href="../classes/kilpailu_controller.html#method_removeNullResults" class="">removeNullResults()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -269,7 +271,7 @@
                 <h3 class="public ">kilpailut()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">kilpailut() </pre>
-                <p><em></em></p>
+                <p><em>Luo näkymän sivulle, joka näyttää kaikki tulossa olevat kilpailut</em></p>
                 
 
                 
@@ -296,7 +298,7 @@
                 <h3 class="public ">menneet_Kilpailut()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">menneet_Kilpailut() </pre>
-                <p><em></em></p>
+                <p><em>Sama kuin yllä, mutta menneille kilpailuille.</em></p>
                 
 
                 
@@ -322,14 +324,14 @@
             <article class="method">
                 <h3 class="public ">showKilpailunSivu()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">showKilpailunSivu(  <span class="argument">$kilpailutunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">showKilpailunSivu(\type  <span class="argument">$kilpailutunnus</span>) </pre>
+                <p><em>Luo näkymän tietyn kilpailun omalle sivulle, jossa näkyy kilpailuun ilmoittautuneet kilpailijat.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
@@ -357,14 +359,15 @@
             <article class="method">
                 <h3 class="public ">showIlmoittautuminen()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">showIlmoittautuminen(  <span class="argument">$kilpailutunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">showIlmoittautuminen(\type  <span class="argument">$kilpailutunnus</span>) </pre>
+                <p><em>Luo näkymän ilmoittautumissivulle. Jos kilpailun päivämäärä on umpeutunut
+tai kilpailussa ei ole vielä sarjoja, ohjataan takaisin kilpailut sivulle.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
@@ -392,15 +395,50 @@
             <article class="method">
                 <h3 class="public ">showTulokset()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">showTulokset(  <span class="argument">$kilpailutunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">showTulokset(\type  <span class="argument">$kilpailutunnus</span>) </pre>
+                <p><em>Näyttää kilpailun tulossivun.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_removeNullResults" name="method_removeNullResults" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">removeNullResults()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">removeNullResults(\type  <span class="argument">$sarja</span>) </pre>
+                <p><em>Poistaa null-arvoiset sijoitukset, joita ei listata kilpailun tulossivulla.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$sarja </td>
                                 <td></td>
                             </tr>
                                             </table>
@@ -470,7 +508,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 29th, 2017 at 18:21.
+                    on August 31st, 2017 at 12:33.
                 </section>
             </section>
         </section>

@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">135</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">78</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1602745731"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1144288609"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1602745731" class="accordion-body collapse in">
+            <div id="namespace-1144288609" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -171,7 +171,8 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>kilpailun_sarja_controller</h1>
-                    <p><em></em></p>
+                    <p><em>Kilpailun_sarja controller vastaa kilpailun_sarjan tietokantailmentymän hallinasta, yhdessä kilpailun_sarja-
+mallin kanssa.</em></p>
                     
                     
                                         
@@ -268,31 +269,34 @@
             <article class="method">
                 <h3 class="public ">store()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">store(  <span class="argument">$kilpailutunnus</span>,   <span class="argument">$alemmat_painoluokat</span>,   <span class="argument">$ylemmat_painoluokat</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">store(\type  <span class="argument">$kilpailutunnus</span>, \type  <span class="argument">$alemmat_painoluokat</span>, \type  <span class="argument">$ylemmat_painoluokat</span>) : \type</pre>
+                <p><em>Tallentaa kilpailun sarjat järjestelmään. Saa parametrina sekä ylemmät että alemmat vyöluokkien painoluokat
+ja kilpailutunnuksen, johon sarjat liittyvät.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$alemmat_painoluokat </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$ylemmat_painoluokat </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -313,14 +317,14 @@
             <article class="method">
                 <h3 class="public ">ilmoittaudu()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">ilmoittaudu(  <span class="argument">$kilpailutunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">ilmoittaudu(\type  <span class="argument">$kilpailutunnus</span>) </pre>
+                <p><em>Luo ilmoittautumisen kilpailun_sarjaan. Tarkistetaan onko käyttäjä kirjatunut sisään.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
@@ -349,7 +353,7 @@
                 <h3 class="public ">destroy()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">destroy() </pre>
-                <p><em></em></p>
+                <p><em>Poistaa kilpailun sarjan.</em></p>
                 
 
                 
@@ -375,14 +379,14 @@
             <article class="method">
                 <h3 class="public ">add()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">add(  <span class="argument">$kilpailutunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">add(\type  <span class="argument">$kilpailutunnus</span>) </pre>
+                <p><em>Lisää uuden, yksittäisen kilpailun sarjan.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
@@ -410,14 +414,14 @@
             <article class="method">
                 <h3 class="public ">destroyIlmoittautuminen()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">destroyIlmoittautuminen(  <span class="argument">$sarjatunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">destroyIlmoittautuminen(\type  <span class="argument">$sarjatunnus</span>) </pre>
+                <p><em>Poistaa kilpailijan ilmoittautumisen kilpailun_sarjaan</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$sarjatunnus </td>
                                 <td></td>
                             </tr>
@@ -445,31 +449,33 @@
             <article class="method">
                 <h3 class="private ">luoSarjat()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">luoSarjat(  <span class="argument">$painoluokka</span>,   <span class="argument">$kilpailutunnus</span>,   <span class="argument">$vyoarvo</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">luoSarjat(\type  <span class="argument">$painoluokka</span>, \type  <span class="argument">$kilpailutunnus</span>, \type  <span class="argument">$vyoarvo</span>) : \Kilpailun_sarja</pre>
+                <p><em>Luo kilpailun sarjat annetuilla parametreilla.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$painoluokka </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$vyoarvo </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    <a href="../classes/Kilpailun_sarja.html">\Kilpailun_sarja</a>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -533,7 +539,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 29th, 2017 at 18:21.
+                    on August 31st, 2017 at 12:33.
                 </section>
             </section>
         </section>

@@ -1,14 +1,25 @@
 <?php
-
+/**
+ * Kilpailun sarja vastaa kilpailun_sarja tietokantataulun ilmentymää.
+ * Tietokannasta poiketen kilpailun sarjala on sarjan_osallistujat array.
+ * Tämä helpottaa tietyn sarjan kilpailijoiden iteroimista ja käsittelyä.
+ */
 class Kilpailun_sarja extends BaseModel {
 
     public $sarjatunnus, $kilpailutunnus, $painoluokka, $vyoarvo, $sarjan_osallistujat;
-
+/**
+ * Luodaan uusi kilpailun sarja.
+ * @param type $attributes
+ */
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_painoluokka');
     }
-
+/**
+ * Haetaan kaikki tietyn kilpailun sarjat. Tämän jälkeen jokaiseen sarjaan haetaan kaikki tietyn kilpailun sarjan kilpailijat.
+ * @param type $kilpailutunnus
+ * @return \Kilpailun_sarja
+ */
     public static function findAll($kilpailutunnus) {
         $query = DB::connection()->prepare('SELECT * FROM kilpailun_sarja WHERE kilpailutunnus = :kilpailutunnus ORDER BY kilpailun_sarja.vyoarvo ASC');
 
@@ -36,7 +47,11 @@ class Kilpailun_sarja extends BaseModel {
 
         return $kilpailun_sarjat;
     }
-
+/**
+ * Hakee kaikki tietyn kilpailun sarjan osallistujat.
+ * @param type $sarjatunnus
+ * @return \Kilpailija
+ */
     public static function getAllClassCompetitors($sarjatunnus) {
         $query = DB::connection()->prepare('SELECT kilpailija.nimi, kilpailija.paaaine, sarjan_osallistuja.sarjatunnus, '
                 . 'sarjan_osallistuja.sijoitus, sarjan_osallistuja.ktunnus FROM sarjan_osallistuja '
@@ -62,7 +77,9 @@ class Kilpailun_sarja extends BaseModel {
         }
         return $sarjan_osallistujat;
     }
-
+/**
+ * Tallentaa uuden kilpailun sarjan tietokantaan.
+ */
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO kilpailun_sarja(kilpailutunnus, painoluokka, vyoarvo) VALUES(:kilpailutunnus, :painoluokka, :vyoarvo) RETURNING sarjatunnus');
 
@@ -71,18 +88,26 @@ class Kilpailun_sarja extends BaseModel {
         $row = $query->fetch();
         $this->sarjatunnus = $row['sarjatunnus'];
     }
-
+/**
+ * Poistaa halutun kilpailun sarjan tietokannasta.
+ */
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM kilpailun_sarja WHERE sarjatunnus = :sarjatunnus');
         $query->execute(array('sarjatunnus' => $this->sarjatunnus));
     }
-
+/**
+ * Validoi painoluokan, ettei luku ole liian suuri ja että kenttä on täytetty.
+ * @return type
+ */
     public function validate_painoluokka() {
         $length = parent::validate_string_length($this->painoluokka, 'Painoluokka', 2, 3);
         $req = parent::validate_required_fields($this->painoluokka, 'Painoluokka');
         return parent::merge_validations($length, $req);
     }
-
+/**
+ * Validoi kilpailun sarjan keskinäiset sijoitukset. Sijoituksia on kolmea erilaista, jokaisella oma metodinsa.
+ * @param type $sijoitusjar
+ */
     public static function validateJarjestys($sijoitusjar) {
         sort($sijoitusjar);
 
@@ -96,7 +121,11 @@ class Kilpailun_sarja extends BaseModel {
             self::checkUnderEightPlacings($sijoitusjar);
         }
     }
-
+/**
+ * Valdioi että kilpailun tulokset on asetettu oikein, jos kilpailijoita on yli kahdeksan.
+ * @param type $sijoitusjar
+ * @return boolean
+ */
     public static function checkEightOrMorePlacings($sijoitusjar) {
         //tarkistetaan uniikit sijat 1 & 2
 
@@ -119,7 +148,11 @@ class Kilpailun_sarja extends BaseModel {
         }
         return true;
     }
-
+/**
+ * Validoi että kilpailun tulokset on asetettu oikein, jos kilpailijoita on alle 8.
+ * @param type $sijoitusjar
+ * @return boolean
+ */
     public static function checkUnderEightPlacings($sijoitusjar) {
         //Jos alle 8 kilpailijaa, kaikkia sijoja on yksi, paitsi erikoistapaus 4 sijoitusta
         for ($index = 0; $index < count($sijoitusjar); $index++) {
@@ -130,7 +163,12 @@ class Kilpailun_sarja extends BaseModel {
         }
         return true;
     }
-
+/**
+ * Validoi neljän kilpailijan sarjan järjestyksen. Huom, tämä on poikkeustapaus ylläolevaan alle kahdeksan
+ * kilpailijan sarjaan.
+ * @param type $sijoitusjar
+ * @return boolean
+ */
     public static function checkFourPlacings($sijoitusjar) {
         //Vedetää rumalla kovakoodilla
         if ($sijoitusjar[0] != 1 || $sijoitusjar[1] != 2) {

@@ -2,6 +2,8 @@
 
 /**
  * Kilpailija luokka vastaa tietokantataulu kilpailijan ilmentymää.
+ * Tietokannasta poiketen mallilla on myös sijoitus-ominaisuus, joka helpottaa merkittävästi
+ * tiettyjen toimintojen toteuttamista suoraan kilpailija-mallin kautta.
  */
 class Kilpailija extends BaseModel {
 
@@ -131,7 +133,7 @@ class Kilpailija extends BaseModel {
      * @param type $ktunnus
      * @return \Kilpailun_sarja
      * Metodi hakee kaikki kilpailun ilmoittautumiset kilpailuihin. Hieman erikoisesti luodaan
-     * Kilpailun_Sarja olio, jolle annetaan hieman eriävät ominaisuudet.
+     * Kilpailun_Sarja olio, jolle annetaan ominaisuudet.
      * Tämän avulla kilpailijan omalle sivulle saadaan listattua kaikki hänen ilmoittautumisensa.
      */
     public static function findAllIlmoittautumiset($ktunnus) {

@@ -1,12 +1,18 @@
 <?php
-
+/**
+ * Ylläpitäjän controller on vastuussa ylläpitäjän toiminnallisuutta vastaavista sivuista.
+ */
 class yllapitajan_controller extends BaseController {
-
+/**
+ * Luo näkymän yleiselle esittelysivulle, johon kaikki pääsevät.
+ */
     public static function aloitus() {
         // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
         View::make('Yleiset-sivut/esittely.html');
     }
-
+/**
+ * Luo näkymän ylläpitäjän hallintasivulle.
+ */
     public static function index() {
         self::check_if_administrator();
 
@@ -17,7 +23,10 @@ class yllapitajan_controller extends BaseController {
 
         View::make('Yllapitaja/yllapitajan_sivu.html', array('kilpailijat' => $kilpailijat, 'tulossaOlevat' => $tulossaOlevatK, 'menneet' => $menneetK));
     }
-
+/**
+ * Näyttää kilpailun muokkaussivun, josta voi poistaa/lisätä kilpailun sarjoja ja muuttaa sen tietoja.
+ * @param type $kilpailutunnus
+ */
     public static function viewMuokattava($kilpailutunnus) {
         self::check_if_administrator();
 
@@ -26,7 +35,10 @@ class yllapitajan_controller extends BaseController {
 
         View::make('Yllapitaja/muokkaa_kilpailun_tietoja.html', array('attributes' => $muokattava, 'muokattavat' => $muokattava_sarjat));
     }
-
+/**
+ * Luo näkymän kilpailun tulossivulle, josta tuloksia voi muokata.
+ * @param type $kilpailutunnus
+ */
     public static function viewMuokattavaTulokset($kilpailutunnus) {
         self::check_if_administrator();
 
@@ -35,7 +47,9 @@ class yllapitajan_controller extends BaseController {
 
         View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html', array('kilpailu' => $muokattava, 'sarjat' => $muokattava_sarjat));
     }
-
+/**
+ * Päivittää kilpailun sijoitukset. Metodi on melko pitkä, kommentteja lisätty väleihin.
+ */
     public static function updateSijoitukset() {
         $params = $_POST;
         $sijoitusjarj = array();
@@ -54,6 +68,7 @@ class yllapitajan_controller extends BaseController {
                 $osallistujat[$index]->sijoitus = null;
             }
             // tarkista vaihtuuko kilpailun sarja (useita sarjoja samassa parametrijoukossa)
+            // jos näin on, tee taikoja eli validoi sarjan järjestys.
             if ($index != 0 && $osallistujat[$index]->sarjatunnus != $osallistujat[$index - 1]->sarjatunnus) {
                 $tarkistettuSarjat++;
                 $errors = Kilpailun_sarja::validateJarjestys($sijoitusjarj);
@@ -81,7 +96,10 @@ class yllapitajan_controller extends BaseController {
             Redirect::to('/yllapitajan_sivu', array('message' => 'Kilpailun tuloksia muokattua onnistuneesti!'));
         }
     }
-
+/**
+ * Päivittää kilpailun tietoja.
+ * @param type $kilpailutunnus
+ */
     public static function update($kilpailutunnus) {
         $params = $_POST;
 
@@ -105,13 +123,17 @@ class yllapitajan_controller extends BaseController {
             Redirect::to('/yllapitajan_sivu', array('message' => 'Kilpailun tietoja päivitetty onnistuneesti!'));
         }
     }
-
+/**
+ * Luo näkymän uuden kilpailun luomisen sivulle.
+ */
     public static function uusi() {
         self::check_if_administrator();
 
         View::make('Kilpailu/uusi_kilpailu.html');
     }
-
+/**
+ * Tallentaa uuden kilpailun sovellukseen ja tietokantaan. Metodi on melko pitkä, sillä samalla luodaan myös kilpailun painoluokat.
+ */
     public static function store() {
         $params = $_POST;
 
@@ -139,7 +161,9 @@ class yllapitajan_controller extends BaseController {
             View::make('Kilpailu/uusi_kilpailu.html', array('errors' => $errors, 'attributes' => $kilpailu));
         }
     }
-
+/**
+ * Poistaa kilpailun järjestelmästä ja tietokannasta.
+ */
     public static function destroy() {
         $params = $_POST;
 

@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">135</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">78</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-508133111"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-956663231"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-508133111" class="accordion-body collapse in">
+            <div id="namespace-956663231" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -171,8 +171,9 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>Kilpailun_sarja</h1>
-                    <p><em></em></p>
-                    
+                    <p><em>Kilpailun sarja vastaa kilpailun_sarja tietokantataulun ilmentymää.</em></p>
+                    <p>Tietokannasta poiketen kilpailun sarjala on sarjan_osallistujat array.
+Tämä helpottaa tietyn sarjan kilpailijoiden iteroimista ja käsittelyä.</p>
                     
                                         
                     <section id="summary">
@@ -195,6 +196,7 @@
                                                                     <a href="../classes/Kilpailun_sarja.html#method_getAllClassCompetitors" class="">getAllClassCompetitors()</a><br />
                                                                     <a href="../classes/Kilpailun_sarja.html#method_save" class="">save()</a><br />
                                                                     <a href="../classes/Kilpailun_sarja.html#method_destroy" class="">destroy()</a><br />
+                                                                    <a href="../classes/Kilpailun_sarja.html#method_validate_painoluokka" class="">validate_painoluokka()</a><br />
                                                                     <a href="../classes/Kilpailun_sarja.html#method_validateJarjestys" class="">validateJarjestys()</a><br />
                                                                     <a href="../classes/Kilpailun_sarja.html#method_checkEightOrMorePlacings" class="">checkEightOrMorePlacings()</a><br />
                                                                     <a href="../classes/Kilpailun_sarja.html#method_checkUnderEightPlacings" class="">checkUnderEightPlacings()</a><br />
@@ -404,14 +406,14 @@
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$attributes</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">__construct(\type  <span class="argument">$attributes</span>) </pre>
+                <p><em>Luodaan uusi kilpailun sarja.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$attributes </td>
                                 <td></td>
                             </tr>
@@ -438,21 +440,23 @@
             <article class="method">
                 <h3 class="public ">findAll()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">findAll(  <span class="argument">$kilpailutunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">findAll(\type  <span class="argument">$kilpailutunnus</span>) : \Kilpailun_sarja</pre>
+                <p><em>Haetaan kaikki tietyn kilpailun sarjat. Tämän jälkeen jokaiseen sarjaan haetaan kaikki tietyn kilpailun sarjan kilpailijat.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    <a href="../classes/Kilpailun_sarja.html">\Kilpailun_sarja</a>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -473,21 +477,23 @@
             <article class="method">
                 <h3 class="public ">getAllClassCompetitors()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getAllClassCompetitors(  <span class="argument">$sarjatunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">getAllClassCompetitors(\type  <span class="argument">$sarjatunnus</span>) : \Kilpailija</pre>
+                <p><em>Hakee kaikki tietyn kilpailun sarjan osallistujat.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$sarjatunnus </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    <a href="../classes/Kilpailija.html">\Kilpailija</a>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -509,7 +515,7 @@
                 <h3 class="public ">save()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">save() </pre>
-                <p><em></em></p>
+                <p><em>Tallentaa uuden kilpailun sarjan tietokantaan.</em></p>
                 
 
                 
@@ -535,7 +541,7 @@
                 <h3 class="public ">destroy()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">destroy() </pre>
-                <p><em></em></p>
+                <p><em>Poistaa halutun kilpailun sarjan tietokannasta.</em></p>
                 
 
                 
@@ -556,18 +562,46 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_validate_painoluokka" name="method_validate_painoluokka" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">validate_painoluokka()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">validate_painoluokka() : \type</pre>
+                <p><em>Validoi painoluokan, ettei luku ole liian suuri ja että kenttä on täytetty.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \type
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_validateJarjestys" name="method_validateJarjestys" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">validateJarjestys()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validateJarjestys(  <span class="argument">$sijoitusjar</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">validateJarjestys(\type  <span class="argument">$sijoitusjar</span>) </pre>
+                <p><em>Validoi kilpailun sarjan keskinäiset sijoitukset. Sijoituksia on kolmea erilaista, jokaisella oma metodinsa.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$sijoitusjar </td>
                                 <td></td>
                             </tr>
@@ -595,21 +629,23 @@
             <article class="method">
                 <h3 class="public ">checkEightOrMorePlacings()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">checkEightOrMorePlacings(  <span class="argument">$sijoitusjar</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">checkEightOrMorePlacings(\type  <span class="argument">$sijoitusjar</span>) : boolean</pre>
+                <p><em>Valdioi että kilpailun tulokset on asetettu oikein, jos kilpailijoita on yli kahdeksan.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$sijoitusjar </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -630,21 +666,23 @@
             <article class="method">
                 <h3 class="public ">checkUnderEightPlacings()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">checkUnderEightPlacings(  <span class="argument">$sijoitusjar</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">checkUnderEightPlacings(\type  <span class="argument">$sijoitusjar</span>) : boolean</pre>
+                <p><em>Validoi että kilpailun tulokset on asetettu oikein, jos kilpailijoita on alle 8.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$sijoitusjar </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -665,21 +703,24 @@
             <article class="method">
                 <h3 class="public ">checkFourPlacings()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">checkFourPlacings(  <span class="argument">$sijoitusjar</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">checkFourPlacings(\type  <span class="argument">$sijoitusjar</span>) : boolean</pre>
+                <p><em>Validoi neljän kilpailijan sarjan järjestyksen. Huom, tämä on poikkeustapaus ylläolevaan alle kahdeksan
+kilpailijan sarjaan.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$sijoitusjar </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -743,7 +784,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 29th, 2017 at 18:21.
+                    on August 31st, 2017 at 12:33.
                 </section>
             </section>
         </section>

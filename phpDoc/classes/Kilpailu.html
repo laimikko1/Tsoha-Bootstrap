@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">135</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">78</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-280729574"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1280609999"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-280729574" class="accordion-body collapse in">
+            <div id="namespace-1280609999" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -171,7 +171,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>Kilpailu</h1>
-                    <p><em></em></p>
+                    <p><em>Kilpailu-malli vastaa kilpailu-tietokantataulun ilmentymää.</em></p>
                     
                     
                                         
@@ -199,6 +199,9 @@
                                                                     <a href="../classes/Kilpailu.html#method_validate_kilpailupaikka" class="">validate_kilpailupaikka()</a><br />
                                                                     <a href="../classes/Kilpailu.html#method_validate_ajankohta" class="">validate_ajankohta()</a><br />
                                                                     <a href="../classes/Kilpailu.html#method_update" class="">update()</a><br />
+                                                                    <a href="../classes/Kilpailu.html#method_destroy" class="">destroy()</a><br />
+                                                                    <a href="../classes/Kilpailu.html#method_validate_dates" class="">validate_dates()</a><br />
+                                                                    <a href="../classes/Kilpailu.html#method_testRange" class="">testRange()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/Kilpailu.html#property_kilpailutunnus" class="">$kilpailutunnus</a><br />
@@ -404,14 +407,14 @@
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$attributes</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">__construct(\type  <span class="argument">$attributes</span>) </pre>
+                <p><em>Konstruktori, joka luo uuden kilpailun.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$attributes </td>
                                 <td></td>
                             </tr>
@@ -438,21 +441,23 @@
             <article class="method">
                 <h3 class="public ">all()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">all(  <span class="argument">$newOrOld</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">all(\type  <span class="argument">$newOrOld</span>) : \Kilpailu</pre>
+                <p><em>Hakee kaikki kilpailut.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$newOrOld </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    <a href="../classes/Kilpailu.html">\Kilpailu</a>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -473,21 +478,23 @@
             <article class="method">
                 <h3 class="public ">find()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">find(  <span class="argument">$kilpailutunnus</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">find(\type  <span class="argument">$kilpailutunnus</span>) : \Kilpailu</pre>
+                <p><em>Palauttaa tietyn kilpailun tietokannasta, halutulla kilpailutunnuksella.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>\type</td>
                                 <td>$kilpailutunnus </td>
                                 <td></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    <a href="../classes/Kilpailu.html">\Kilpailu</a>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -508,13 +515,15 @@
             <article class="method">
                 <h3 class="public ">save()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">save() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">save() : \type</pre>
+                <p><em>Tallentaa uuden kilpailun tietokantaan. Palauttaa kilpailun</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -534,13 +543,15 @@
             <article class="method">
                 <h3 class="public ">validate_name()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validate_name() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">validate_name() : \type</pre>
+                <p><em>Validoi kilpailun nimen, palauttaa virheviestit array-oliona.</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -560,13 +571,15 @@
             <article class="method">
                 <h3 class="public ">validate_kilpailun_kuvaus()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validate_kilpailun_kuvaus() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">validate_kilpailun_kuvaus() : \type</pre>
+                <p><em>Sama kuin yllä, mutta kilpailun kuvaukselle.</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -586,13 +599,15 @@
             <article class="method">
                 <h3 class="public ">validate_kilpailupaikka()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validate_kilpailupaikka() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">validate_kilpailupaikka() : \type</pre>
+                <p><em>Sama kuin yllä, mutta kilpailupaikalle.</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -612,13 +627,16 @@
             <article class="method">
                 <h3 class="public ">validate_ajankohta()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validate_ajankohta() </pre>
-                <p><em></em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">validate_ajankohta() : \type</pre>
+                <p><em>Validoi kilpailun ajankohdan. Esnin tarkistetaan että luotu päiväys on oikea, eli ei sisällä esimerkiksi
+kirjaimia. Tämän jälkeen tarkistetaan että kuukaudet, päivät, tunnit, minuutit ja sekunnit ovat oikealla välillä.</em></p>
+                <p>Tämä tehdään erikseen, sillä datetime objekti hyväksyy 50 kuukautta, siirtäen vain päivämäärää eteenpäin.</p>
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -639,12 +657,112 @@
                 <h3 class="public ">update()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">update() </pre>
-                <p><em></em></p>
+                <p><em>Päivittää kilpailun tietoja.</em></p>
                 
 
                 
                 
                 				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_destroy" name="method_destroy" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">destroy()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">destroy() </pre>
+                <p><em>Poistaa kilpailun tietokannasta.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_validate_dates" name="method_validate_dates" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">validate_dates()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">validate_dates() : \type</pre>
+                <p><em>Apumetodi, jota edellä mainittu ajankohdan validointi käyttää.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    \type
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testRange" name="method_testRange" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testRange()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testRange(\type  <span class="argument">$int</span>, \type  <span class="argument">$min</span>, \type  <span class="argument">$max</span>) : \type</pre>
+                <p><em>Apumetodi ylläolevalle, joka tarkistaa onko annettu integer määritellyllä välillä.</em></p>
+                <p>credit StackOverFlow: <a href="https://stackoverflow.com/questions/5029409/how-to-check-if-an-integer-is-within-a-range">https://stackoverflow.com/questions/5029409/how-to-check-if-an-integer-is-within-a-range</a></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$int </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$min </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\type</td>
+                                <td>$max </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -707,7 +825,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 29th, 2017 at 18:21.
+                    on August 31st, 2017 at 12:33.
                 </section>
             </section>
         </section>

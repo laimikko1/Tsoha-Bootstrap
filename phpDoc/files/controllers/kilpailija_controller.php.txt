@@ -1,7 +1,11 @@
 <?php
-
+/**
+ * Kilpailija-controller vastaa kilpailija-mallin kanssa kilpailijaan liittyvistä toiminnoista
+ */
 class kilpailija_controller extends BaseController {
-
+/**
+ * Talleta uusi kilpailija tietokantaan.
+ */
     public static function store() {
 
         $params = $_POST;
@@ -27,7 +31,10 @@ class kilpailija_controller extends BaseController {
             View::make('Kilpailija/rekisteroityminen.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
-
+/**
+ * Luo kilpailijan oman sivun näkymä. Saa parametrinaan ktunnuksen, jonka avulla haetaan haluttu kilpailija.
+ * @param type $ktunnus
+ */
     public static function view($ktunnus) {
         self::check_logged_in();
         self::check_if_users_page($ktunnus);
@@ -36,7 +43,10 @@ class kilpailija_controller extends BaseController {
         $kilpailija = Kilpailija::find($ktunnus);
         View::make('Kilpailija/kayttajan_tiedot_ja_ilmoittautumiset.html', array('attributes' => $kilpailija, 'ilmoittautumiset' => $ilmoittautumiset));
     }
-
+/**
+ * Luo näkymän kilpailijan tietojen muokkaussivulle.
+ * @param type $ktunnus
+ */
     public static function edit($ktunnus) {
 
         self::check_logged_in();
@@ -45,7 +55,10 @@ class kilpailija_controller extends BaseController {
         $kilpailija = Kilpailija::find($ktunnus);
         View::make('Kilpailija/kayttajan_sivu_muokkaus.html', array('attributes' => $kilpailija));
     }
-
+/**
+ * Päivitä kilpailjian tietoja.
+ * @param type $ktunnus
+ */
     public static function update($ktunnus) {
         self::check_logged_in();
 
@@ -73,7 +86,10 @@ class kilpailija_controller extends BaseController {
             Redirect::to('/kayttajan_sivu/' . $kilpailija->ktunnus, array('message' => 'Tietoja päivitetty onnistuneesti!'));
         }
     }
-
+/**
+ * Poista kilpailija sovelluksesta.
+ * @param type $ktunnus
+ */
     public static function destroy($ktunnus) {
         $kilpailija = new Kilpailija(array('ktunnus' => $ktunnus));
         $kilpailija->destroy();

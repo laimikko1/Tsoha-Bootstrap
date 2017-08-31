@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">135</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">78</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1351412554"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-151056238"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1351412554" class="accordion-body collapse in">
+            <div id="namespace-151056238" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -171,7 +171,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>Sarjan_osallistuja</h1>
-                    <p><em></em></p>
+                    <p><em>Sarjan-osallistuja-malli vastaa sarjan_osallistuja liitostaulun ilmentymää tietokannassa.</em></p>
                     
                     
                                         
@@ -271,12 +271,12 @@
             <a id="property_ktunnus" name="property_ktunnus" class="anchor"></a>
             <article class="property">
                 <h3 class="public ">$ktunnus</h3>
-                <pre class="signature">$ktunnus : </pre>
-                <p><em></em></p>
+                <pre class="signature">$ktunnus : \type</pre>
+                <p><em>Luodaan uusi sarjan osallistuja, joka liittyy aina tiettyyn kilpailuun ja sarjaan.</em></p>
                 
 
                                 <h4>Type</h4>
-                
+                \type
                                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -295,12 +295,12 @@
             <a id="property_sarjatunnus" name="property_sarjatunnus" class="anchor"></a>
             <article class="property">
                 <h3 class="public ">$sarjatunnus</h3>
-                <pre class="signature">$sarjatunnus : </pre>
-                <p><em></em></p>
+                <pre class="signature">$sarjatunnus : \type</pre>
+                <p><em>Luodaan uusi sarjan osallistuja, joka liittyy aina tiettyyn kilpailuun ja sarjaan.</em></p>
                 
 
                                 <h4>Type</h4>
-                
+                \type
                                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -319,12 +319,12 @@
             <a id="property_sijoitus" name="property_sijoitus" class="anchor"></a>
             <article class="property">
                 <h3 class="public ">$sijoitus</h3>
-                <pre class="signature">$sijoitus : </pre>
-                <p><em></em></p>
+                <pre class="signature">$sijoitus : \type</pre>
+                <p><em>Luodaan uusi sarjan osallistuja, joka liittyy aina tiettyyn kilpailuun ja sarjaan.</em></p>
                 
 
                                 <h4>Type</h4>
-                
+                \type
                                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -386,7 +386,7 @@
                 <h3 class="public ">save()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">save() </pre>
-                <p><em></em></p>
+                <p><em>Tallennetaan uusi sarjan osallistuja tietokantaan.</em></p>
                 
 
                 
@@ -412,7 +412,7 @@
                 <h3 class="public ">updateSijoitus()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">updateSijoitus() </pre>
-                <p><em></em></p>
+                <p><em>Päivitetään sarjan osallistujan sijoitus.</em></p>
                 
 
                 
@@ -437,13 +437,15 @@
             <article class="method">
                 <h3 class="public ">validate_ilmoittautuminen()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validate_ilmoittautuminen() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">validate_ilmoittautuminen() : string</pre>
+                <p><em>Validoi ilmoittautumisen, käytännössä vain tarkistaa ettei osallistuja ilmoittaudu samaan sarjaan useasti.</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    string
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -463,13 +465,15 @@
             <article class="method">
                 <h3 class="public ">validate_sijoitus()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validate_sijoitus() </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">validate_sijoitus() : \type</pre>
+                <p><em>Validoi sarjan osallistujan sijoituksen numeron, joka tulee olla väliltä 1-7.</em></p>
                 
 
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    \type
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -490,7 +494,7 @@
                 <h3 class="public ">destroyIlmoittautuminen()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">destroyIlmoittautuminen() </pre>
-                <p><em></em></p>
+                <p><em>Poistaa ilmoittautumisen sarjasta.</em></p>
                 
 
                 
@@ -558,7 +562,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 29th, 2017 at 18:21.
+                    on August 31st, 2017 at 12:33.
                 </section>
             </section>
         </section>

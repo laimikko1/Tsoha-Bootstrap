@@ -1,24 +1,38 @@
 <?php
 
+/**
+ * Sarjan-osallistuja-malli vastaa sarjan_osallistuja liitostaulun ilmentymää tietokannassa.
+ */
 class Sarjan_osallistuja extends BaseModel {
 
+    /**
+     * Luodaan uusi sarjan osallistuja, joka liittyy aina tiettyyn kilpailuun ja sarjaan.
+     * @var type 
+     */
     public $ktunnus, $sarjatunnus, $sijoitus;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
-
+/**
+ * Tallennetaan uusi sarjan osallistuja tietokantaan.
+ */
     function save() {
         $query = DB::connection()->prepare('INSERT INTO Sarjan_osallistuja(ktunnus, sarjatunnus) VALUES(:ktunnus, :sarjatunnus)');
 
         $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus));
     }
-
+/**
+ * Päivitetään sarjan osallistujan sijoitus.
+ */
     public function updateSijoitus() {
         $query = DB::connection()->prepare('UPDATE sarjan_osallistuja SET sijoitus = :sijoitus WHERE ktunnus = :ktunnus AND sarjatunnus = :sarjatunnus');
         $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus, 'sijoitus' => $this->sijoitus));
     }
-
+/**
+ * Validoi ilmoittautumisen, käytännössä vain tarkistaa ettei osallistuja ilmoittaudu samaan sarjaan useasti.
+ * @return string
+ */
     public function validate_ilmoittautuminen() {
         $query = DB::connection()->prepare('SELECT * FROM sarjan_osallistuja WHERE ktunnus = :ktunnus AND sarjatunnus = :sarjatunnus');
 
@@ -31,7 +45,10 @@ class Sarjan_osallistuja extends BaseModel {
         }
         return null;
     }
-
+/**
+ * Validoi sarjan osallistujan sijoituksen numeron, joka tulee olla väliltä 1-7.
+ * @return type
+ */
     public function validate_sijoitus() {
 
         $v = new Valitron\Validator(array('sijoitus' => $this->sijoitus));
@@ -43,11 +60,12 @@ class Sarjan_osallistuja extends BaseModel {
         }
         return null;
     }
-
+/**
+ * Poistaa ilmoittautumisen sarjasta.
+ */
     public function destroyIlmoittautuminen() {
         $query = DB::connection()->prepare('DELETE FROM sarjan_osallistuja WHERE ktunnus = :ktunnus AND sarjatunnus = :sarjatunnus');
-        $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' =>$this->sarjatunnus));
-
+        $query->execute(array('ktunnus' => $this->ktunnus, 'sarjatunnus' => $this->sarjatunnus));
     }
 
 }
