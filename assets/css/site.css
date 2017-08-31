@@ -59,10 +59,18 @@
 #yllapitoTaulukko{
     margin-bottom: 50px;
 }
-
-footer{
-    background-color: lightgrey;
-    width: 100%;
-    padding: 25px;
-    margin: 10px;
+html {
+    position: relative;
+    min-height: 100%;
 }
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+}
+
