@@ -58,4 +58,11 @@
 
 #yllapitoTaulukko{
     margin-bottom: 50px;
-    }
+}
+
+footer{
+    background-color: lightgrey;
+    width: 100%;
+    padding: 25px;
+    margin: 10px;
+}

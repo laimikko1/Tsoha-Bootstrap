@@ -91,6 +91,7 @@
             </div>
             {% endif %}
 
+
             <!-- Dynaaminen sisältö tulee tähän -->
             {% block content %}{% endblock %}
         </div>
@@ -105,5 +106,13 @@
         <!-- Oma skriptitiedostomme -->
         <script src="{{base_path}}/assets/js/site.js"></script>
         {% endblock %}
+
+        <footer>
+            <div class="col-lg-offset-4">
+                <div class="text center"><a href="https://github.com/laimikko1/Tsoha-Bootstrap/blob/master/LICENSE">This project is licensed by MIT license.</a>
+                </div>
+            </div>
+        </footer>
     </body>
+
 </html>
