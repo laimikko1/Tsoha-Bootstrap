@@ -24,7 +24,6 @@ class BaseModel {
         if (!$v->validate()) {
             return $v->errors('string');
         }
-        return null;
     }
 
     public function validate_required_fields($string, $message) {
@@ -33,19 +32,18 @@ class BaseModel {
         if (!$v->validate()) {
             return $v->errors('string');
         }
-        return null;
     }
 
     public function errors() {
 //         Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
         $errors = $this->validators;
         $yhdistetty = array();
-
-
+//
         foreach ($errors as $val) {
             if ($this->{$val}() == NULL) {
                 continue;
             }
+
 
             foreach ($this->{$val}() as $value) {
                 $yhdistetty[] = $value;

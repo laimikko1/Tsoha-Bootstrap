@@ -45,19 +45,17 @@
             <tbody>
                 {% for ilm in ilmoittautumiset %}
             <form method="post" action="{{base_path}}/kayttajan_sivu/{{ilm.sarjatunnus}}/peru">
-
-
                 <tr>
                     <td>{{ilm.kilpailutunnus}}</td>
                     <td>{{ilm.painoluokka}}</td>
                     <td> {{ilm.vyoarvo}}</td>
-                    <td> <input type="hidden" name="sarjatunnus" value="{{ilm.sarjatunnus}}"></td>
+                    <input type="hidden" name="sarjatunnus" value="{{ilm.sarjatunnus}}">
                     <td><button type="submit" class="btn btn-danger">Peru ilmoittautuminen</button></td>
                 </tr>
             </form>
+            {% endfor %}
 
             </tbody>
-            {% endfor %}
 
         </table>
     </div>

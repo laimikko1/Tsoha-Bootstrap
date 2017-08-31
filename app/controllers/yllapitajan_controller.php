@@ -19,6 +19,8 @@ class yllapitajan_controller extends BaseController {
     }
 
     public static function viewMuokattava($kilpailutunnus) {
+        self::check_if_administrator();
+
         $muokattava = Kilpailu::find($kilpailutunnus);
         $muokattava_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
 
@@ -26,6 +28,8 @@ class yllapitajan_controller extends BaseController {
     }
 
     public static function viewMuokattavaTulokset($kilpailutunnus) {
+        self::check_if_administrator();
+
         $muokattava = Kilpailu::find($kilpailutunnus);
         $muokattava_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
 
@@ -36,6 +40,9 @@ class yllapitajan_controller extends BaseController {
         $params = $_POST;
         $sijoitusjarj = array();
         $tarkistettuSarjat = 0;
+        if (empty($params)) {
+            Redirect::to('/yllapitajan_sivu', array('message' => 'Muokattavia tuloksia ei löytynyt!'));
+        }
 
         for ($index = 0; $index < count($params['sarjatunnus']); $index++) {
             $osallistujat[] = new Sarjan_osallistuja(array(
@@ -63,15 +70,10 @@ class yllapitajan_controller extends BaseController {
         Kilpailun_sarja::validateJarjestys($sijoitusjarj);
 
 
-//
-//        if (count($errors) > 0) {
-//            View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html', array('errors' => $errors));
-//        }
 
-
-
-
-
+        if (count($errors) > 0) {
+            View::make('Yllapitaja/muokkaa_kilpailun_tuloksia.html', array('errors' => $errors));
+        }
 
         foreach ($osallistujat as $osal) {
             $osal->updateSijoitus();
@@ -105,6 +107,8 @@ class yllapitajan_controller extends BaseController {
     }
 
     public static function uusi() {
+        self::check_if_administrator();
+
         View::make('Kilpailu/uusi_kilpailu.html');
     }
 
@@ -134,6 +138,17 @@ class yllapitajan_controller extends BaseController {
         } else {
             View::make('Kilpailu/uusi_kilpailu.html', array('errors' => $errors, 'attributes' => $kilpailu));
         }
+    }
+
+    public static function destroy() {
+        $params = $_POST;
+
+        $kilpailu = new Kilpailu(array(
+            'kilpailutunnus' => $params['kilpailutunnus']
+        ));
+
+        $kilpailu->destroy();
+        Redirect::to('/yllapitajan_sivu', array('message' => 'Kilpailu poistettu!'));
     }
 
 }

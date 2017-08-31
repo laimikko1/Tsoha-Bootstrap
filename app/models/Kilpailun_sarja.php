@@ -6,10 +6,11 @@ class Kilpailun_sarja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_painoluokka');
     }
 
     public static function findAll($kilpailutunnus) {
-        $query = DB::connection()->prepare('SELECT * FROM kilpailun_sarja WHERE kilpailutunnus = :kilpailutunnus');
+        $query = DB::connection()->prepare('SELECT * FROM kilpailun_sarja WHERE kilpailutunnus = :kilpailutunnus ORDER BY kilpailun_sarja.vyoarvo ASC');
 
         $query->execute(array('kilpailutunnus' => $kilpailutunnus));
 
@@ -63,7 +64,6 @@ class Kilpailun_sarja extends BaseModel {
     }
 
     public function save() {
-
         $query = DB::connection()->prepare('INSERT INTO kilpailun_sarja(kilpailutunnus, painoluokka, vyoarvo) VALUES(:kilpailutunnus, :painoluokka, :vyoarvo) RETURNING sarjatunnus');
 
         $query->execute(array('kilpailutunnus' => $this->kilpailutunnus, 'painoluokka' => $this->painoluokka, 'vyoarvo' => $this->vyoarvo));
@@ -75,6 +75,12 @@ class Kilpailun_sarja extends BaseModel {
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM kilpailun_sarja WHERE sarjatunnus = :sarjatunnus');
         $query->execute(array('sarjatunnus' => $this->sarjatunnus));
+    }
+
+    public function validate_painoluokka() {
+        $length = parent::validate_string_length($this->painoluokka, 'Painoluokka', 2, 3);
+        $req = parent::validate_required_fields($this->painoluokka, 'Painoluokka');
+        return parent::merge_validations($length, $req);
     }
 
     public static function validateJarjestys($sijoitusjar) {
@@ -89,8 +95,6 @@ class Kilpailun_sarja extends BaseModel {
         if (count($sijoitusjar) < 4) {
             self::checkUnderEightPlacings($sijoitusjar);
         }
-
-
     }
 
     public static function checkEightOrMorePlacings($sijoitusjar) {

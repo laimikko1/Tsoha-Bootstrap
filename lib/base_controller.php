@@ -25,6 +25,11 @@ class BaseController {
     public static function check_if_users_page($tarkistettava) {
         // Tarkistaa ettei yksi käyttäjä pääse esimerkiksi kaikkien muidenkin käyttäjien
         // henk koht sivuille, kuten käyttäjätietojen muokkaukseen
+        // Poikkeus admin, kenen id 6
+        if ($_SESSION['kilpailija'] == 6) {
+            return;
+        }
+
         $id = ($_SESSION['kilpailija']);
         if ($id != $tarkistettava) {
             Redirect::to('/kayttajan_sivu/' . $id);
@@ -37,7 +42,8 @@ class BaseController {
         $kilpailija = Kilpailija::find($tarkistettava);
         $nimi = $kilpailija->kayttajanimi;
         if ($nimi != 'admin') {
-             Redirect::to('/', array('message' => 'Sivu sallittu vain ylläpidolle!'));
+            Redirect::to('/', array('message' => 'Sivu sallittu vain ylläpidolle!'));
         }
     }
-}    
+
+}

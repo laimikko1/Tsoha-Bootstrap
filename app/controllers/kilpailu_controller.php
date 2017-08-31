@@ -21,12 +21,18 @@ class kilpailu_controller extends BaseController {
 
     public static function showIlmoittautuminen($kilpailutunnus) {
         self::check_logged_in();
+        $errors = array();
 
         $kilpailu = Kilpailu::find($kilpailutunnus);
+        if ($kilpailu->ajankohta < date('Y-m-d h:i:s')) {
+            $errors[] = 'Kilpailun ilmoittautuminen on päättynyt!';
+            Redirect::to('/kilpailut', array('errors' => $errors));
+        }
         $kilpailun_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
-
-        Kint::dump($kilpailu);
-        Kint::dump($kilpailun_sarjat);
+        if (empty($kilpailun_sarjat)) {
+            $errors[] = 'Kilpailuun ei ole lisätty vielä sarjoja!';
+            Redirect::to('/kilpailut', array('errors' => $errors));
+        }
 
         View::make('Kilpailu/kilpailun_ilmoittautumislomake.html', array('kilpailu' => $kilpailu, 'kilpailun_sarjat' => $kilpailun_sarjat));
     }
@@ -34,8 +40,25 @@ class kilpailu_controller extends BaseController {
     public static function showTulokset($kilpailutunnus) {
         $kilpailu = Kilpailu::find($kilpailutunnus);
         $kilpailun_sarjat = Kilpailun_sarja::findAll($kilpailutunnus);
+        foreach ($kilpailun_sarjat as $sarja) {
+            self::removeNullResults($sarja);
+        }
 
         View::make('Kilpailu/kilpailun_tulokset.html', array('kilpailu' => $kilpailu, 'kilpailun_sarjat' => $kilpailun_sarjat));
+    }
+
+    public static function removeNullResults($sarja) {
+        for ($index = 0; $index < count($sarja->sarjan_osallistujat); $index++) {
+            $k = new Kilpailija($sarja->sarjan_osallistujat[$index]);
+            if ($k->sijoitus == NULL) {
+                $poistettavat[] = $index;
+            }
+        }
+        if (!empty($poistettavat)) {
+            foreach ($poistettavat as $value) {
+                unset($sarja->sarjan_osallistujat[$value]);
+            }
+        }
     }
 
 }

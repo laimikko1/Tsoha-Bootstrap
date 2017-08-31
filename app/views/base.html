@@ -65,7 +65,16 @@
             </div>
         </nav>
 
+        {% if user_logged_in %}
+        <div class="col-lg-offset-3">
+            <form method="post" action="{{base_path}}/kirjaudu_ulos" id="uloskirjautuminen">
+                <button type="submit" class="alert alert-danger">Kirjaudu ulos!</button>
+            </form>
+        </div>
+        {% endif %}
+
         <div id="main-container">
+
             {% if message %}
             <div class="alert alert-success">
                 {{message}}
@@ -82,11 +91,6 @@
             </div>
             {% endif %}
 
-            {% if user_logged_in %}
-            <form method="post" action="{{base_path}}/kirjaudu_ulos" id="uloskirjautuminen">
-                <button type="submit" class="alert alert-danger" style="inline-block">Kirjaudu ulos!</button>
-            </form>
-            {% endif %}
             <!-- Dynaaminen sisältö tulee tähän -->
             {% block content %}{% endblock %}
         </div>

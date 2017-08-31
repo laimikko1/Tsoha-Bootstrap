@@ -1,3 +1,8 @@
-$(document).ready(function(){
-  //alert('Hello World!');
-});
+function deleteClick() {
+    if (!confirm("Haluatko varmasti poistaa kohteen?")) {
+        return false;
+    }
+    return true;
+
+
+}

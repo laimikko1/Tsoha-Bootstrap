@@ -4,14 +4,14 @@ class kilpailun_sarja_controller extends BaseController {
 
     public static function store($kilpailutunnus, $alemmat_painoluokat, $ylemmat_painoluokat) {
 
-
-        $kilpailun_sarjat[] = self::luoSarjat($alemmat_painoluokat, $kilpailutunnus, 'Keltainen/oranssi');
-        $kilpailun_sarjat[] = self::luoSarjat($ylemmat_painoluokat, $kilpailutunnus, 'Vihrea/Sininen/Ruskea/Musta');
-
+        $alemmat = self::luoSarjat($alemmat_painoluokat, $kilpailutunnus, 'Keltainen/oranssi');
+        $ylemmat = self::luoSarjat($ylemmat_painoluokat, $kilpailutunnus, 'Vihrea/Sininen/Ruskea/Musta');
+        $kilpailun_sarjat = array_merge($alemmat, $ylemmat);
 
         foreach ($kilpailun_sarjat as $ksarja) {
             $ksarja->save();
         }
+
 
         return $kilpailun_sarjat;
     }
@@ -19,6 +19,7 @@ class kilpailun_sarja_controller extends BaseController {
     public static function ilmoittaudu($kilpailutunnus) {
         self::check_logged_in();
         $id = $_SESSION['kilpailija'];
+        $errors = array();
 
         $params = $_POST;
 
@@ -28,10 +29,9 @@ class kilpailun_sarja_controller extends BaseController {
         ));
 
         $sarjan_osallistuja = new Sarjan_osallistuja($attributes);
+        $errors[] = $sarjan_osallistuja->validate_ilmoittautuminen();
 
-        $errors = $sarjan_osallistuja->validate_ilmoittautuminen();
-
-        if (count($errors) == 0) {
+        if ($errors[0] == NULL) {
             $sarjan_osallistuja->save();
             Redirect::to('/', array('message' => 'Ilmoittautuminen kilpailuun lisätty!'));
         } else {
@@ -43,7 +43,7 @@ class kilpailun_sarja_controller extends BaseController {
         foreach ($painoluokka as $painoluokka) {
             $kilpailun_sarja = new Kilpailun_sarja(array(
                 'kilpailutunnus' => $kilpailutunnus,
-                'vyoarvo' => 'Keltainen/Oranssi',
+                'vyoarvo' => $vyoarvo,
                 'painoluokka' => $painoluokka
             ));
             $kilpailun_sarjat[] = $kilpailun_sarja;
@@ -56,8 +56,6 @@ class kilpailun_sarja_controller extends BaseController {
         $sarjatunnus = $params['sarjatunnus'];
         $kilpailutunnus = $params['kilpailutunnus'];
         $poistettava_sarja = new Kilpailun_sarja(array('sarjatunnus' => $sarjatunnus));
-//        Kint::dump($poistettava_sarja);
-//        View::make('/');
         $poistettava_sarja->destroy();
 
 
@@ -65,16 +63,18 @@ class kilpailun_sarja_controller extends BaseController {
     }
 
     public static function add($kilpailutunnus) {
-
         $params = $_POST;
-
-        Kint::dump($params);
-        View::make('/');
-//        $lisattava_sarja = new kilpailun_sarja(array(
-//            'kilpailutunnus' => $kilpailutunnus,
-//            'painoluokka' => $params['painoluokka'],
-//            'vyoarvo' => $params['vyoarvo']
-//        ));
+        $lisattava_sarja = new Kilpailun_sarja(array(
+            'kilpailutunnus' => $kilpailutunnus,
+            'painoluokka' => $params['painoluokka'],
+            'vyoarvo' => $params['vyoarvo']
+        ));
+        $errors = $lisattava_sarja->errors();
+        if (count($errors) > 0) {
+            Redirect::to('/kilpailun_sivu/' . $kilpailutunnus . '/muokkaa', array('errors' => $errors));
+        }
+        $lisattava_sarja->save();
+        Redirect::to('/kilpailun_sivu/' . $kilpailutunnus . '/muokkaa', array('message' => 'Sarja lisätty kilpailuun!'));
     }
 
     public static function destroyIlmoittautuminen($sarjatunnus) {

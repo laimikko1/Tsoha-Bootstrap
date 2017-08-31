@@ -71,9 +71,15 @@ $routes->get('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen', function($kilpa
     kilpailu_controller::showIlmoittautuminen($kilpailutunnus);
 });
 
+$routes->post('/kilpailun_sivu/:kilpailutunnus/destroy', function() {
+    yllapitajan_controller::destroy();
+});
+
 $routes->post('/kilpailun_sivu/:kilpailutunnus/ilmoittautuminen/', function($kilpailutunnus) {
     kilpailun_sarja_controller::ilmoittaudu($kilpailutunnus);
 });
+
+
 
 $routes->post('/kayttajan_sivu/:sarjatunnus/peru/', function($kilpailutunnus) {
     kilpailun_sarja_controller::destroyIlmoittautuminen($kilpailutunnus);
@@ -94,7 +100,6 @@ $routes->get('/kilpailun_sivu/:kilpailutunnus/muokkaa_tuloksia', function($kilpa
 $routes->post('/kilpailun_sivu/:kilpailutunnus/muokkaa_tuloksia', function($kilpailutunnus) {
     yllapitajan_controller::updateSijoitukset($kilpailutunnus);
 });
-
 
 $routes->post('/kilpailun_sarja/destroy', function() {
     kilpailun_sarja_controller::destroy();
